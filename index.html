@@ -1,166 +1,880 @@
-<style>
-  /* --- HERO LAYOUT & SPLIT --- */
-  .hero {
-    padding: 160px 0 120px;
-    position: relative;
-    overflow-x: hidden; /* Essential for the 'bleed' effect */
-    background: var(--bg);
-  }
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TriFekta | TrackFlow Workflow Software</title>
+  <meta name="description" content="TriFekta starts with TrackFlow — job tracking, staff updates, client portals, approvals, photos, payments, and progress visibility for project-based businesses." />
+  <link rel="icon" type="image/png" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFMAAABDCAYAAADgZDmbAAAYjklEQVR4nI2cXaxtV1XHf2Outff5uOd+tb0taQryZcpXWwUqhYK1hVJARGLkxWhINPFVMUZfiPHFR6O8QELiQyMxtIkKBaQQqrRCpVCNIKBiENrbQlva+9Hb3p5z9ppz+DDnmHPMtXeL++aej7XnmnOM/xjjP8Ycc+0jYe8KAFSV7iWCqiIiUN6zMSJSh9VrgNpYAdEyRsoYAVQR2vUyAYhAWX4mBSJSriko1N+E8rubzMmVZxInY75BEFRssTZexMb4e3Q2rxQdys+ieZWC1dhAFJQ2sF4vgGoRBAeoN4D6BVEQB4s0RbqX5vvE4WEglFlmxjKFbHpTpog1dwhnGhGnV1O5yeGlUzrDiDMGs69CW3ecrV6u22paPXQmlVOyLGLexyYv8/fbleaRJpz48Q53qYhJgc+mEub22fSSmcy9KFq9XB264r5WiUXKqu5adV7JYEoJRSmumz2mX1gtHNuFHBSGnZqHKapeiGZTNeSMBiqwBRh7r1M4Kyt1ZI/GTMweQBdd6q6rXTMdPPVUSlqnlCpt/d25NhBUlZS0u9jm9pxShLP/ZZz3Pu2si3vHZmrotahsqxhojq3q+yq6BmiL2H5Vk9VoorGhs56Twy5lcbTc2/6JDxRVNGmli6qXqnmmVCH6kG6DLRn1SSiLqWjvtJ5PioBzmiKVsUE9PrhbnN7Naj7IOkGxZOl4Hc/lfnGd/V5pvfJyvq2YSs0Yni0dtZYfxpYIeyCl/MuT9URePcLza5dJbTGvtndjqYlUZjxWo0e9ddYppltTivfrfM3mjWq8btccP6zf07jQ5qczojZKawMINVnMyXkDOD1Jz0LHBec8nHyQ96S+0Sln2d0Gzqhofoe6cWtZfXabGM1IW6h4V0tq7b2OpMTf34s59jVjM/Za3UlLIMbTzek9m62HWM0D5UtNzk5Qb5O5kDnstFyXlvTsh+LOvcwmlwvpKmqT2RJp42t1TuvGmSS2ljm3aqlRN5RGHXiFJysFeJexgn7Dq3GlVGGbeL0JfFIUp7yvLzuZ/BouS/dvGG9m78iKS/OoLjj7jGy316vV0fNcVWdtSdFsONZinHXaW6/PZA2Aqosb00nST9h8uJRgm0obqcL0aUvcvCbDmuzK2qQdl5pHyYwr1cOp3dyd7vMCXpvKYVaHzH9Ze73Qu47qnbL+5h6c9bn7bLnRap0MmzJ7G7CRZbsU/AI3s+4LHdPL+htjDeEieCs91HmIu79FeWdZSy5+A6BzZUWdhjOu3KRSV9YYUWp/fZZl5+Gl9UsTVJ/HSFUue8vp3uafqWK7OCXvzWuy0H7dbr+6tnaBrxjDJ5VuBqUQtAfy+XXxc3fjzN033VdBzjJrAURwu7q1OULldAt56TLfuiE9JaYKdEuOo4FWOzrVcjOtZ7Wd2HvdZZc5gVCADEwEEkLaiMYLEovLwC0R9x4vBXhVJcrAxAAEBGUgEiQ5jBQIpdIIGVNV0GTpuYSdZKVcLWvmSQTQgWT5vxhzbEnGrGPgNKU3td7y7WapmUuWFNfKmawaMuRxAfvS5NxIpxtYz+3WTAZDXEgIAetuiQhBlCChYKE4N+jX8l0v8cKU3ZAPf1WSSE1kht+sNOq7Mt071UJZUPV8UsLLwsTYUoClRH7vZft6w0nhXBpIRfkkubQICrHgEZh1a4q31cybpCpo1JKACEBgd4zce+Eon/juRRmWA6cuu4IPfegP9MjeHsvlIlNSAtVUHUEACaFmbwnFp4sDmSFiisS4IqXI2QsX+Mu/+BiPPXlGfJUwqgOkFrCIa8W52sqs2iWDlsV92YFkoV58BP2tl09csZVIkpVXIIkSyzrzDp9BpvP/yTyjebMAIWTPObIY+PwD+xzZDhyu9nnPe96tv/3B32B7ObLYWjCEYcZcPk9obQgbkZk8ADElVGEYArd/4pNcuHBeEC19kTzDWO/ruNcli7Ww80BTC/sGhtYQjwhvfJFyaiexH5vPq0BSSElJBuhMkK5ygAZ6mSSVewaFAViK8v2DkQfPbQljZHe5xfve936Wi5EwhBz+Ejp9stc38KyB3OuT100xklLi4OCAP//IR1kdHhCAqC2eRvOAjtS1rzDqcYRveFQPLCScxYBC+gCEBb/8omeYtGhsFlMImkNKVIu3+l2WLVCmsSxdVko1koQkSkgwjMI/PxZ48hAmEV71mmv05l+8gcViJIis8b23nYHWvLEfKwJDCKDw5a/cz0P/810hjEiiwyz4Ji+eF20132TN5nSh4saVBJbnSwzAK45GvfZ4ZEpagWyVSfZeEToAFUXFeqMtgxemrN9NA1VYJeXZSbjjByMToFPknbe9m63lgmEYCGEghLAGVJO+lYC+HdnoQBnHHMR/+3d3kWRZI8MTUdCqTUkgcxIzsBVyBg6l7JoRpM0TpGTRwDsu3+fK5QpCz40qJZeLEARCybpWmZCMO12q1FSSRVbUl64hCQ89O/CtpxCIbC2X3PJLN3JwcACaCA6UukFp9i0AbvBehZQSKSVUlaefvsB9997HFBZMGojWOy38M2Y8HEeaxZl5pA97WqE6uxHVQJIFexK56fIDYupDNNAcP5BLjJAgYWHf8LMsLtI8JwitqkqQImwLPHhuRFihMXL1696or7r66gLeDB+d6drVkbNxZDCnGBERPnXXXfzoR48IYdEbptw71h7sfN/cMn7mTNchyaFn5YtlfJdCdOTSnUl//uTEqvBKLO9qAXEoegSFFIpXRjufESKaU79I8dK8ftACKFKvjSp89YmR7W1liombb7mFk8f3Gphd0kmzxo3Usmj+alVE4uy58/zJn/6ZCBMhTkQdQUN1ROGntODWZq4/9IDXpEIsQEduOfUcx3cgHgJRKwcNwBhgEOdgCikJMQiTKlFzUtFCJ0bnoQicjZGzZBR4LI1860yQfQYuvfQyPvDrv5aTVkmOMeYUl1QhpRqaeZOT+XRTgsqGVUIIfPqzd3PmJ49DMK8tRZ5FkNKyuc9mtZ50s/pac62nr+5nEYJGTuwG7v5+IAmMQUhDQAIMEhiC5P8oKQiTCBLzOj85gIsqkBKiioQM/jII2yGxBWyJggoXJ4E08V8Xlvx4GoHEpVe+RA+Arz74byyGMRf1KZLKziAUvYK0JrNIMHdHgKQJTQnKwVkY4I477mCSJZJWFZ9a9tQd4u6pGZit1GlOZyFNqwFdWz7Tbp9hF7rKP4tgHaJcYghBBkKQVlqp3SfElIhTzGSoCdHUclwIjCEgYUCHsZBFIsXEiiUAIQRGiYSSxVQTmiIpxgxQDV6XdEIghAEJweIgVxUKSRVNiWma8mfP60ZKRIowIjmLK00pA+WFDvlbB006wI3fkgQGpmzD6tTW7rAYDq7Wy6E3EFmME6SJkCbQ6IrqIQMo5NaJ5uoihpHEmBOdgARBiWVe2zpGRGIOc1szBJDc9FDJbRGCkU8u07JRFYaQ+chUEYveTDkhiHFmX3tpCVcbLKrloQSZJXJtoJYw0fIwQmKwKtFNLxX+LJfUM5XcoIATwwELAvssGMaREJSFCFsjOgZhgXJinPjm06Nc1NIKKyE7GBASUA2oq6rrQxV1DKXOCogs0JA9XTVzaFIlpYgWgyEJCalybYtiMrWNkvfmAh6hspaxgst83kt17rLqBM9erjLPb1YRWEMl+0xuk8EWyq9etq+vPBbY2R1ZSiKgLAV2B2V7KWyTOLsf+N1/HyFGQkjAwN72klMnT2opYEETpIRqRLW0Q2ojBpDBWTlAGJFhkQFGOfP0s3L2/DNOygZUrXBKT1QL545zDsjrGSq4Ben4rYFuHtmqaClh44KffqYGfO4ORkSFlx891A+/fmIhCnJAUmECYsqlVYzCKPDAmSM8u6+EcZW7ToeR3//jD+nvfPA3GYaQu0Bkrouu6G4tWV+gWx1bSq0gTDHxh3/0Yf3U5/9RYvHE7HSuEDaNQkAJTCqMPqlUL608tuZY3Twbx8wat919nTO3RJcQJAo3XBoZgIsxU1SQzNtDECQpofDh/U8GCCtEJyBwbG+Pm2+6id2dbRbLBYvFghCkgqez6sN3zJvWyuFqhYhw+pFHuffee2XgMCchhllm6JXJzZps6B4nMRUt220ALEs4R6d6bd/7dLPXBqvfY+f3wii8/gphKmtqqWFyMOWOjIhy+mDJf54bZTmsmFTQJFx9zXX6c9e9FgGGYWAodeMaE0lhbKdUKjVnSqk2Mz7xN3dy/vzZzK9qHGuVi69sbNOSr48bDm7qwh6j6m99YTq7p69BbbfUIspCzcLeOkyBnz0a9dpjE5ogDNT3bZcURFgG+M75wJlVyGWh5I7QLbfeyvbWEjN+sKRUVfGJsOyopDw/VYAUEcZx4MmnznDX33+aGBYQJ5QEkqj8aPI7nfLPKdO1SuvlzRe3XYCrmBrH1M6K44qSLVv6Mk62utIBhRIkl0lvOKW8dGdVD/YDeYtp+QQgpcDXnxyZZEQlh94lJ4/zgfe/lxTbjsT3PauMxaoGZLN/E0rCyL98/Rs8fPq0pARRhaQ1K5TxvYfk7WkCTYxWX2pZtONNjGEso5Vyyc7FOm6oBOUeNWnJqTq02UVANB9bLCTxtsumcpLp/FZzA1lEIMEj08CXn9wiSd6OxsMDXvHKq/VnrrqSmFLdCHSGFucc9pp1P1KKTDEyxRV33nknMa0YNGajFd380yZZ9kKH5kxamsN99mlK91m73GxljXPGeWLqOnNqju3Zuewuym7+1A5cf+KQ/VTMJTYqA6FJWKjy7TMDP3xmEIZ8r2jirW97C8vlWLxR8rawAGmhnDQVR+hBrHoUcR9++CE++5kvipbxuUxqUledLTe0dwBKaVQvSQO6urUh5pKJONQriBsenfGdqOocpW+KArkneMMlF/XEIpG0ZGwqQeRQS8I28JUnBpKmXA4ROHbiUt761htJSXNJJO4pNhNRlWma2PSyNloQ0DjxsY//FTFNqARXmDewq5O5ub1pxk7nqnj2wL6mmSegXjBbpLvcjTWIpACWuSIg3HT5xEKVKIKEVksY5Al4Ng48eEZYynOkJEw68Lprf0FvfNP1LBYDIqEcJxc+V0GCkGJktVptELgpPqny6I9/zJe++AXSuEOaDitAxcXXO5TqyyRtYM7Xac/LicOx/GBNi/5LC6G18O/YpiIfVAmiXLl9yBtOxnIwl7e/NbrK85PbQXjw/IJHng2CHuZjCBVuu+1d7O7uMAyD77u0xm0UPv2Zz3H77bczLrby3KTSMQqoJmKcSNPEmbPn+N+HHpco9TmQrho1cSp4a9FXjnrbI9W+fOwRto63/dyO0LybFmqogIsjaTenkpsDwHWXRn35zsRBkra29uAvRbj/icC5qfRBVTl5fI9fec+tVaZQjkvsmAFgtZr460/eyRe/dK+kYat+WsIDoXZ+rPmktJXEeezacwTVag0z03b9KbjKN0WjWiza+25wLZnsIfqyKSvGWBPE20fyExhvvmxFKEGfk0U+fRQtuUThbIT7HhVS2QdP08RrXv06veLUZRwcHBDLsYKJFFP29NOPPsJ/f/ubDIsFqjEfLafciM7tNckNkZRLINOA2vXcGFdZV11/eLsElDYfrgDJ2gR56BonNGtWWp2PaUPt20RgZ1RuOHHIxcm40VphTYSFwOmLgf94OghBiASiwi3veDvb21u5sdsHY735a1/7Bo899rhoOkDSBJpQck2oSclPNWgrp8r95jtSlPJZu+vIV33ytVHq53ZwEdAfRDUgW3LA16XqHpcxS65RRa6RrN+pGnjZ3qFetZWYNO9yECBRd3Ak2FvAg0+OxDAwBCXqyNG9HW5484111xJC43MRIYTAc/v7fPZzn2MVFY2Rei5fEp/TxHJM9am+zSj9R1cKhtJFaP4W/IT9e22GORO4mG8Lzt5XHLXUu5VAZJDc7bz1ikN22olB6+yo5TFlQLj/8YHtxcgQAkECr73mWr3+9dfmBwxC9kwLb4BhGHno4Yf5h7vvkZWORMbSSNbiEIrfJrXErq2+Lnv2HkR3zUJH6ztWZ/ok3/KYFo/riyQHpCHmTGctvJoPnZVFYNCICBwbE285OaFJ65be2gSqOTkNIvzwmZHvPr0lYVBUAkEj73jnbexsb3VlSop5j43k3z/z+S9wuL+PLndJ9lmjZtOa+qUi0yennhPnvKl1TC35hLydbDnasrN5VENIMLqcCUYd0i3pdxfeYLlxMfDao/t6zdHIoRYDllIsGIdpPoh74OzI44cjw7hCUI7u7HLb229mNU2M41DmbJ4pIfDcc89xzxe+xHJ3j4NVbtNpWXsmdiu8XRQa2KZP/1klVw2U+2vaMvhUm89ZDqrPXnpMVJsn9vP2C84NaVYU4VDhNScjR0Z7LMGFGTmXaoKDGLj70S0OUVaaOFxNXPWSl+qLr7qS1eEhMeasnaPPHgpQfvDQab73ve9ICImgcZZSStaedb1q8qmqtfetFPRR2eeIrGPdTnb6N0cx27gypxdi/aqB1gtqOW5iYACuOx55TiU/p1lgDAXUoLmWfPiZwFeeCBJkIqYAMXL9m27g+LE9pimyWk2oDojkTnpKiRgT99zzTzz11AUYQvGsxBr79ey2oXxMvXIuyqr3WoiTH8IY8yQ++VOzWoeGo4N1UNV9zej4Y4HWW1SSBo4uIi+7JDANuTttz0kO5KIcVbZ3Av/6yMDZQ2EcDokycuzESd713ncDEIacO2PSEsTZM3/02ON85KMfZ5IRUsz1YxVVfNi1qsSirZFc0bcnBb8BqZ7sABaOXN5u99neOLOWCi3wG+J+bMGtMXgnSjOEcHxM3HTJvu7kw8Fahg1WnkQlBOWBc0t+cHEQYSLJwO7uEW5625v1yHJsCaR6Sn7c+szZ89xz39ckhqHubqxXq95bcKcIxS1rn7d6XBs771eYIbyDi+xdXnDRDkzjN0t8mY+sRWbnKJ1ojffE28sJZCM1n2M3a/g1taFbutt2LAyKxBUSyqNgagmgapdPCodtd8RdlK87JAdkDTKt0SiO71Qa0Dh8TBwp3CnFIPlArSSf2tQtC1kWq1A4ATZ9nLq95jnTSHoWcgawvya+8yg5QfnKYuxPCOehmM/ktY2nnFTW5Ck12ilg2V9aqJ9ck/ZQWEXAvKrO3IxuEozGpnU/XWewtOBAsDE1TGaZ3iWzPuSxGqMMLU9PbCoFdO2H7lwu72Q21xB+kvkRVYevzd9cjFzMdxloE7F1maOtkd16nGcq6/g4KKu3VNDVPVIDFSRRKU/9Cj4m+g/i9+Csb3XnXk2lD3v5sDYjtURq4d/P6rd/akKQdTEgKzlZjnAR0VTSaoMeXCvynu8l/S9SvzczG3c1C1MVEnpede7d5FzH7qe+LGLrRNraFOtyu4u6vl49lXZDekn9Lb0WMnu3PdGx8bOMljCoJN1P29/SW7NlP59+PMt5YWoYdolBHGrP92rU0q/Tr1LH1P22S0hzO8y9eBZSs7/nUuQWRtv52GPVWriuLuiEbH8hpjGnbQWl6bTR49SFYL1mQFkCrMmN7rjWsq92xDfrJ1bDGWHn7zWJWvTUnxvYQhOt+V6TxRTSmTydMmL9zPJG9ymG+lvjjPrflK7DbXEf2NJzV3UAtxcpDwvMxKrGqzuS+tki475ZiLTzYezBhSZJH3H1BNjOihyQbZxU1uo9Yx5bXmhlbOcmvUdmjzYrV9vUhaoOVvC6IGseJt2faGgbDSdglxab+WY5x2Utn8BsDhcWauCY7GXOHg/nnVLnrJNI3k1Z46dnG6fnDM+xkoDxgV/RPe2w/nIAqOs3zc6Tcvg6gWckX12jm3em+ZwhPL/aAMVj08/nHdlN3/7OnH+tx4gP76qyw8gMNa4fQ7RJ5n8mxyYULYVSjcXsoY1f/A5pU2KzVRrfzpOU8d5mH7AsUHixM74fQwNdjbw857bx/Z8hogOpw+R5VFLKJ5ef76WzN3s/7blLZ17cjZP+Hp/MusTl49Qt7Q/+8wVpwsyr87nAm/xhk27zadbuK2Y1IP2HWEtgj5UXfIz4LqoHYu2aX1WaBxgWvtkhOdzbs0YdoZQhWrxeG1B27uTFm4VtBUbNd5wHdlHuLUS1WY2y/8/LqoPqoi1HuMdjnBAGt1u1vd/HTjW+2EIlQbk5RFzJ0oVWf1/t5NsotZ/bWh0mKuteW3nOJZ6Kq+t9eR3rAxfeYXzf0u6Xer3OUQ8W82M2zrdai6EFsS3gFW7K1N2HfdjUE3OFHAdG2wE372ie5dOuLWveV1fQvD9vK9pDEe3eRt/aA27cKZA/iZFad13F7V+MM53x7dNorRNUJRDKJ9SMw1rPzkHs923usqB9iInN4YEzkDzpw8a5O89w3y0JST+Pl0cwOug5Ox9Bg/+rra34d2dCjvtqNLliuv55yjKNtSOhca0C/wcKpWvSUMUKBwAAAABJRU5ErkJggg==" />
+  <style>
+    :root {
+      --navy: #2d3748;
+      --navy-900: #071737;
+      --navy-800: #13264a;
+      --navy-700: #1f2d3d;
+      --orange: #c8441a;
+      --orange-light: #E85A1F;
+      --cream: #f0ece4;
+      --cream-soft: #f7f7f5;
+      --white: #ffffff;
+      --ink: #1a1a1a;
+      --muted: #666666;
+      --muted-light: rgba(255,255,255,0.72);
+      --border: #e0e0e0;
+      --success: #2d7d4f;
+      --warning: #d48c1a;
+      --danger: #c0392b;
+      --blue: #3763ff;
+      --purple: #7c3aed;
+      --teal: #0891b2;
+      --shadow-sm: 0 1px 3px rgba(0,0,0,0.08);
+      --shadow-md: 0 10px 30px rgba(0,0,0,0.10);
+      --shadow-lg: 0 30px 80px rgba(0,0,0,0.28);
+      --radius: 18px;
+      --radius-lg: 28px;
+      --max: 1180px;
+      --font: Arial, Helvetica, sans-serif;
+    }
 
-  .hero .container {
-    max-width: 1300px; /* Slightly wider to accommodate the split */
-    margin: 0 auto;
-    padding: 0 24px;
-  }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--cream);
+      color: var(--ink);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+    a { color: inherit; text-decoration: none; }
+    button { font-family: inherit; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
 
-  .hero-split {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 40px;
-  }
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(20px);
+      background: rgba(7, 23, 55, 0.86);
+      border-bottom: 1px solid rgba(255,255,255,0.10);
+    }
+    .nav {
+      height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: white;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
+    }
+    .brand-mark {
+      width: 72px;
+      height: auto;
+      display: block;
+      flex-shrink: 0;
+    }
+    .brand-text {
+      display: inline-block;
+      line-height: 1;
+    }
+    .site-header .brand-mark, .footer .brand-mark { background-color: transparent; }
+    .nav-links { display: flex; align-items: center; gap: 26px; font-size: 13px; font-weight: 700; color: rgba(255,255,255,0.78); }
+    .nav-links a:hover { color: white; }
+    .nav-actions { display: flex; align-items: center; gap: 10px; }
 
-  .hero-inner {
-    flex: 0 0 55%; /* Text takes up 55% */
-    max-width: 620px;
-    position: relative;
-    z-index: 10;
-  }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 44px;
+      padding: 0 18px;
+      border-radius: 12px;
+      border: 1px solid transparent;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease, border-color .2s ease;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: linear-gradient(135deg, var(--orange-light), var(--orange)); color: white; box-shadow: 0 14px 34px rgba(232,90,31,0.24); }
+    .btn-primary:hover { box-shadow: 0 18px 40px rgba(232,90,31,0.32); }
+    .btn-dark { background: var(--navy); color: white; }
+    .btn-light { background: white; color: var(--navy); border-color: rgba(255,255,255,0.16); }
+    .btn-outline { background: transparent; color: white; border-color: rgba(255,255,255,0.24); }
+    .btn-outline:hover { border-color: rgba(255,255,255,0.5); background: rgba(255,255,255,0.06); }
+    .btn-ghost { background: rgba(255,255,255,0.07); color: white; border-color: rgba(255,255,255,0.12); }
 
-  /* --- TRACKFLOW MOCKUP (THE PEEK-IN) --- */
-  .hero-mockup {
-    flex: 0 0 45%;
-    position: relative;
-    display: flex;
-    justify-content: flex-end;
-    perspective: 2000px; /* Creates the 3D depth */
-  }
+    .hero {
+      position: relative;
+      isolation: isolate;
+      background:
+        radial-gradient(circle at 20% 15%, rgba(232,90,31,0.20), transparent 24%),
+        radial-gradient(circle at 80% 20%, rgba(104,167,255,0.12), transparent 26%),
+        linear-gradient(135deg, #13264a 0%, #071737 48%, #11101b 100%);
+      color: white;
+      padding: 86px 0 74px;
+      overflow: hidden;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      top: -240px;
+      right: -260px;
+      width: 900px;
+      height: 900px;
+      border-radius: 50%;
+      border: 1px solid rgba(255,255,255,0.025);
+      box-shadow:
+        0 0 0 120px rgba(255,255,255,0.010),
+        0 0 0 240px rgba(255,255,255,0.008),
+        0 0 0 360px rgba(255,255,255,0.006);
+      z-index: -1;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.92fr) minmax(430px, 1.08fr);
+      gap: 52px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.78);
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      margin-bottom: 24px;
+    }
+    .eyebrow-dot { width: 8px; height: 8px; border-radius: 999px; background: var(--orange-light); box-shadow: 0 0 0 5px rgba(232,90,31,0.14); }
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 78px);
+      line-height: .96;
+      letter-spacing: -0.065em;
+      font-weight: 900;
+      max-width: 720px;
+      margin-bottom: 24px;
+    }
+    .hero h1 em { color: var(--orange-light); font-style: normal; }
+    .hero-sub {
+      max-width: 590px;
+      font-size: 18px;
+      color: var(--muted-light);
+      margin-bottom: 30px;
+    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 22px; }
+    .live-line { display: flex; align-items: center; gap: 9px; color: rgba(255,255,255,0.74); font-size: 13px; font-weight: 700; }
+    .live-line span:first-child { width: 9px; height: 9px; background: #69f0ae; border-radius: 50%; box-shadow: 0 0 0 6px rgba(105,240,174,0.12); }
 
-  .mockup-container {
-    width: 850px; /* Large width to bleed off the screen */
-    height: 540px;
-    background: var(--bg-subtle);
-    border-radius: 16px;
-    border: 1px solid var(--border);
-    box-shadow: var(--shadow-lg);
-    display: flex;
-    overflow: hidden;
-    transform: rotateY(-15deg) rotateX(5deg) translateX(50px);
-    transform-origin: left center;
-    transition: transform 0.5s ease;
-  }
+    .hero-panel {
+      width: 100%;
+      min-height: 560px;
+      padding: 18px;
+      border-radius: 26px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(20, 30, 50, 0.76);
+      box-shadow: var(--shadow-lg);
+      backdrop-filter: blur(14px);
+      transform: perspective(1200px) rotateY(-5deg) rotateX(2deg);
+      transform-origin: left center;
+    }
+    .mock-app {
+      height: 100%;
+      min-height: 524px;
+      display: grid;
+      grid-template-columns: 170px 1fr;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.10);
+      background: #f7f7f5;
+      color: var(--ink);
+    }
+    .mock-sidebar {
+      background: var(--navy);
+      color: white;
+      padding: 18px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .mock-logo { font-size: 17px; font-weight: 900; margin-bottom: 12px; }
+    .mock-logo span { color: var(--orange-light); }
+    .mock-nav-item {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 11px;
+      border-radius: 12px;
+      color: rgba(255,255,255,0.72);
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .mock-nav-item.active { color: white; background: var(--orange); }
+    .mock-nav-icon { width: 16px; height: 16px; border: 1.8px solid currentColor; border-radius: 5px; opacity: .9; }
+    .mock-main { padding: 22px; overflow: hidden; }
+    .mock-topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+    .mock-title { font-size: 22px; font-weight: 900; color: var(--navy); letter-spacing: -0.04em; }
+    .mock-avatar { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg, #f59e0b, #c8441a); }
+    .mock-kpis { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin-bottom: 16px; }
+    .mock-kpi { background: white; border: 1px solid var(--border); border-radius: 14px; padding: 14px; min-height: 90px; box-shadow: var(--shadow-sm); }
+    .mock-kpi small { display: block; color: var(--muted); font-size: 10px; text-transform: uppercase; letter-spacing: .04em; margin-bottom: 10px; font-weight: 800; }
+    .mock-kpi strong { display: block; font-size: 22px; color: var(--navy); }
+    .mock-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 14px; margin-bottom: 14px; }
+    .mock-card { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 16px; box-shadow: var(--shadow-sm); }
+    .mock-card h4 { font-size: 13px; color: var(--navy); margin-bottom: 14px; }
+    .status-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; font-size: 11px; color: var(--muted); }
+    .status-dot { width: 9px; height: 9px; border-radius: 999px; background: var(--orange); }
+    .status-dot.green { background: var(--success); }
+    .status-dot.yellow { background: var(--warning); }
+    .status-dot.blue { background: #3763ff; }
+    .donut {
+      width: 116px;
+      height: 116px;
+      border-radius: 50%;
+      background: conic-gradient(var(--orange) 0 32%, #3763ff 32% 56%, var(--success) 56% 82%, #d9d9d9 82% 100%);
+      position: relative;
+      margin: 4px auto 16px;
+    }
+    .donut::after { content: ""; position: absolute; inset: 23px; background: white; border-radius: 50%; }
+    .activity { display: grid; gap: 11px; }
+    .activity-item { display: grid; grid-template-columns: 28px 1fr auto; gap: 9px; align-items: center; font-size: 11px; color: var(--muted); }
+    .activity-icon { width: 28px; height: 28px; border-radius: 50%; background: rgba(200,68,26,0.10); color: var(--orange); display: grid; place-items: center; font-weight: 900; }
+    .activity-item strong { display: block; font-size: 12px; color: var(--navy); }
+    .mini-panels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .mini-panel { background: white; border: 1px solid var(--border); border-radius: 16px; padding: 14px; min-height: 116px; box-shadow: var(--shadow-sm); }
+    .mini-panel b { color: var(--navy); font-size: 13px; }
+    .mini-panel p { color: var(--muted); font-size: 11px; margin-top: 8px; }
+    .progress { height: 8px; border-radius: 999px; background: #ececec; overflow: hidden; margin-top: 14px; }
+    .progress span { display: block; height: 100%; width: 68%; background: var(--orange); border-radius: inherit; }
 
-  .mockup-container:hover {
-    transform: rotateY(-10deg) rotateX(2deg) translateX(30px);
-  }
+    .section { padding: 86px 0; }
+    .section.light { background: var(--cream-soft); }
+    .section.white { background: white; }
+    .section-head { max-width: 720px; margin: 0 auto 42px; text-align: center; }
+    .section-kicker { color: var(--orange); font-size: 12px; text-transform: uppercase; letter-spacing: .10em; font-weight: 900; margin-bottom: 10px; }
+    .section-title { font-size: clamp(30px, 4vw, 48px); line-height: 1.05; letter-spacing: -0.055em; font-weight: 900; color: var(--navy); margin-bottom: 14px; }
+    .section-copy { color: var(--muted); font-size: 17px; }
 
-  /* Internal Mockup UI (TrackFlow Replica) */
-  .mock-sidebar {
-    width: 70px;
-    background: #2d3748; /* Your Navy */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 20px;
-    gap: 15px;
-  }
-  .mock-side-item { width: 30px; height: 30px; background: rgba(255,255,255,0.1); border-radius: 6px; }
-  .mock-side-item.active { background: var(--orange); }
+    .product-grid { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 18px; }
+    .product-card {
+      position: relative;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      min-height: 310px;
+      display: flex;
+      flex-direction: column;
+      transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    }
+    .product-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .product-card.featured { border-color: rgba(200,68,26,0.32); box-shadow: 0 18px 55px rgba(200,68,26,0.10); }
+    .tag { display: inline-flex; align-items: center; align-self: flex-start; padding: 6px 10px; border-radius: 999px; font-size: 10px; font-weight: 900; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 18px; }
+    .tag.live { color: #166534; background: #dcfce7; }
+    .tag.soon { color: #3154d4; background: #eef2ff; }
+    .app-icon { width: 50px; height: 50px; border-radius: 14px; display: grid; place-items: center; color: white; font-size: 24px; font-weight: 900; margin-bottom: 18px; }
+    .app-icon.track { background: linear-gradient(135deg, var(--navy), var(--orange)); }
+    .app-icon.craft { background: linear-gradient(135deg, #a855f7, #6d28d9); }
+    .app-icon.event { background: linear-gradient(135deg, #22d3ee, #0891b2); }
+    .product-card h3 { font-size: 25px; color: var(--navy); letter-spacing: -0.04em; margin-bottom: 10px; }
+    .product-card p { color: var(--muted); margin-bottom: 18px; }
+    .product-list { list-style: none; display: grid; gap: 9px; margin-top: auto; color: var(--muted); font-size: 13px; }
+    .product-list li { display: flex; align-items: center; gap: 8px; }
+    .check { width: 18px; height: 18px; border-radius: 50%; display: grid; place-items: center; color: white; background: var(--success); font-size: 12px; flex: 0 0 auto; }
+    .circle { width: 18px; height: 18px; border-radius: 50%; border: 2px solid #aab3c2; flex: 0 0 auto; }
 
-  .mock-main {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    background: #f7f7f5;
-  }
+    .featured-layout { display: grid; grid-template-columns: .85fr 1.15fr; gap: 42px; align-items: center; }
+    .feature-stack { display: grid; gap: 18px; }
+    .feature-line { display: flex; gap: 14px; align-items: flex-start; }
+    .feature-line-icon { width: 44px; height: 44px; border-radius: 14px; display: grid; place-items: center; background: rgba(200,68,26,0.10); color: var(--orange); flex: 0 0 auto; }
+    .feature-line h4 { color: var(--navy); font-size: 16px; margin-bottom: 4px; }
+    .feature-line p { color: var(--muted); font-size: 14px; }
+    .floating-board { position: relative; min-height: 440px; }
+    .job-card-big, .activity-card-big, .payment-card-big {
+      position: absolute;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      padding: 22px;
+      box-shadow: 0 24px 70px rgba(31,45,61,0.13);
+    }
+    .job-card-big { width: 330px; left: 10px; top: 42px; }
+    .activity-card-big { width: 320px; right: 12px; top: 0; }
+    .payment-card-big { width: 380px; left: 170px; bottom: 22px; }
+    .pill { display: inline-flex; align-items: center; padding: 5px 10px; border-radius: 999px; background: #dcfce7; color: #166534; font-size: 11px; font-weight: 900; }
+    .detail-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 18px 0; }
+    .detail span { display: block; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 3px; }
+    .detail b { color: var(--navy); font-size: 13px; }
 
-  .mock-header {
-    height: 60px;
-    background: #fff;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    padding: 0 20px;
-    justify-content: space-between;
-  }
-  .mock-search { width: 200px; height: 30px; background: #eee; border-radius: 4px; }
-  .mock-user { width: 32px; height: 32px; background: #ddd; border-radius: 50%; }
+    .feature-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .feature-card { background: white; border: 1px solid var(--border); border-radius: 20px; padding: 22px; min-height: 178px; box-shadow: var(--shadow-sm); }
+    .feature-card-icon { width: 42px; height: 42px; border-radius: 14px; background: rgba(200,68,26,0.10); color: var(--orange); display: grid; place-items: center; margin-bottom: 18px; }
+    .feature-card h3 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+    .feature-card p { color: var(--muted); font-size: 13px; }
 
-  .mock-body { padding: 25px; display: flex; flex-direction: column; gap: 20px; }
-  .mock-stats { display: flex; gap: 15px; }
-  .mock-stat-card { flex: 1; height: 80px; background: #fff; border-radius: 8px; border: 1px solid var(--border); border-left: 4px solid var(--orange); }
-  
-  .mock-table { flex: 1; background: #fff; border-radius: 8px; border: 1px solid var(--border); padding: 15px; }
-  .mock-row { height: 12px; background: #f0f0f0; margin-bottom: 10px; border-radius: 2px; width: 100%; }
-  .mock-row.short { width: 60%; }
+    .portal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .portal-card { background: white; border: 1px solid var(--border); border-radius: 26px; padding: 26px; box-shadow: var(--shadow-sm); overflow: hidden; }
+    .portal-card h3 { font-size: 24px; color: var(--navy); letter-spacing: -0.04em; margin-bottom: 8px; }
+    .portal-card p { color: var(--muted); margin-bottom: 18px; }
+    .portal-screen {
+      margin-top: 18px;
+      background: var(--cream-soft);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 16px;
+    }
+    .portal-row { display: flex; justify-content: space-between; align-items: center; padding: 11px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+    .portal-row:last-child { border-bottom: 0; }
+    .portal-row b { color: var(--navy); }
 
-  /* --- RESPONSIVENESS --- */
-  @media (max-width: 1100px) {
-    .hero-split { flex-direction: column; text-align: center; }
-    .hero-inner { flex: 0 0 100%; max-width: 100%; }
-    .hero-mockup { width: 100%; justify-content: center; margin-top: 60px; }
-    .mockup-container { width: 100%; transform: none; height: 400px; }
-  }
-</style>
+    .industry-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+    .industry-card { background: white; border: 1px solid var(--border); border-radius: 18px; padding: 22px 14px; text-align: center; color: var(--navy); font-weight: 800; font-size: 13px; box-shadow: var(--shadow-sm); }
+    .industry-icon { font-size: 24px; margin-bottom: 10px; }
 
-<section class="hero" id="hero">
-  <div class="container">
-    <div class="hero-split">
-      
-      <div class="hero-inner">
-        <div class="hero-eyebrow">
-          <div class="hero-eyebrow-dot"></div>
-          <span class="label">Trifekta Platform</span>
-        </div>
-        <h1 class="hero-headline">
-          Operations.<br><em>Made Visible.</em>
-        </h1>
-        <p class="hero-sub">
-          Trifekta is building the operating system for furniture fabricators and studios —
-          giving every team the clarity, control, and consistency to run better operations.
-        </p>
-        
-        <div class="pillars-wrap">
-          <div class="pillars-label">Built on three pillars</div>
-          <div class="pillars">
-            <div class="pillar active">Execution</div>
-            <div class="pillar">Operations</div>
-            <div class="pillar">Insight</div>
-          </div>
-        </div>
+    .solutions-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .solution-card { background: white; border: 1px solid var(--border); border-radius: 24px; padding: 28px; box-shadow: var(--shadow-sm); }
+    .solution-card h3 { color: var(--navy); margin-bottom: 10px; font-size: 20px; }
+    .solution-card p { color: var(--muted); font-size: 14px; }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+    .pricing-plan {
+      position: relative;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 26px;
+      padding: 28px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      min-height: 100%;
+    }
+    .pricing-plan.featured {
+      border-color: rgba(200,68,26,0.42);
+      box-shadow: 0 24px 70px rgba(200,68,26,0.14);
+      transform: translateY(-8px);
+    }
+    .pricing-plan h3 {
+      color: var(--navy);
+      font-size: 24px;
+      letter-spacing: -0.045em;
+      margin: 14px 0 8px;
+    }
+    .plan-price {
+      color: var(--navy);
+      font-size: 34px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.06em;
+      margin-bottom: 8px;
+    }
+    .plan-price span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0;
+      margin-top: 8px;
+    }
+    .plan-desc {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 20px;
+      min-height: 62px;
+    }
+    .plan-features {
+      list-style: none;
+      display: grid;
+      gap: 11px;
+      margin: 0 0 24px;
+      color: var(--navy);
+      font-size: 13px;
+      flex: 1;
+    }
+    .plan-features li { display: flex; gap: 9px; align-items: flex-start; }
+    .plan-features .check { margin-top: 1px; }
+    .pricing-plan .btn { width: 100%; margin-top: auto; }
+    .plan-badge {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font-weight: 900;
+      color: var(--orange);
+      background: rgba(200,68,26,0.10);
+      border: 1px solid rgba(200,68,26,0.16);
+      border-radius: 999px;
+      padding: 6px 9px;
+    }
+
+    .future-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .future-card { background: white; border: 1px solid var(--border); border-radius: 24px; padding: 28px; display: grid; grid-template-columns: 58px 1fr; gap: 18px; align-items: start; }
+    .future-card h3 { color: var(--navy); font-size: 22px; margin-bottom: 8px; }
+    .future-card p { color: var(--muted); font-size: 14px; margin-bottom: 14px; }
+
+    .cta {
+      background:
+        radial-gradient(circle at 20% 35%, rgba(232,90,31,0.20), transparent 28%),
+        linear-gradient(135deg, #111c33, #071737 72%);
+      color: white;
+      border-radius: 34px;
+      padding: 46px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 28px;
+      overflow: hidden;
+    }
+    .cta h2 { font-size: clamp(30px, 4vw, 46px); letter-spacing: -0.06em; line-height: 1.02; margin-bottom: 12px; }
+    .cta p { color: rgba(255,255,255,0.72); max-width: 650px; }
+    .cta-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+
+    .footer { background: #071737; color: white; padding: 54px 0 28px; }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr repeat(4, 1fr); gap: 32px; margin-bottom: 38px; }
+    .footer p, .footer a { color: rgba(255,255,255,0.65); font-size: 13px; }
+    .footer h4 { font-size: 13px; text-transform: uppercase; letter-spacing: .08em; margin-bottom: 14px; color: rgba(255,255,255,0.86); }
+    .footer ul { list-style: none; display: grid; gap: 9px; }
+    .footer-bottom { border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; color: rgba(255,255,255,0.48); font-size: 12px; text-align: center; }
+
+    .mobile-menu { display: none; width: 44px; height: 44px; border: 1px solid rgba(255,255,255,0.12); border-radius: 12px; background: rgba(255,255,255,0.06); color: white; font-size: 22px; }
+
+    @media (max-width: 1080px) {
+      .hero-grid, .featured-layout { grid-template-columns: 1fr; }
+      .hero-panel { transform: none; min-height: auto; }
+      .product-grid, .solutions-grid { grid-template-columns: 1fr; }
+      .feature-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-plan.featured { transform: none; }
+      .industry-grid { grid-template-columns: repeat(3, 1fr); }
+      .floating-board { min-height: 520px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 760px) {
+      .container { width: min(100% - 28px, var(--max)); }
+      .nav { height: 68px; }
+      .nav-links, .nav-actions { display: none; }
+      .mobile-menu { display: inline-grid; place-items: center; }
+      .hero { padding: 56px 0 52px; }
+      .hero-grid { gap: 30px; }
+      .hero-sub { font-size: 15px; }
+      .hero-actions .btn { width: 100%; }
+      .mock-app { grid-template-columns: 1fr; min-height: auto; }
+      .mock-sidebar { display: none; }
+      .mock-kpis, .mock-grid, .mini-panels, .portal-grid, .future-grid, .pricing-grid, .cta { grid-template-columns: 1fr; }
+      .hero-panel { padding: 10px; }
+      .mock-main { padding: 14px; }
+      .mock-kpi { min-height: 76px; }
+      .section { padding: 62px 0; }
+      .feature-grid { grid-template-columns: 1fr; }
+      .industry-grid { grid-template-columns: repeat(2, 1fr); }
+      .floating-board { min-height: auto; display: grid; gap: 14px; }
+      .job-card-big, .activity-card-big, .payment-card-big { position: static; width: auto; }
+      .future-card { grid-template-columns: 1fr; }
+      .cta { padding: 30px; }
+      .cta-actions { justify-content: stretch; }
+      .cta-actions .btn { width: 100%; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav">
+      <a href="#top" class="brand" aria-label="TriFekta home">
+        <img class="brand-mark" src="data:image/png;base64,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" alt="TriFekta TF logo" />
+        <span class="brand-text">TRIFEKTA</span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#solutions">Solutions</a>
+        <a href="#pricing">Pricing</a>
+      </nav>
+      <div class="nav-actions">
+        <a class="btn btn-outline" href="#trackflow">View TrackFlow</a>
+        <a class="btn btn-primary" href="#demo">Request Demo</a>
       </div>
-
-      <div class="hero-mockup">
-        <div class="mockup-container">
-          <div class="mock-sidebar">
-            <div class="mock-side-item active"></div>
-            <div class="mock-side-item"></div>
-            <div class="mock-side-item"></div>
-            <div class="mock-side-item"></div>
-          </div>
-          <div class="mock-main">
-            <div class="mock-header">
-              <div class="mock-search"></div>
-              <div class="mock-user"></div>
-            </div>
-            <div class="mock-body">
-              <div class="mock-stats">
-                <div class="mock-stat-card"></div>
-                <div class="mock-stat-card"></div>
-                <div class="mock-stat-card"></div>
-              </div>
-              <div class="mock-table">
-                <div class="mock-row"></div>
-                <div class="mock-row short"></div>
-                <div class="mock-row"></div>
-                <div class="mock-row short"></div>
-                <div class="mock-row"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      <button class="mobile-menu" aria-label="Open menu">☰</button>
     </div>
-  </div>
-</section>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow"><span class="eyebrow-dot"></span> TrackFlow by TriFekta</div>
+          <h1>Simple workflow software for <em>service businesses.</em></h1>
+          <p class="hero-sub">TriFekta starts with TrackFlow — a job tracking and client communication platform for project-based businesses that need clearer updates, stronger staff coordination, faster approvals, and better payment visibility.</p>
+          <div class="hero-actions">
+            <a href="#trackflow" class="btn btn-primary">View TrackFlow →</a>
+            <a href="#demo" class="btn btn-outline">Request Demo</a>
+          </div>
+          <div class="live-line"><span></span><span>TrackFlow is the first active TriFekta product. CraftFlow and EventFlow are planned next.</span></div>
+        </div>
+
+        <div class="hero-panel" aria-label="TrackFlow dashboard preview">
+          <div class="mock-app">
+            <aside class="mock-sidebar">
+              <div class="mock-logo">Track<span>Flow</span></div>
+              <div class="mock-nav-item active"><span class="mock-nav-icon"></span> Dashboard</div>
+              <div class="mock-nav-item"><span class="mock-nav-icon"></span> Jobs</div>
+              <div class="mock-nav-item"><span class="mock-nav-icon"></span> Clients</div>
+              <div class="mock-nav-item"><span class="mock-nav-icon"></span> Staff</div>
+              <div class="mock-nav-item"><span class="mock-nav-icon"></span> Finance</div>
+              <div class="mock-nav-item"><span class="mock-nav-icon"></span> Approvals</div>
+            </aside>
+            <div class="mock-main">
+              <div class="mock-topbar">
+                <div class="mock-title">Operations Dashboard</div>
+                <div class="mock-avatar"></div>
+              </div>
+              <div class="mock-kpis">
+                <div class="mock-kpi"><small>Active jobs</small><strong>24</strong></div>
+                <div class="mock-kpi"><small>Completed</small><strong>156</strong></div>
+                <div class="mock-kpi"><small>Overdue</small><strong>6</strong></div>
+                <div class="mock-kpi"><small>Payments due</small><strong>AED 42k</strong></div>
+              </div>
+              <div class="mock-grid">
+                <div class="mock-card">
+                  <h4>Job status overview</h4>
+                  <div class="donut"></div>
+                  <div class="status-row"><span class="status-dot"></span> In production <b style="margin-left:auto;color:#2d3748;">24</b></div>
+                  <div class="status-row"><span class="status-dot blue"></span> Design approval <b style="margin-left:auto;color:#2d3748;">8</b></div>
+                  <div class="status-row"><span class="status-dot green"></span> Completed <b style="margin-left:auto;color:#2d3748;">156</b></div>
+                </div>
+                <div class="mock-card">
+                  <h4>Recent activity</h4>
+                  <div class="activity">
+                    <div class="activity-item"><span class="activity-icon">✓</span><span><strong>Design approved</strong>Kitchen renovation</span><span>1h</span></div>
+                    <div class="activity-item"><span class="activity-icon">↥</span><span><strong>Site photo uploaded</strong>Retail fit-out</span><span>2h</span></div>
+                    <div class="activity-item"><span class="activity-icon">AED</span><span><strong>Payment received</strong>Office fit-out</span><span>Yday</span></div>
+                    <div class="activity-item"><span class="activity-icon">!</span><span><strong>Deadline risk</strong>Materials pending</span><span>Now</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="mini-panels">
+                <div class="mini-panel"><b>Client Portal</b><p>Customers see progress, photos, approvals, and payment updates.</p><div class="progress"><span></span></div></div>
+                <div class="mini-panel"><b>Staff Portal</b><p>Workers update tasks, upload photos, and mark work complete.</p><div class="progress"><span style="width:82%;background:#2d7d4f"></span></div></div>
+                <div class="mini-panel"><b>Approvals</b><p>Designs and documents move from pending to approved.</p><div class="progress"><span style="width:54%;background:#d48c1a"></span></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white" id="products">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">One brand. Three focused apps.</div>
+          <h2 class="section-title">TriFekta is built as a family of workflow tools.</h2>
+          <p class="section-copy">TrackFlow leads the launch. CraftFlow and EventFlow stay visible as future products, creating anticipation without distracting from the product that is ready first.</p>
+        </div>
+        <div class="product-grid">
+          <article class="product-card featured">
+            <span class="tag live">Active product</span>
+            <div class="app-icon track">T</div>
+            <h3>TrackFlow</h3>
+            <p>Job tracking and client communication for fit-out, interiors, furniture, renovation, signage, maintenance, and project-based teams.</p>
+            <ul class="product-list">
+              <li><span class="check">✓</span> Job management, staff updates, client portal</li>
+              <li><span class="check">✓</span> Design approvals, photos, payments, timeline</li>
+              <li><span class="check">✓</span> Built first and ready to demonstrate</li>
+            </ul>
+          </article>
+          <article class="product-card">
+            <span class="tag soon">Coming later</span>
+            <div class="app-icon craft">C</div>
+            <h3>CraftFlow</h3>
+            <p>Workshop and production management for custom orders, makers, fabricators, joinery shops, and small manufacturers.</p>
+            <ul class="product-list">
+              <li><span class="circle"></span> Production stages</li>
+              <li><span class="circle"></span> Material status</li>
+              <li><span class="circle"></span> Quality checks and delivery</li>
+            </ul>
+          </article>
+          <article class="product-card">
+            <span class="tag soon">Coming later</span>
+            <div class="app-icon event">E</div>
+            <h3>EventFlow</h3>
+            <p>Event planning and operations management for planners, decorators, corporate events, vendors, and event-day teams.</p>
+            <ul class="product-list">
+              <li><span class="circle"></span> Event checklists and run sheets</li>
+              <li><span class="circle"></span> Vendor and client approvals</li>
+              <li><span class="circle"></span> Guest list and social media helper</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light" id="trackflow">
+      <div class="container featured-layout">
+        <div>
+          <div class="section-kicker">Featured product</div>
+          <h2 class="section-title">TrackFlow keeps every job, update, approval, and payment visible.</h2>
+          <p class="section-copy" style="margin-bottom:28px;">TrackFlow is a job tracking and client communication platform for project-based businesses. It helps teams manage jobs, assign staff, upload site updates, share progress with clients, collect approvals, and track payments — all from one simple portal.</p>
+          <div class="feature-stack">
+            <div class="feature-line"><div class="feature-line-icon">▦</div><div><h4>Keep jobs on track and teams aligned</h4><p>Plan, assign, and monitor jobs from inquiry to handover.</p></div></div>
+            <div class="feature-line"><div class="feature-line-icon">☑</div><div><h4>Communicate clearly with clients</h4><p>Share photos, approvals, documents, and progress in one client portal.</p></div></div>
+            <div class="feature-line"><div class="feature-line-icon">AED</div><div><h4>Stay in control of every detail</h4><p>From quotation to payments, activity history, and completion.</p></div></div>
+          </div>
+        </div>
+        <div class="floating-board">
+          <div class="job-card-big">
+            <div style="display:flex;justify-content:space-between;gap:12px;align-items:start;"><div><h3 style="color:var(--navy);font-size:20px;margin-bottom:4px;">Job #1042</h3><p style="color:var(--muted);font-size:13px;">Villa Fit-out</p></div><span class="pill">In Progress</span></div>
+            <div class="detail-grid">
+              <div class="detail"><span>Client</span><b>Client Portal</b></div>
+              <div class="detail"><span>Assigned</span><b>Install Team</b></div>
+              <div class="detail"><span>Start date</span><b>May 6</b></div>
+              <div class="detail"><span>Due date</span><b>May 20</b></div>
+            </div>
+            <div style="display:flex;justify-content:space-between;color:var(--muted);font-size:12px;margin-bottom:8px;"><b style="color:var(--navy);">Progress</b><b>68%</b></div>
+            <div class="progress"><span></span></div>
+          </div>
+          <div class="activity-card-big">
+            <h3 style="color:var(--navy);font-size:18px;margin-bottom:16px;">Recent activity</h3>
+            <div class="activity">
+              <div class="activity-item"><span class="activity-icon">✓</span><span><strong>Design approved</strong>Client accepted V2 drawing</span><span>2h</span></div>
+              <div class="activity-item"><span class="activity-icon">↥</span><span><strong>Site photo uploaded</strong>Staff added progress photos</span><span>4h</span></div>
+              <div class="activity-item"><span class="activity-icon">AED</span><span><strong>Payment received</strong>Advance payment updated</span><span>Yday</span></div>
+            </div>
+          </div>
+          <div class="payment-card-big">
+            <h3 style="color:var(--navy);font-size:18px;margin-bottom:14px;">Payment tracking</h3>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+              <div class="detail"><span>Paid to date</span><b style="font-size:22px;">AED 18,450</b></div>
+              <div class="detail"><span>Outstanding</span><b style="font-size:22px;">AED 6,230</b></div>
+            </div>
+            <div class="progress"><span style="width:75%;background:#2d7d4f"></span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white" id="features">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">TrackFlow modules</div>
+          <h2 class="section-title">Powerful features built for how project teams actually work.</h2>
+        </div>
+        <div class="feature-grid">
+          <div class="feature-card"><div class="feature-card-icon">▦</div><h3>Job Management</h3><p>Create, assign, and track every job from start to finish.</p></div>
+          <div class="feature-card"><div class="feature-card-icon">👷</div><h3>Staff Portal</h3><p>Give staff a simple mobile-first place to update work.</p></div>
+          <div class="feature-card"><div class="feature-card-icon">👤</div><h3>Client Portal</h3><p>Let clients view progress without chasing your team.</p></div>
+          <div class="feature-card"><div class="feature-card-icon">✓</div><h3>Design Approvals</h3><p>Share designs, documents, versions, and approval status.</p></div>
+          <div class="feature-card"><div class="feature-card-icon">AED</div><h3>Payment Tracking</h3><p>Track advance payments, balances, and payment history.</p></div>
+          <div class="feature-card"><div class="feature-card-icon">◷</div><h3>Activity Timeline</h3><p>See updates, uploads, approvals, and actions chronologically.</p></div>
+          <div class="feature-card"><div class="feature-card-icon">🔔</div><h3>Notifications</h3><p>Keep admins, staff, and clients informed at the right moments.</p></div>
+          <div class="feature-card"><div class="feature-card-icon">📷</div><h3>Photo Updates</h3><p>Capture site progress and share visual proof of work.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Two portals. One source of truth.</div>
+          <h2 class="section-title">Staff update the work. Clients see the progress.</h2>
+          <p class="section-copy">TrackFlow separates internal execution from client communication, so your team stays productive and your customers stay informed.</p>
+        </div>
+        <div class="portal-grid">
+          <article class="portal-card">
+            <h3>Staff Portal</h3>
+            <p>For workers, supervisors, and field teams who need a simple way to see tasks and report progress.</p>
+            <div class="portal-screen">
+              <div class="portal-row"><b>Today’s jobs</b><span class="pill">3 active</span></div>
+              <div class="portal-row"><b>Upload site photos</b><span>Ready</span></div>
+              <div class="portal-row"><b>Add progress update</b><span>One tap</span></div>
+              <div class="portal-row"><b>Mark task complete</b><span>Simple</span></div>
+            </div>
+          </article>
+          <article class="portal-card">
+            <h3>Client Portal</h3>
+            <p>For customers who want clear updates, photos, documents, payment status, and approvals without constant calls.</p>
+            <div class="portal-screen">
+              <div class="portal-row"><b>Project progress</b><span>68%</span></div>
+              <div class="portal-row"><b>Latest photos</b><span>12 uploaded</span></div>
+              <div class="portal-row"><b>Design approval</b><span class="pill">Approved</span></div>
+              <div class="portal-row"><b>Payment balance</b><span>AED 6,230</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white" id="solutions">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Who TrackFlow is for</div>
+          <h2 class="section-title">Built for project-based teams that still rely on calls, WhatsApp, Excel, and manual follow-ups.</h2>
+        </div>
+        <div class="industry-grid">
+          <div class="industry-card"><div class="industry-icon">🏗️</div>Interior Fit-out</div>
+          <div class="industry-card"><div class="industry-icon">🪵</div>Furniture & Joinery</div>
+          <div class="industry-card"><div class="industry-icon">🛠️</div>Renovation</div>
+          <div class="industry-card"><div class="industry-icon">🪧</div>Signage</div>
+          <div class="industry-card"><div class="industry-icon">🔧</div>Maintenance Teams</div>
+          <div class="industry-card"><div class="industry-icon">📋</div>Project-based SMEs</div>
+        </div>
+        <div class="solutions-grid" style="margin-top:18px;">
+          <article class="solution-card"><h3>For business owners</h3><p>See where every job stands, what is delayed, what is approved, and what payment is still pending.</p></article>
+          <article class="solution-card"><h3>For operations teams</h3><p>Coordinate staff, clients, tasks, files, updates, photos, and deadlines from one place.</p></article>
+          <article class="solution-card"><h3>For customers</h3><p>Give clients a clean view of progress instead of making them call or message repeatedly.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light" id="pricing">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">TrackFlow pricing</div>
+          <h2 class="section-title">Simple monthly plans for different team sizes.</h2>
+          <p class="section-copy">Start with the plan that matches your current team and upgrade as your jobs, users, and workflows grow.</p>
+        </div>
+        <div class="pricing-grid">
+          <article class="pricing-plan">
+            <span class="tag live">Starter</span>
+            <h3>Starter</h3>
+            <div class="plan-price">AED 199<span>/ month</span></div>
+            <p class="plan-desc">For small studios that need basic job visibility, client updates, and approvals.</p>
+            <ul class="plan-features">
+              <li><span class="check">✓</span> 3 users</li>
+              <li><span class="check">✓</span> 20 active jobs</li>
+              <li><span class="check">✓</span> Client portal</li>
+              <li><span class="check">✓</span> Basic job tracking</li>
+              <li><span class="check">✓</span> Design approvals</li>
+            </ul>
+            <a href="#demo" class="btn btn-dark">Start with Starter</a>
+          </article>
+
+          <article class="pricing-plan featured">
+            <div class="plan-badge">Recommended</div>
+            <span class="tag live">Growth</span>
+            <h3>Growth</h3>
+            <div class="plan-price">AED 349<span>/ month</span></div>
+            <p class="plan-desc">For growing teams that need staff tracking, finance, quotes, and smarter updates.</p>
+            <ul class="plan-features">
+              <li><span class="check">✓</span> 8 users</li>
+              <li><span class="check">✓</span> 75 active jobs</li>
+              <li><span class="check">✓</span> Quote system</li>
+              <li><span class="check">✓</span> Finance and staff tracking</li>
+              <li><span class="check">✓</span> Change orders</li>
+              <li><span class="check">✓</span> AI updates</li>
+            </ul>
+            <a href="#demo" class="btn btn-primary">Choose Growth</a>
+          </article>
+
+          <article class="pricing-plan">
+            <span class="tag live">Pro</span>
+            <h3>Pro</h3>
+            <div class="plan-price">AED 599<span>/ month</span></div>
+            <p class="plan-desc">For established operations that need unlimited jobs, dashboards, and reporting.</p>
+            <ul class="plan-features">
+              <li><span class="check">✓</span> 20 users</li>
+              <li><span class="check">✓</span> Unlimited jobs</li>
+              <li><span class="check">✓</span> Production dashboard</li>
+              <li><span class="check">✓</span> Advanced reporting</li>
+              <li><span class="check">✓</span> Priority support</li>
+            </ul>
+            <a href="#demo" class="btn btn-dark">Go Pro</a>
+          </article>
+
+          <article class="pricing-plan">
+            <span class="tag soon">Custom</span>
+            <h3>Custom</h3>
+            <div class="plan-price">Contact us<span>custom setup</span></div>
+            <p class="plan-desc">For companies that need tailored onboarding, workflows, and integration planning.</p>
+            <ul class="plan-features">
+              <li><span class="check">✓</span> Custom users</li>
+              <li><span class="check">✓</span> Onboarding support</li>
+              <li><span class="check">✓</span> Custom workflows</li>
+              <li><span class="check">✓</span> Integrations</li>
+            </ul>
+            <a href="#demo" class="btn btn-dark">Contact us</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white" id="coming-soon">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">What comes next</div>
+          <h2 class="section-title">Future apps will reuse the same TriFekta foundation.</h2>
+          <p class="section-copy">CraftFlow and EventFlow should remain visible as planned products, but the main sales attention should stay on TrackFlow.</p>
+        </div>
+        <div class="future-grid">
+          <article class="future-card">
+            <div class="app-icon craft">C</div>
+            <div>
+              <span class="tag soon">Coming later</span>
+              <h3>CraftFlow</h3>
+              <p>For workshops, custom orders, production stages, material tracking, quality checks, and delivery updates.</p>
+              <ul class="product-list"><li><span class="circle"></span> Production planning</li><li><span class="circle"></span> Inventory and material status</li><li><span class="circle"></span> Order-to-delivery visibility</li></ul>
+            </div>
+          </article>
+          <article class="future-card">
+            <div class="app-icon event">E</div>
+            <div>
+              <span class="tag soon">Coming later</span>
+              <h3>EventFlow</h3>
+              <p>For event planners, vendor coordination, event checklists, client approvals, run sheets, guest lists, and social content support.</p>
+              <ul class="product-list"><li><span class="circle"></span> Event-day run sheet</li><li><span class="circle"></span> Vendor and guest coordination</li><li><span class="circle"></span> Social media helper</li></ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section light" id="demo">
+      <div class="container">
+        <div class="cta">
+          <div>
+            <h2>Start with TrackFlow today.</h2>
+            <p>Bring your jobs, staff updates, client approvals, progress photos, and payment tracking into one simple system under the TriFekta brand.</p>
+          </div>
+          <div class="cta-actions">
+            <a href="#trackflow" class="btn btn-primary">View TrackFlow →</a>
+            <a href="#pricing" class="btn btn-outline">View Pricing</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="margin-bottom:14px;"><img class="brand-mark" src="data:image/png;base64,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" alt="TriFekta TF logo" /> <span class="brand-text">TRIFEKTA</span></div>
+          <p>Three products. One vision. Simple workflow software for service and project-based businesses.</p>
+        </div>
+        <div><h4>Solutions</h4><ul><li><a href="#trackflow">TrackFlow</a></li><li><a href="#coming-soon">CraftFlow</a></li><li><a href="#coming-soon">EventFlow</a></li></ul></div>
+        <div><h4>TrackFlow</h4><ul><li><a href="#features">Features</a></li><li><a href="#solutions">Industries</a></li><li><a href="#pricing">Pricing</a></li></ul></div>
+        <div><h4>Company</h4><ul><li><a href="#pricing">Pricing</a></li><li><a href="#demo">Request Demo</a></li></ul></div>
+        <div><h4>Get Started</h4><ul><li><a href="#pricing">View plans</a></li><li><a href="#trackflow">View TrackFlow</a></li></ul></div>
+      </div>
+      <div class="footer-bottom">© 2026 TriFekta. TrackFlow is the first product in the TriFekta workflow family.</div>
+    </div>
+  </footer>
+</body>
+</html>
