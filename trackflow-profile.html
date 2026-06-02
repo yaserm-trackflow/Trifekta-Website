@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TrackFlow — Product Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  background: #dde0e6;
+  -webkit-font-smoothing: antialiased;
+  color: #0f1c35;
+}
+
+/* ── Page shell ── */
+.page {
+  width: 794px;           /* A4 @ 96dpi */
+  min-height: 1123px;
+  margin: 40px auto;
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,.22);
+}
+.page + .page { margin-top: 32px; }
+
+/* ── Print ── */
+@media print {
+  body { background: white; margin: 0; }
+  .page { margin: 0; box-shadow: none; page-break-after: always; }
+  .page:last-child { page-break-after: auto; }
+  .print-btn { display: none !important; }
+}
+
+/* ── Print button ── */
+.print-btn {
+  display: block;
+  margin: 0 auto 28px;
+  width: 794px;
+  padding: 0;
+  text-align: right;
+}
+.print-btn button {
+  padding: 10px 22px;
+  background: #e85a1f;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  letter-spacing: .02em;
+}
+.print-btn button:hover { background: #c8441a; }
+
+/* ══════════════════════════════════════
+   PAGE 1
+══════════════════════════════════════ */
+
+/* Top bar */
+.p1-topbar {
+  background: linear-gradient(135deg, #13264a 0%, #071737 55%, #090b18 100%);
+  padding: 32px 48px 36px;
+  position: relative;
+  overflow: hidden;
+}
+.p1-topbar::before {
+  content: "";
+  position: absolute;
+  right: -140px; top: -140px;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.035);
+  box-shadow:
+    0 0 0 80px rgba(255,255,255,.010),
+    0 0 0 160px rgba(255,255,255,.007);
+}
+.p1-topbar::after {
+  content: "";
+  position: absolute;
+  left: -80px; bottom: -80px;
+  width: 280px; height: 280px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232,90,31,.16) 0%, transparent 70%);
+}
+.p1-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 44px;
+  position: relative;
+  z-index: 2;
+}
+.brand {
+  display: flex; align-items: center; gap: 10px;
+}
+.brand-badge {
+  width: 40px; height: 40px;
+  background: #e85a1f;
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 15px; color: white;
+  letter-spacing: -.02em;
+}
+.brand-name {
+  font-size: 18px; font-weight: 900; color: white; letter-spacing: -.04em;
+}
+.brand-name span { color: #e85a1f; }
+.nav-pill {
+  padding: 6px 14px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.22);
+  background: rgba(255,255,255,.07);
+  color: rgba(255,255,255,.80);
+  font-size: 11px; font-weight: 700;
+  letter-spacing: .06em; text-transform: uppercase;
+}
+
+/* Hero copy */
+.p1-hero {
+  position: relative; z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 32px;
+  align-items: center;
+}
+.p1-eyebrow {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 6px 12px; border-radius: 999px;
+  background: rgba(232,90,31,.14); border: 1px solid rgba(232,90,31,.30);
+  color: #f08a5d; font-size: 10px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .10em;
+  margin-bottom: 14px;
+}
+.p1-dot { width: 6px; height: 6px; background: #e85a1f; border-radius: 50%; }
+.p1-hero h1 {
+  font-size: 36px; line-height: .97; letter-spacing: -.065em; font-weight: 900;
+  color: white; margin-bottom: 14px;
+}
+.p1-hero h1 em { color: #e85a1f; font-style: normal; }
+.p1-hero p {
+  font-size: 13px; color: rgba(255,255,255,.68);
+  max-width: 360px; line-height: 1.65; margin-bottom: 22px;
+}
+.p1-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 11px 20px;
+  background: linear-gradient(135deg, #e85a1f, #c8441a);
+  border-radius: 11px; color: white;
+  font-size: 12px; font-weight: 800;
+  box-shadow: 0 10px 28px rgba(232,90,31,.30);
+  letter-spacing: .01em;
+}
+
+/* Hero right: mini dashboard */
+.p1-dash {
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 18px; padding: 14px;
+  box-shadow: 0 18px 50px rgba(0,0,0,.30);
+}
+.p1-dash-inner {
+  background: #f4f6f9;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.p1-dash-header {
+  background: #202c40;
+  padding: 10px 14px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.p1-dash-header span {
+  font-size: 11px; font-weight: 800; color: white;
+}
+.p1-live {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 9px; color: rgba(255,255,255,.55); font-weight: 700;
+}
+.live-dot {
+  width: 6px; height: 6px; border-radius: 50%; background: #22c55e;
+  animation: livePulse 2s ease-in-out infinite;
+}
+@keyframes livePulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+.p1-stats {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px; padding: 10px;
+}
+.p1-stat {
+  background: white; border: 1px solid #e5e9f0;
+  border-radius: 10px; padding: 10px;
+}
+.p1-stat small {
+  display: block; font-size: 8px; font-weight: 800;
+  text-transform: uppercase; letter-spacing: .06em; color: #94a3b8;
+}
+.p1-stat b { display: block; font-size: 19px; font-weight: 900; color: #0f1c35; margin-top: 3px; }
+.p1-jobs { padding: 0 10px 10px; display: grid; gap: 6px; }
+.p1-job {
+  background: white; border: 1px solid #e5e9f0;
+  border-radius: 9px; padding: 9px 11px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.p1-job-name { font-size: 10px; font-weight: 800; color: #0f1c35; }
+.p1-job-sub { font-size: 8px; color: #94a3b8; font-weight: 600; margin-top: 1px; }
+.tag {
+  padding: 3px 8px; border-radius: 999px;
+  font-size: 9px; font-weight: 800; white-space: nowrap;
+}
+.tag-green { background: #dcfce7; color: #15803d; }
+.tag-orange { background: #ffedd5; color: #c2410c; }
+.tag-blue { background: #dbeafe; color: #1d4ed8; }
+.tag-yellow { background: #fef3c7; color: #92400e; }
+.p1-action {
+  margin: 0 10px 10px;
+  background: linear-gradient(135deg, #13264a, #071737);
+  border-radius: 9px; padding: 9px 11px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.p1-action span { font-size: 9px; font-weight: 800; color: rgba(255,255,255,.75); }
+.p1-action-count {
+  background: #e85a1f; color: white;
+  font-size: 9px; font-weight: 900;
+  padding: 2px 7px; border-radius: 999px;
+}
+
+/* Orange divider strip */
+.p1-divider {
+  height: 3px;
+  background: linear-gradient(90deg, #e85a1f 0%, #f48c5a 50%, transparent 100%);
+}
+
+/* Body section */
+.p1-body { padding: 32px 48px; }
+
+/* Section label */
+.sec-label {
+  font-size: 10px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: .12em; color: #e85a1f; margin-bottom: 16px; display: block;
+}
+
+/* Module grid */
+.module-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px;
+  margin-bottom: 28px;
+}
+.module-card {
+  border-radius: 16px;
+  border: 1px solid rgba(15,28,53,.10);
+  padding: 16px;
+  background: white;
+  box-shadow: 0 6px 18px rgba(2,8,24,.05);
+}
+.module-icon {
+  font-size: 20px; display: block; margin-bottom: 8px;
+}
+.module-card h4 {
+  font-size: 13px; font-weight: 800;
+  letter-spacing: -.025em; margin-bottom: 5px; color: #0f1c35;
+}
+.module-card p { font-size: 11px; color: #647084; line-height: 1.55; }
+.module-tag {
+  display: inline-flex; padding: 3px 8px; border-radius: 999px;
+  font-size: 9px; font-weight: 900; text-transform: uppercase;
+  letter-spacing: .04em; margin-bottom: 8px;
+  background: rgba(232,90,31,.10); color: #e85a1f;
+}
+
+/* Workflow row */
+.wf-row {
+  display: flex; align-items: flex-start; gap: 0;
+  margin-bottom: 28px;
+}
+.wf-step {
+  flex: 1;
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  position: relative;
+}
+.wf-step::after {
+  content: "→";
+  position: absolute;
+  right: -8px; top: 16px;
+  font-size: 13px; font-weight: 900; color: #e85a1f;
+  line-height: 1;
+}
+.wf-step:last-child::after { display: none; }
+.wf-circle {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: rgba(232,90,31,.10);
+  border: 1.5px solid rgba(232,90,31,.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; margin-bottom: 7px;
+}
+.wf-step span {
+  font-size: 10px; font-weight: 700;
+  color: #0f1c35; line-height: 1.35;
+  max-width: 72px;
+}
+
+/* Two-col layout */
+.two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+/* Feature list block */
+.feature-block {
+  background: #f7f8fb;
+  border: 1px solid rgba(15,28,53,.08);
+  border-radius: 16px; padding: 18px;
+}
+.feature-block h4 {
+  font-size: 13px; font-weight: 800; margin-bottom: 12px; color: #0f1c35;
+  letter-spacing: -.02em;
+}
+.feat-list { list-style: none; display: grid; gap: 8px; }
+.feat-list li {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 11px; color: #475569; line-height: 1.5;
+}
+.feat-list li::before {
+  content: "✓"; color: #e85a1f; font-weight: 900; font-size: 11px;
+  flex-shrink: 0; margin-top: 1px;
+}
+
+/* Pain block */
+.pain-block {
+  background: linear-gradient(135deg, #13264a, #071737);
+  border-radius: 16px; padding: 18px; color: white;
+}
+.pain-block h4 {
+  font-size: 13px; font-weight: 800; color: white; margin-bottom: 12px;
+}
+.pain-list { list-style: none; display: grid; gap: 7px; }
+.pain-list li {
+  display: flex; align-items: flex-start; gap: 8px;
+  font-size: 11px; color: rgba(255,255,255,.65); line-height: 1.5;
+}
+.pain-list li::before {
+  content: "✗"; color: #f87171; font-weight: 900; font-size: 11px;
+  flex-shrink: 0; margin-top: 1px;
+}
+
+/* Page 1 footer strip */
+.p1-foot {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: #071737;
+  padding: 12px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.p1-foot span { font-size: 10px; color: rgba(255,255,255,.45); font-weight: 600; }
+.p1-foot a { font-size: 10px; color: rgba(255,255,255,.60); font-weight: 700; }
+.p1-foot .page-num {
+  font-size: 10px; font-weight: 800; color: rgba(255,255,255,.35);
+}
+
+
+/* ══════════════════════════════════════
+   PAGE 2
+══════════════════════════════════════ */
+
+/* Dark top accent bar */
+.p2-topbar {
+  background: linear-gradient(135deg, #13264a 0%, #071737 100%);
+  padding: 24px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.p2-topbar-title {
+  font-size: 13px; font-weight: 800; color: rgba(255,255,255,.70);
+  letter-spacing: -.01em;
+}
+.p2-topbar-title span { color: white; }
+
+/* Body */
+.p2-body { padding: 32px 48px 80px; }
+
+/* Before/After table */
+.ba-table {
+  border-radius: 18px; overflow: hidden;
+  border: 1px solid rgba(15,28,53,.10);
+  box-shadow: 0 8px 28px rgba(2,8,24,.06);
+  margin-bottom: 28px;
+}
+.ba-head-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+}
+.ba-head-cell {
+  padding: 12px 18px; font-size: 12px; font-weight: 900;
+  display: flex; align-items: center; gap: 9px;
+}
+.ba-head-cell:first-child {
+  background: #fafafa; border-right: 1px solid rgba(15,28,53,.08);
+  color: #b91c1c;
+  border-bottom: 1px solid rgba(15,28,53,.08);
+}
+.ba-head-cell:last-child {
+  background: linear-gradient(135deg, #13264a, #071737);
+  color: #4ade80;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.ba-icon {
+  width: 26px; height: 26px; border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; flex-shrink: 0;
+}
+.bi-bad { background: #fee2e2; color: #b91c1c; }
+.bi-good { background: rgba(34,197,94,.18); color: #15803d; }
+.ba-data-row { display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(15,28,53,.07); }
+.ba-data-row:first-of-type { border-top: none; }
+.ba-cell {
+  padding: 11px 18px; display: flex; align-items: flex-start; gap: 9px;
+}
+.ba-cell:first-child { background: #fafafa; border-right: 1px solid rgba(15,28,53,.07); }
+.ba-cell-icon {
+  width: 22px; height: 22px; border-radius: 7px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; font-weight: 900; flex-shrink: 0; margin-top: 1px;
+}
+.ci-x { background: #fee2e2; color: #b91c1c; }
+.ci-check { background: #dcfce7; color: #15803d; }
+.ba-cell b { display: block; font-size: 11px; font-weight: 800; color: #0f1c35; margin-bottom: 1px; }
+.ba-cell p { font-size: 10px; color: #647084; line-height: 1.45; }
+
+/* Portals two-col */
+.portals-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px; }
+.portal-card {
+  border-radius: 18px; overflow: hidden;
+  border: 1px solid rgba(15,28,53,.10);
+  box-shadow: 0 8px 24px rgba(2,8,24,.06);
+}
+.portal-card-head {
+  padding: 14px 18px;
+  display: flex; align-items: center; gap: 10px;
+}
+.portal-card-head.staff { background: linear-gradient(135deg, #13264a, #071737); color: white; }
+.portal-card-head.client { background: linear-gradient(135deg, #1a3157, #0d2143); color: white; }
+.portal-icon {
+  width: 34px; height: 34px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center; font-size: 16px;
+  background: rgba(255,255,255,.12);
+}
+.portal-card-head h4 { font-size: 13px; font-weight: 800; margin-bottom: 1px; }
+.portal-card-head p { font-size: 10px; color: rgba(255,255,255,.58); }
+.portal-card-body { background: #f7f8fb; padding: 14px 18px; }
+.portal-row {
+  display: flex; justify-content: space-between; align-items: center;
+  gap: 10px; padding: 8px 0; border-top: 1px solid rgba(15,28,53,.07);
+  font-size: 10px; font-weight: 700; color: #0f1c35;
+}
+.portal-row:first-child { border-top: none; padding-top: 0; }
+.portal-row:last-child { padding-bottom: 0; }
+
+/* Specs row */
+.specs-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+.spec-card {
+  background: white; border: 1px solid rgba(15,28,53,.09);
+  border-radius: 14px; padding: 14px; text-align: center;
+  box-shadow: 0 4px 14px rgba(2,8,24,.04);
+}
+.spec-val {
+  font-size: 24px; font-weight: 900; color: #e85a1f;
+  letter-spacing: -.04em; line-height: 1; display: block; margin-bottom: 4px;
+}
+.spec-label { font-size: 10px; font-weight: 700; color: #647084; line-height: 1.35; }
+
+/* Trial card */
+.trial-band {
+  background: radial-gradient(circle at 14% 24%, rgba(232,90,31,.18), transparent 40%),
+              linear-gradient(135deg, #13264a, #071737);
+  border-radius: 18px; padding: 24px 28px;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 24px; align-items: center;
+}
+.trial-band h3 { font-size: 20px; font-weight: 900; color: white; letter-spacing: -.04em; margin-bottom: 6px; }
+.trial-band p { font-size: 12px; color: rgba(255,255,255,.65); line-height: 1.55; max-width: 400px; }
+.trial-band-steps {
+  display: flex; flex-direction: column; gap: 6px; margin-top: 14px;
+}
+.trial-step {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; color: rgba(255,255,255,.72); font-weight: 600;
+}
+.trial-step::before {
+  content: "→";
+  color: #e85a1f; font-weight: 900; font-size: 11px;
+}
+.trial-cta-box {
+  display: flex; flex-direction: column; align-items: center;
+  text-align: center; flex-shrink: 0;
+}
+.trial-days {
+  font-size: 64px; line-height: .9; font-weight: 900; color: #e85a1f;
+  letter-spacing: -.06em;
+}
+.trial-days-label {
+  font-size: 12px; font-weight: 700; color: rgba(255,255,255,.65);
+  margin-top: 4px; margin-bottom: 16px;
+}
+.trial-btn {
+  display: inline-flex; align-items: center;
+  padding: 11px 22px;
+  background: linear-gradient(135deg, #e85a1f, #c8441a);
+  border-radius: 11px; color: white;
+  font-size: 12px; font-weight: 800;
+  box-shadow: 0 10px 28px rgba(232,90,31,.30);
+  white-space: nowrap; letter-spacing: .01em;
+}
+.trial-note {
+  font-size: 9px; color: rgba(255,255,255,.40); margin-top: 8px;
+}
+
+/* Page 2 footer */
+.p2-foot {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  background: #071737;
+  padding: 12px 48px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 2px solid #e85a1f;
+}
+.p2-foot span { font-size: 10px; color: rgba(255,255,255,.45); font-weight: 600; }
+.p2-foot a { font-size: 10px; color: rgba(255,255,255,.65); font-weight: 700; }
+
+</style>
+</head>
+<body>
+
+<div class="print-btn">
+  <button onclick="window.print()">⬇ Download / Print PDF</button>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE 1
+══════════════════════════════════════ -->
+<div class="page">
+
+  <!-- Top hero band -->
+  <div class="p1-topbar">
+    <div class="p1-nav">
+      <div class="brand">
+        <div class="brand-badge">TF</div>
+        <div>
+          <div class="brand-name">Track<span>Flow</span></div>
+          <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-top:1px;">by TriFekta</div>
+        </div>
+      </div>
+      <div class="nav-pill">Product Profile 2025</div>
+    </div>
+
+    <div class="p1-hero">
+      <div>
+        <div class="p1-eyebrow">
+          <div class="p1-dot"></div>
+          Job Management for Fit-Out &amp; Furniture Teams
+        </div>
+        <h1>From <em>quote</em> to delivery —<br>every job, one place.</h1>
+        <p>TrackFlow replaces scattered WhatsApp messages, forwarded photos, and manual Excel follow-up with one clear operational workspace for fit-out, furniture, joinery, and interior studios.</p>
+        <div class="p1-cta">
+          trifekta.io/trackflow &nbsp;·&nbsp; Start 21-Day Free Trial
+        </div>
+      </div>
+
+      <!-- Mini dashboard visual -->
+      <div class="p1-dash">
+        <div class="p1-dash-inner">
+          <div class="p1-dash-header">
+            <span>Jobs · Active</span>
+            <span class="p1-live"><span class="live-dot"></span> Live</span>
+          </div>
+          <div class="p1-stats">
+            <div class="p1-stat">
+              <small>Active Jobs</small>
+              <b>12</b>
+            </div>
+            <div class="p1-stat">
+              <small>Pending Approval</small>
+              <b style="color:#e85a1f;">4</b>
+            </div>
+          </div>
+          <div class="p1-jobs">
+            <div class="p1-job">
+              <div>
+                <div class="p1-job-name">Villa Fit-Out — Al Barsha</div>
+                <div class="p1-job-sub">Delivery Jun 12 · 78% done</div>
+              </div>
+              <span class="tag tag-green">On Track</span>
+            </div>
+            <div class="p1-job">
+              <div>
+                <div class="p1-job-name">Custom Kitchen — JLT</div>
+                <div class="p1-job-sub">Awaiting design approval</div>
+              </div>
+              <span class="tag tag-orange">Action</span>
+            </div>
+            <div class="p1-job">
+              <div>
+                <div class="p1-job-name">Office Joinery — DIFC</div>
+                <div class="p1-job-sub">Quote sent · pending</div>
+              </div>
+              <span class="tag tag-blue">Quote</span>
+            </div>
+            <div class="p1-job">
+              <div>
+                <div class="p1-job-name">Bedroom Suite — Mirdif</div>
+                <div class="p1-job-sub">Workshop · 4 tasks active</div>
+              </div>
+              <span class="tag tag-green">In Progress</span>
+            </div>
+          </div>
+          <div class="p1-action">
+            <span>3 items need attention today</span>
+            <span class="p1-action-count">3</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="p1-divider"></div>
+
+  <!-- Body -->
+  <div class="p1-body">
+
+    <!-- Quote-to-delivery workflow -->
+    <span class="sec-label">How a Job Moves Through TrackFlow</span>
+    <div class="wf-row">
+      <div class="wf-step">
+        <div class="wf-circle">📋</div>
+        <span>Quote Created</span>
+      </div>
+      <div class="wf-step">
+        <div class="wf-circle">✅</div>
+        <span>Client Approves</span>
+      </div>
+      <div class="wf-step">
+        <div class="wf-circle">🏗️</div>
+        <span>Job Created</span>
+      </div>
+      <div class="wf-step">
+        <div class="wf-circle">👷</div>
+        <span>Staff Assigned</span>
+      </div>
+      <div class="wf-step">
+        <div class="wf-circle">📸</div>
+        <span>Site Updates</span>
+      </div>
+      <div class="wf-step">
+        <div class="wf-circle">🎨</div>
+        <span>Design Approval</span>
+      </div>
+      <div class="wf-step">
+        <div class="wf-circle">💳</div>
+        <span>Payment Tracking</span>
+      </div>
+      <div class="wf-step">
+        <div class="wf-circle">🏁</div>
+        <span>Delivery &amp; Handover</span>
+      </div>
+    </div>
+
+    <!-- Module grid -->
+    <span class="sec-label">Core Modules</span>
+    <div class="module-grid">
+
+      <div class="module-card">
+        <span class="module-tag">Pipeline</span>
+        <span class="module-icon">🏗️</span>
+        <h4>Jobs Dashboard</h4>
+        <p>All active jobs with status, progress, assigned staff, and deadlines — one screen.</p>
+      </div>
+
+      <div class="module-card">
+        <span class="module-tag">Approvals</span>
+        <span class="module-icon">✅</span>
+        <h4>Quote &amp; Design Approvals</h4>
+        <p>Send quotes and design selections to clients via their portal. Every approval timestamped.</p>
+      </div>
+
+      <div class="module-card">
+        <span class="module-tag">Staff</span>
+        <span class="module-icon">👷</span>
+        <h4>Staff Task Tracking</h4>
+        <p>Assign tasks to site and workshop staff. They update from mobile — no app needed.</p>
+      </div>
+
+      <div class="module-card">
+        <span class="module-tag">Alerts</span>
+        <span class="module-icon">🔔</span>
+        <h4>Action Center</h4>
+        <p>Pending approvals, overdue tasks, open change orders, and outstanding payments — surfaced daily.</p>
+      </div>
+
+      <div class="module-card">
+        <span class="module-tag">Finance</span>
+        <span class="module-icon">💳</span>
+        <h4>Payment Visibility</h4>
+        <p>Deposit, progress payments, and outstanding balances tracked per job. Visible in client portal.</p>
+      </div>
+
+      <div class="module-card">
+        <span class="module-tag">Media</span>
+        <span class="module-icon">📸</span>
+        <h4>Photo Timeline</h4>
+        <p>Staff photos attached to the correct task and job — not loose in a chat thread.</p>
+      </div>
+
+    </div>
+
+    <!-- Two-col: pain vs features -->
+    <div class="two-col">
+      <div class="pain-block">
+        <h4>The Problems TrackFlow Replaces</h4>
+        <ul class="pain-list">
+          <li>Job updates buried in WhatsApp group chats</li>
+          <li>Photos forwarded with no job context</li>
+          <li>Client approvals verbal or undocumented</li>
+          <li>Payment follow-up done from a spreadsheet</li>
+          <li>Owner chasing staff every morning for status</li>
+          <li>Excel and chat used together, out of sync</li>
+        </ul>
+      </div>
+      <div class="feature-block">
+        <h4>What TrackFlow Gives You Instead</h4>
+        <ul class="feat-list">
+          <li>One job timeline from quote to delivery</li>
+          <li>Quote and design approvals recorded in writing</li>
+          <li>Staff mobile updates attached to each task</li>
+          <li>Site photos saved to the correct job</li>
+          <li>Client portal — progress, approvals, payments</li>
+          <li>Action Center: know what needs attention today</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Page footer -->
+  <div class="p1-foot">
+    <span>TrackFlow by TriFekta &nbsp;·&nbsp; Fit-Out, Furniture &amp; Interior Job Management &nbsp;·&nbsp; UAE / GCC</span>
+    <a href="https://trifekta.io">trifekta.io</a>
+    <span class="page-num">1 / 2</span>
+  </div>
+
+</div><!-- /page 1 -->
+
+
+<!-- ══════════════════════════════════════
+     PAGE 2
+══════════════════════════════════════ -->
+<div class="page">
+
+  <!-- Top bar -->
+  <div class="p2-topbar">
+    <div class="brand">
+      <div class="brand-badge">TF</div>
+      <div>
+        <div class="brand-name">Track<span>Flow</span></div>
+        <div style="font-size:9px;color:rgba(255,255,255,.45);font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-top:1px;">by TriFekta</div>
+      </div>
+    </div>
+    <div class="p2-topbar-title">
+      <span>Staff Portal &nbsp;·&nbsp; Client Portal &nbsp;·&nbsp; Before &amp; After &nbsp;·&nbsp; Get Started</span>
+    </div>
+    <div style="font-size:10px;color:rgba(255,255,255,.45);font-weight:700;">trifekta.io</div>
+  </div>
+
+  <div class="p2-body">
+
+    <!-- Before / After -->
+    <span class="sec-label">Before &amp; After — What Actually Changes</span>
+    <div class="ba-table">
+      <div class="ba-head-row">
+        <div class="ba-head-cell">
+          <div class="ba-icon bi-bad">✗</div>
+          Before TrackFlow
+        </div>
+        <div class="ba-head-cell">
+          <div class="ba-icon bi-good">✓</div>
+          With TrackFlow
+        </div>
+      </div>
+      <div class="ba-data-row">
+        <div class="ba-cell">
+          <div class="ba-cell-icon ci-x">✗</div>
+          <div><b>Job updates in WhatsApp chats</b><p>Photos, approvals, and questions mixed into threads with no record.</p></div>
+        </div>
+        <div class="ba-cell">
+          <div class="ba-cell-icon ci-check">✓</div>
+          <div><b>One job timeline per client</b><p>Every update, photo, and approval attached to the correct job.</p></div>
+        </div>
+      </div>
+      <div class="ba-data-row">
+        <div class="ba-cell">
+          <div class="ba-cell-icon ci-x">✗</div>
+          <div><b>Approvals verbal or undocumented</b><p>No written record of which design or quote the client confirmed.</p></div>
+        </div>
+        <div class="ba-cell">
+          <div class="ba-cell-icon ci-check">✓</div>
+          <div><b>Approvals recorded &amp; timestamped</b><p>Quote and design sign-offs confirmed through the client portal.</p></div>
+        </div>
+      </div>
+      <div class="ba-data-row">
+        <div class="ba-cell">
+          <div class="ba-cell-icon ci-x">✗</div>
+          <div><b>Owner chasing updates manually</b><p>Daily calls to carpenters and supervisors asking for job status.</p></div>
+        </div>
+        <div class="ba-cell">
+          <div class="ba-cell-icon ci-check">✓</div>
+          <div><b>Action Center shows what's blocked</b><p>Pending items, overdue tasks, and open approvals visible at a glance.</p></div>
+        </div>
+      </div>
+      <div class="ba-data-row">
+        <div class="ba-cell">
+          <div class="ba-cell-icon ci-x">✗</div>
+          <div><b>Payment follow-up from Excel</b><p>Someone manually tracks which jobs have outstanding balances.</p></div>
+        </div>
+        <div class="ba-cell">
+          <div class="ba-cell-icon ci-check">✓</div>
+          <div><b>Payment status per job</b><p>Deposit, progress, and balance tracked automatically. Visible to client.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Staff + Client portals -->
+    <span class="sec-label">Two Portals — Staff &amp; Client</span>
+    <div class="portals-row">
+
+      <div class="portal-card">
+        <div class="portal-card-head staff">
+          <div class="portal-icon">👷</div>
+          <div>
+            <h4>Mobile Staff Portal</h4>
+            <p>For carpenters, installers, and supervisors</p>
+          </div>
+        </div>
+        <div class="portal-card-body">
+          <div class="portal-row">
+            <span>Opens from phone browser</span>
+            <span class="tag tag-green">No app needed</span>
+          </div>
+          <div class="portal-row">
+            <span>Start Work tap</span>
+            <span class="tag tag-blue">One button</span>
+          </div>
+          <div class="portal-row">
+            <span>Report a Problem</span>
+            <span class="tag tag-orange">With photo &amp; note</span>
+          </div>
+          <div class="portal-row">
+            <span>Mark task Done</span>
+            <span class="tag tag-green">Photo proof attached</span>
+          </div>
+          <div class="portal-row">
+            <span>Supervisor sees update</span>
+            <span class="tag tag-blue">Immediately</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="portal-card">
+        <div class="portal-card-head client">
+          <div class="portal-icon">👤</div>
+          <div>
+            <h4>Branded Client Portal</h4>
+            <p>For homeowners, clients, and end users</p>
+          </div>
+        </div>
+        <div class="portal-card-body">
+          <div class="portal-row">
+            <span>Link-based — no login required</span>
+            <span class="tag tag-blue">No app download</span>
+          </div>
+          <div class="portal-row">
+            <span>Shows your studio name</span>
+            <span class="tag tag-green">Branded portal</span>
+          </div>
+          <div class="portal-row">
+            <span>Quote &amp; design approvals</span>
+            <span class="tag tag-green">Recorded</span>
+          </div>
+          <div class="portal-row">
+            <span>Progress photos &amp; updates</span>
+            <span class="tag tag-blue">Per stage</span>
+          </div>
+          <div class="portal-row">
+            <span>Payment status</span>
+            <span class="tag tag-green">Transparent</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Specs row -->
+    <span class="sec-label">At a Glance</span>
+    <div class="specs-row">
+      <div class="spec-card">
+        <span class="spec-val">8</span>
+        <span class="spec-label">Workflow steps from quote to delivery</span>
+      </div>
+      <div class="spec-card">
+        <span class="spec-val">2</span>
+        <span class="spec-label">Portals — staff mobile &amp; client branded</span>
+      </div>
+      <div class="spec-card">
+        <span class="spec-val">0</span>
+        <span class="spec-label">Apps to download for staff or clients</span>
+      </div>
+      <div class="spec-card">
+        <span class="spec-val">21</span>
+        <span class="spec-label">Day free trial — no credit card</span>
+      </div>
+    </div>
+
+    <!-- Trial band -->
+    <div class="trial-band">
+      <div>
+        <h3>Start with one real job. See the difference in a week.</h3>
+        <p>Most studios run their first job through TrackFlow in under an hour. Staff get their link, clients get their portal, and the owner can see everything from one screen — no more chasing.</p>
+        <div class="trial-band-steps">
+          <div class="trial-step">Sign up — under 2 minutes, no credit card</div>
+          <div class="trial-step">Add one active job from your current workload</div>
+          <div class="trial-step">Invite your site staff and share a client portal link</div>
+          <div class="trial-step">Run the job — see if it changes how you work</div>
+        </div>
+      </div>
+      <div class="trial-cta-box">
+        <div class="trial-days">21</div>
+        <div class="trial-days-label">Days Free Trial</div>
+        <div class="trial-btn">Start Free at trifekta.io</div>
+        <div class="trial-note">No credit card &nbsp;·&nbsp; No setup fee &nbsp;·&nbsp; Cancel anytime</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Page 2 footer -->
+  <div class="p2-foot">
+    <span>TrackFlow by TriFekta &nbsp;·&nbsp; hello@trifekta.io &nbsp;·&nbsp; UAE / GCC</span>
+    <a href="https://trifekta.io">trifekta.io/trackflow</a>
+    <span style="font-size:10px;color:rgba(255,255,255,.35);font-weight:800;">2 / 2</span>
+  </div>
+
+</div><!-- /page 2 -->
+
+</body>
+</html>
