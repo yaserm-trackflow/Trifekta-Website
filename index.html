@@ -794,7 +794,7 @@
 <!-- ============================================================
      PRODUCT TOUR — section header
 ============================================================ -->
-<section class="bg-white pt-20 md:pt-24 pb-0 overflow-hidden">
+<section class="bg-white pt-20 md:pt-24 pb-0 overflow-hidden" id="features">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
     <div class="inline-block text-orange text-xs font-black tracking-widest uppercase mb-4 fade-up-hidden">Everything in One Place</div>
     <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-navy leading-tight tracking-tight fade-up-hidden" style="transition-delay:.05s">Built around how fit-out studios<br class="hidden md:inline"> actually work.</h2>
@@ -1491,7 +1491,7 @@
     });
   });
 
-  // IntersectionObserver fade-up for bento cards + problem cards
+  // IntersectionObserver fade-up for product-tour + problem cards
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
