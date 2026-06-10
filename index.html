@@ -792,6 +792,17 @@
 </section>
 
 <!-- ============================================================
+     PRODUCT TOUR — section header
+============================================================ -->
+<section class="bg-white pt-20 md:pt-24 pb-0 overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="inline-block text-orange text-xs font-black tracking-widest uppercase mb-4 fade-up-hidden">Everything in One Place</div>
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-navy leading-tight tracking-tight fade-up-hidden" style="transition-delay:.05s">Built around how fit-out studios<br class="hidden md:inline"> actually work.</h2>
+    <p class="text-gray-500 text-lg mt-5 max-w-2xl mx-auto fade-up-hidden" style="transition-delay:.1s">Six screens, one workspace. Here's the product, page by page.</p>
+  </div>
+</section>
+
+<!-- ============================================================
      PRODUCT TOUR — CLIENT PORTAL  (reference motion section)
 ============================================================ -->
 <section class="bg-white py-20 md:py-28 overflow-hidden" id="tour-portal">
@@ -886,261 +897,312 @@
 </section>
 
 <!-- ============================================================
-     BENTO GRID
+     PRODUCT TOUR — DASHBOARD
 ============================================================ -->
-<section class="bg-white py-20" id="features">
+<section class="bg-cream py-20 md:py-24 overflow-hidden" id="tour-dashboard">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col-reverse md:flex-row-reverse items-center gap-12 lg:gap-20">
 
-    <!-- Header -->
-    <div class="text-center mb-14">
-      <div class="inline-block text-orange text-xs font-bold tracking-widest uppercase mb-4">Everything in One Place</div>
-      <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-navy leading-tight tracking-tight">
-        Built around how fit-out studios<br class="hidden md:inline"> actually work.
-      </h2>
+      <!-- Copy -->
+      <div class="w-full md:w-[46%] fade-up-hidden">
+        <div class="inline-flex items-center gap-2 text-orange text-xs font-black tracking-widest uppercase mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-orange"></span> Dashboard
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-navy leading-[1.08] tracking-tight">
+          Your whole studio on<br class="hidden lg:inline"> one live screen.
+        </h2>
+        <p class="text-gray-500 text-lg leading-relaxed mt-5 max-w-md">
+          Walk in, open one tab, and see every job, blocker, and update in real time — no more morning round of phone calls just to find out where things stand.
+        </p>
+        <div class="flex flex-col gap-4 mt-8">
+          <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><div class="font-bold text-navy text-sm">See what's blocked before your clients do</div><div class="text-gray-500 text-sm leading-snug">Approval blockers and delays surface at the top, not in a buried chat.</div></div></div>
+          <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><div class="font-bold text-navy text-sm">Live KPIs at a glance</div><div class="text-gray-500 text-sm leading-snug">Active, delayed, and awaiting-approval counts update as the day moves.</div></div></div>
+          <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><div class="font-bold text-navy text-sm">Every update flows to one feed</div><div class="text-gray-500 text-sm leading-snug">Photos, approvals, and problems land in a single timeline you can trust.</div></div></div>
+        </div>
+      </div>
+
+      <!-- Browser frame -->
+      <div class="w-full md:w-[54%] flex justify-center fade-up-hidden" style="transition-delay:.12s">
+        <div class="relative w-full max-w-[540px]">
+          <div class="absolute -inset-6 bg-gradient-to-tr from-orange/15 via-transparent to-blue-500/10 blur-3xl rounded-full"></div>
+          <div class="relative rounded-2xl border border-gray-200 shadow-2xl overflow-hidden bg-white animate-float" style="animation-duration:7s;">
+            <div class="bg-[#1a1a2e] px-3 py-2.5 flex items-center gap-2.5 border-b border-white/10">
+              <div class="flex gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span><span class="w-2.5 h-2.5 rounded-full bg-yellow-400/80"></span><span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span></div>
+              <div class="flex-1 bg-white/8 border border-white/10 rounded-md px-2.5 py-1 text-[10px] text-white/40 font-mono">trackflow.trifekta.io/dashboard</div>
+            </div>
+            <div class="bg-gray-50 p-3">
+              <div class="flex items-center justify-between mb-3">
+                <div><div class="font-bold text-gray-900 text-sm">Good morning, Alex</div><div class="text-gray-400 text-[11px]">Tuesday, June 3 · Dubai</div></div>
+                <div class="w-8 h-8 rounded-full bg-orange text-white font-bold text-sm flex items-center justify-center">A</div>
+              </div>
+              <div class="grid grid-cols-4 gap-2 mb-3">
+                <div class="bg-white rounded-lg p-2.5 border border-gray-100 shadow-sm"><div class="font-black text-gray-900 text-xl leading-none">24</div><div class="text-gray-500 text-[10px] mt-1">Active Jobs</div><div class="mt-2 inline-flex items-center gap-1 bg-green-50 text-green-700 rounded px-1.5 py-0.5 text-[9px] font-semibold"><span class="w-1 h-1 rounded-full bg-green-500"></span>8 moving</div></div>
+                <div class="bg-white rounded-lg p-2.5 border border-gray-100 shadow-sm"><div class="font-black text-gray-900 text-xl leading-none">6</div><div class="text-gray-500 text-[10px] mt-1">Approval Blockers</div><div class="mt-2 inline-flex items-center gap-1 bg-amber-50 text-amber-700 rounded px-1.5 py-0.5 text-[9px] font-semibold"><span class="w-1 h-1 rounded-full bg-amber-500"></span>client action</div></div>
+                <div class="bg-white rounded-lg p-2.5 border border-gray-100 shadow-sm"><div class="font-black text-gray-900 text-xl leading-none">4</div><div class="text-gray-500 text-[10px] mt-1">Delayed Jobs</div><div class="mt-2 inline-flex items-center gap-1 bg-red-50 text-red-700 rounded px-1.5 py-0.5 text-[9px] font-semibold"><span class="w-1 h-1 rounded-full bg-red-500"></span>escalate</div></div>
+                <div class="bg-white rounded-lg p-2.5 border border-gray-100 shadow-sm"><div class="font-black text-gray-900 text-xl leading-none">17</div><div class="text-gray-500 text-[10px] mt-1">Staff Updates</div><div class="mt-2 inline-flex items-center gap-1 bg-blue-50 text-blue-700 rounded px-1.5 py-0.5 text-[9px] font-semibold"><span class="w-1 h-1 rounded-full bg-blue-500"></span>photos+notes</div></div>
+              </div>
+              <div class="grid grid-cols-2 gap-2">
+                <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-3">
+                  <div class="font-bold text-gray-800 text-[11px] mb-2">Job completion snapshot</div>
+                  <div class="flex items-center gap-3">
+                    <div class="relative shrink-0"><svg width="64" height="64" viewBox="0 0 54 54"><circle cx="27" cy="27" r="21" fill="none" stroke-width="6" stroke="#e5e7eb"/><circle cx="27" cy="27" r="21" fill="none" stroke-width="6" stroke="#e85a1f" stroke-dasharray="93.1 131.9" stroke-linecap="round" transform="rotate(-90 27 27)"/></svg><div class="absolute inset-0 flex items-center justify-center"><span class="text-xs font-black text-gray-800">71%</span></div></div>
+                    <div class="flex flex-col gap-1.5 flex-1 min-w-0">
+                      <div><div class="flex justify-between mb-0.5"><span class="text-[9px] text-gray-500">Quotes accepted</span><span class="text-[9px] font-semibold text-gray-700">88%</span></div><div class="h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-orange rounded-full" style="width:88%"></div></div></div>
+                      <div><div class="flex justify-between mb-0.5"><span class="text-[9px] text-gray-500">Production on track</span><span class="text-[9px] font-semibold text-gray-700">71%</span></div><div class="h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-orange rounded-full" style="width:71%"></div></div></div>
+                      <div><div class="flex justify-between mb-0.5"><span class="text-[9px] text-gray-500">Design approvals</span><span class="text-[9px] font-semibold text-gray-700">64%</span></div><div class="h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-blue-400 rounded-full" style="width:64%"></div></div></div>
+                      <div><div class="flex justify-between mb-0.5"><span class="text-[9px] text-gray-500">Ready for delivery</span><span class="text-[9px] font-semibold text-gray-700">55%</span></div><div class="h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-green-400 rounded-full" style="width:55%"></div></div></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-3">
+                  <div class="font-bold text-gray-800 text-[11px] mb-2">Today's critical feed</div>
+                  <div class="flex flex-col gap-2">
+                    <div class="flex items-start gap-2"><div class="w-5 h-5 rounded-full bg-red-100 flex items-center justify-center shrink-0 text-[9px]">❗</div><div class="min-w-0"><div class="font-semibold text-gray-800 text-[10px] leading-tight truncate">Client approval overdue</div><div class="text-gray-400 text-[9px]">Villa Wardrobe · 2 days</div></div></div>
+                    <div class="flex items-start gap-2"><div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center shrink-0 text-[9px]">📸</div><div class="min-w-0"><div class="font-semibold text-gray-800 text-[10px] leading-tight truncate">Ahmed uploaded install photos</div><div class="text-gray-400 text-[9px]">L-Shape Sofa · 12 min</div></div></div>
+                    <div class="flex items-start gap-2"><div class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center shrink-0 text-[9px]">✅</div><div class="min-w-0"><div class="font-semibold text-gray-800 text-[10px] leading-tight truncate">Quote accepted by client</div><div class="text-gray-400 text-[9px]">Reception Counter · 34 min</div></div></div>
+                    <div class="flex items-start gap-2"><div class="w-5 h-5 rounded-full bg-amber-100 flex items-center justify-center shrink-0 text-[9px]">⚠️</div><div class="min-w-0"><div class="font-semibold text-gray-800 text-[10px] leading-tight truncate">Supervisor reported a problem</div><div class="text-gray-400 text-[9px]">Kitchen Cabinet · material mismatch</div></div></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
-    <!-- Bento grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
-
-      <!-- Card A: Live job pipeline (col-span-2) -->
-      <div class="md:col-span-2 bg-navy rounded-2xl p-6 overflow-hidden fade-up-hidden relative">
-        <div class="mb-3">
-          <h3 class="text-white font-black text-xl">Live job pipeline</h3>
-          <p class="text-white/50 text-sm mt-1">Every job has a stage, owner, and next action.</p>
-        </div>
-        <!-- Mini kanban -->
-        <div class="grid grid-cols-4 gap-2 mt-4">
-          <!-- Quote col -->
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-white/60 text-xs font-semibold">Quote</span>
-              <span class="bg-white/10 text-white/60 text-xs px-1.5 py-0.5 rounded-full">3</span>
-            </div>
-            <div class="flex flex-col gap-2">
-              <div class="bg-white/8 border border-white/10 rounded-lg p-2">
-                <div class="text-white text-[10px] font-bold leading-tight">TF-1280</div>
-                <div class="text-white/60 text-[9px]">L-Shape Sofa</div>
-                <div class="mt-1.5 bg-white/10 rounded-full h-1"><div class="h-full bg-white/30 rounded-full" style="width:15%"></div></div>
-                <div class="text-white/40 text-[8px] mt-1">Dubai Marina · Due Fri</div>
-              </div>
-              <div class="bg-white/8 border border-white/10 rounded-lg p-2">
-                <div class="text-white text-[10px] font-bold leading-tight">TF-1281</div>
-                <div class="text-white/60 text-[9px]">Villa Wardrobe</div>
-                <div class="mt-1.5 bg-white/10 rounded-full h-1"><div class="h-full bg-white/30 rounded-full" style="width:5%"></div></div>
-                <div class="text-white/40 text-[8px] mt-1">Jumeirah · Due Mon</div>
-              </div>
-            </div>
-          </div>
-          <!-- In Production col -->
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-white/60 text-xs font-semibold">In Production</span>
-              <span class="bg-blue-500/20 text-blue-300 text-xs px-1.5 py-0.5 rounded-full">8</span>
-            </div>
-            <div class="flex flex-col gap-2">
-              <div class="bg-white/8 border border-white/10 rounded-lg p-2">
-                <div class="text-white text-[10px] font-bold leading-tight">TF-1274</div>
-                <div class="text-white/60 text-[9px]">Kitchen Cabinet</div>
-                <div class="mt-1.5 bg-white/10 rounded-full h-1"><div class="h-full bg-blue-400 rounded-full" style="width:60%"></div></div>
-                <div class="text-white/40 text-[8px] mt-1">Business Bay · Due Thu</div>
-              </div>
-              <div class="bg-white/8 border border-white/10 rounded-lg p-2">
-                <div class="text-white text-[10px] font-bold leading-tight">TF-1269</div>
-                <div class="text-white/60 text-[9px]">TV Unit</div>
-                <div class="mt-1.5 bg-white/10 rounded-full h-1"><div class="h-full bg-blue-400 rounded-full" style="width:78%"></div></div>
-                <div class="text-white/40 text-[8px] mt-1">Marina · Due Wed</div>
-              </div>
-            </div>
-          </div>
-          <!-- Awaiting Approval col -->
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-white/60 text-xs font-semibold">Awaiting Approval</span>
-              <span class="bg-amber-500/20 text-amber-300 text-xs px-1.5 py-0.5 rounded-full">6</span>
-            </div>
-            <div class="flex flex-col gap-2">
-              <div class="bg-white/8 border border-amber-500/20 rounded-lg p-2">
-                <div class="text-white text-[10px] font-bold leading-tight">TF-1265</div>
-                <div class="text-white/60 text-[9px]">Reception Counter</div>
-                <div class="mt-1.5 bg-white/10 rounded-full h-1"><div class="h-full bg-amber-400 rounded-full" style="width:90%"></div></div>
-                <div class="text-amber-400/80 text-[8px] mt-1">Client action needed</div>
-              </div>
-              <div class="bg-white/8 border border-amber-500/20 rounded-lg p-2">
-                <div class="text-white text-[10px] font-bold leading-tight">TF-1261</div>
-                <div class="text-white/60 text-[9px]">Dining Table</div>
-                <div class="mt-1.5 bg-white/10 rounded-full h-1"><div class="h-full bg-amber-400 rounded-full" style="width:95%"></div></div>
-                <div class="text-amber-400/80 text-[8px] mt-1">2 days waiting</div>
-              </div>
-            </div>
-          </div>
-          <!-- Delivery Ready col -->
-          <div>
-            <div class="flex items-center justify-between mb-2">
-              <span class="text-white/60 text-xs font-semibold">Delivery Ready</span>
-              <span class="bg-green-500/20 text-green-300 text-xs px-1.5 py-0.5 rounded-full">2</span>
-            </div>
-            <div class="flex flex-col gap-2">
-              <div class="bg-white/8 border border-green-500/20 rounded-lg p-2">
-                <div class="text-white text-[10px] font-bold leading-tight">TF-1254</div>
-                <div class="text-white/60 text-[9px]">Bedroom Set</div>
-                <div class="mt-1.5 bg-white/10 rounded-full h-1"><div class="h-full bg-green-400 rounded-full" style="width:100%"></div></div>
-                <div class="text-green-400/80 text-[8px] mt-1">Ready to ship ✓</div>
-              </div>
-              <div class="bg-white/8 border border-green-500/20 rounded-lg p-2">
-                <div class="text-white text-[10px] font-bold leading-tight">TF-1248</div>
-                <div class="text-white/60 text-[9px]">Office Desk</div>
-                <div class="mt-1.5 bg-white/10 rounded-full h-1"><div class="h-full bg-green-400 rounded-full" style="width:100%"></div></div>
-                <div class="text-green-400/80 text-[8px] mt-1">Scheduled Thu ✓</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card B: One-tap client approvals -->
-      <div class="bg-cream rounded-2xl p-6 flex flex-col fade-up-hidden" style="transition-delay:.1s">
-        <h3 class="text-navy font-black text-xl">One-tap approvals</h3>
-        <p class="text-navy/50 text-sm mt-1">Clients approve exact scope — no confusion.</p>
-        <!-- Quote approval UI -->
-        <div class="mt-5 bg-white rounded-xl shadow p-4 border border-gray-100 flex-1">
-          <div class="text-gray-400 text-xs font-mono mb-1">QO-1048</div>
-          <div class="font-bold text-gray-900 text-sm">L-Shape Sofa</div>
-          <div class="text-gray-500 text-xs mt-0.5">Dubai Marina · 3-seater sectional</div>
-          <div class="mt-3 text-xl font-black text-gray-900">AED 10,150</div>
-          <div class="mt-3 flex items-center gap-2 bg-green-50 border border-green-200 rounded-xl p-3">
-            <div class="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
-            </div>
-            <div>
-              <div class="font-bold text-green-700 text-sm">Approved</div>
-              <div class="text-green-600 text-xs">Client confirmed · Jun 2</div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card C: Staff daily tasks -->
-      <div class="bg-navy-2 rounded-2xl p-6 flex flex-col fade-up-hidden" style="transition-delay:.15s; background: #0d2143;">
-        <h3 class="text-white font-black text-xl">Staff know exactly what to do</h3>
-        <p class="text-white/50 text-sm mt-1">Photo, voice note, Problem, or Done.</p>
-        <!-- Mobile phone frame -->
-        <div class="mt-5 flex justify-center flex-1">
-          <div class="bg-[#1a1a2e] rounded-3xl border-4 border-gray-700 shadow-2xl overflow-hidden" style="width:150px; min-height:220px;">
-            <div class="bg-[#1a1a2e] flex justify-center pt-2 pb-1">
-              <div class="w-10 h-1.5 bg-gray-600 rounded-full"></div>
-            </div>
-            <div class="bg-white mx-1 mb-1 rounded-2xl p-3 flex flex-col gap-2">
-              <div class="text-[9px] text-gray-400 font-mono">TF-1430</div>
-              <div class="text-[10px] font-bold text-gray-900 leading-tight">Install wardrobe side panels</div>
-              <div class="inline-flex items-center gap-1 bg-blue-50 text-blue-600 text-[8px] font-semibold px-2 py-0.5 rounded-full self-start">
-                <span class="w-1 h-1 rounded-full bg-blue-500"></span> In progress
-              </div>
-              <div class="text-[8px] text-gray-400 mt-1">Al Barsha · Floor 4</div>
-              <div class="grid grid-cols-2 gap-1.5 mt-1">
-                <button class="bg-red-50 text-red-600 text-[8px] font-bold py-1.5 rounded-lg border border-red-100">Problem</button>
-                <button class="bg-green-500 text-white text-[8px] font-bold py-1.5 rounded-lg">Done ✓</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card D: Design approvals with version history -->
-      <div class="bg-cream rounded-2xl p-6 fade-up-hidden" style="transition-delay:.2s">
-        <h3 class="text-navy font-black text-xl">Design reviews. Tracked.</h3>
-        <p class="text-navy/50 text-sm mt-1">Clients comment. Versions logged. Nothing lost.</p>
-        <!-- Version list -->
-        <div class="mt-5 flex flex-col gap-2">
-          <div class="flex items-center gap-3 bg-white rounded-xl px-4 py-3 shadow-sm border border-gray-100">
-            <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-xs font-black text-gray-400 shrink-0">v1</div>
-            <div class="flex-1 min-w-0">
-              <div class="text-xs font-semibold text-gray-700 truncate">Initial concept</div>
-              <div class="text-xs text-gray-400">May 22</div>
-            </div>
-            <span class="text-xs bg-red-50 text-red-500 px-2 py-0.5 rounded-full font-medium shrink-0">Change requested</span>
-          </div>
-          <div class="flex items-center gap-3 bg-white rounded-xl px-4 py-3 shadow-sm border border-gray-100">
-            <div class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-xs font-black text-gray-400 shrink-0">v2</div>
-            <div class="flex-1 min-w-0">
-              <div class="text-xs font-semibold text-gray-700 truncate">Studio update</div>
-              <div class="text-xs text-gray-400">May 26</div>
-            </div>
-            <span class="text-xs bg-blue-50 text-blue-500 px-2 py-0.5 rounded-full font-medium shrink-0">Studio update</span>
-          </div>
-          <div class="flex items-center gap-3 bg-white rounded-xl px-4 py-3 shadow-sm border border-orange/20">
-            <div class="w-8 h-8 rounded-full bg-orange flex items-center justify-center text-xs font-black text-white shrink-0">v3</div>
-            <div class="flex-1 min-w-0">
-              <div class="text-xs font-semibold text-gray-700 truncate">Final revision</div>
-              <div class="text-xs text-gray-400">Jun 1</div>
-            </div>
-            <span class="text-xs bg-green-50 text-green-600 px-2 py-0.5 rounded-full font-medium shrink-0">Ready ✓</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card E: StockFlow (LOCKED) -->
-      <div class="relative rounded-2xl overflow-hidden fade-up-hidden" style="transition-delay:.25s">
-        <!-- Background card content -->
-        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 h-full min-h-[200px]">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-navy flex items-center justify-center">
-              <svg class="w-5 h-5 text-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/></svg>
-            </div>
-            <div>
-              <div class="font-black text-navy text-base">StockFlow</div>
-              <div class="text-gray-400 text-xs">Material &amp; inventory management</div>
-            </div>
-          </div>
-          <div class="space-y-2 opacity-40">
-            <div class="h-2 bg-gray-200 rounded-full w-3/4"></div>
-            <div class="h-2 bg-gray-200 rounded-full w-1/2"></div>
-            <div class="h-2 bg-gray-200 rounded-full w-2/3"></div>
-          </div>
-        </div>
-        <!-- Glassmorphic overlay -->
-        <div class="absolute inset-0 backdrop-blur-sm bg-white/60 rounded-2xl flex items-center justify-center">
-          <div class="text-center">
-            <div class="inline-flex items-center gap-2 bg-navy text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-              Coming Soon
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Card F: SiteFlow (LOCKED) -->
-      <div class="relative rounded-2xl overflow-hidden fade-up-hidden" style="transition-delay:.3s">
-        <!-- Background card content -->
-        <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6 h-full min-h-[200px]">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-xl bg-navy flex items-center justify-center">
-              <svg class="w-5 h-5 text-orange" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>
-            </div>
-            <div>
-              <div class="font-black text-navy text-base">SiteFlow</div>
-              <div class="text-gray-400 text-xs">Site inspection &amp; snag reporting</div>
-            </div>
-          </div>
-          <div class="space-y-2 opacity-40">
-            <div class="h-2 bg-gray-200 rounded-full w-2/3"></div>
-            <div class="h-2 bg-gray-200 rounded-full w-3/4"></div>
-            <div class="h-2 bg-gray-200 rounded-full w-1/3"></div>
-          </div>
-        </div>
-        <!-- Glassmorphic overlay -->
-        <div class="absolute inset-0 backdrop-blur-sm bg-white/60 rounded-2xl flex items-center justify-center">
-          <div class="text-center">
-            <div class="inline-flex items-center gap-2 bg-navy text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-              Coming Soon
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div><!-- end bento grid -->
   </div>
 </section>
+
+<!-- ============================================================
+     PRODUCT TOUR — JOBS
+============================================================ -->
+<section class="bg-white py-20 md:py-24 overflow-hidden" id="tour-jobs">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col-reverse md:flex-row items-center gap-12 lg:gap-20">
+
+      <!-- Copy -->
+      <div class="w-full md:w-[46%] fade-up-hidden">
+        <div class="inline-flex items-center gap-2 text-orange text-xs font-black tracking-widest uppercase mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-orange"></span> Jobs
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-navy leading-[1.08] tracking-tight">
+          Every job, every stage,<br class="hidden lg:inline"> one pipeline.
+        </h2>
+        <p class="text-gray-500 text-lg leading-relaxed mt-5 max-w-md">
+          From quote to delivery, each job carries its stage, owner, and next action — so nothing falls through the gap between WhatsApp and the workshop.
+        </p>
+        <div class="flex flex-col gap-4 mt-8">
+          <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><div class="font-bold text-navy text-sm">Stage, owner &amp; next action on every job</div><div class="text-gray-500 text-sm leading-snug">No guessing who's on it or what happens next.</div></div></div>
+          <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><div class="font-bold text-navy text-sm">Filter by production, approval or delivery</div><div class="text-gray-500 text-sm leading-snug">Jump straight to the jobs that need a decision today.</div></div></div>
+          <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><div class="font-bold text-navy text-sm">Progress that reflects the real site</div><div class="text-gray-500 text-sm leading-snug">Updated by the people doing the work, not a weekly guess.</div></div></div>
+        </div>
+      </div>
+
+      <!-- Browser frame -->
+      <div class="w-full md:w-[54%] flex justify-center fade-up-hidden" style="transition-delay:.12s">
+        <div class="relative w-full max-w-[540px]">
+          <div class="absolute -inset-6 bg-gradient-to-tr from-blue-500/10 via-transparent to-orange/15 blur-3xl rounded-full"></div>
+          <div class="relative rounded-2xl border border-gray-200 shadow-2xl overflow-hidden bg-white animate-float" style="animation-duration:7.5s;">
+            <div class="bg-[#1a1a2e] px-3 py-2.5 flex items-center gap-2.5 border-b border-white/10">
+              <div class="flex gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span><span class="w-2.5 h-2.5 rounded-full bg-yellow-400/80"></span><span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span></div>
+              <div class="flex-1 bg-white/8 border border-white/10 rounded-md px-2.5 py-1 text-[10px] text-white/40 font-mono">trackflow.trifekta.io/jobs</div>
+            </div>
+            <div class="bg-gray-50 p-3">
+              <div class="flex items-center justify-between mb-3">
+                <div class="font-bold text-gray-900 text-sm">Jobs <span class="text-gray-400 font-normal text-xs">· 24 active</span></div>
+                <div class="flex gap-1.5"><span class="text-[10px] font-semibold bg-orange/10 text-orange px-2 py-1 rounded-full">All</span><span class="text-[10px] font-semibold bg-white text-gray-500 px-2 py-1 rounded-full border border-gray-100">Production</span><span class="text-[10px] font-semibold bg-white text-gray-500 px-2 py-1 rounded-full border border-gray-100">Approval</span></div>
+              </div>
+              <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                <div class="grid grid-cols-12 px-3 py-2 bg-gray-50 border-b border-gray-100 text-[9px] font-bold text-gray-400 uppercase tracking-wide"><div class="col-span-5">Job</div><div class="col-span-3">Stage</div><div class="col-span-2">Owner</div><div class="col-span-2">Progress</div></div>
+                <div class="grid grid-cols-12 items-center px-3 py-2.5 border-b border-gray-50"><div class="col-span-5"><div class="text-[11px] font-bold text-gray-900">Kitchen Cabinet</div><div class="text-[9px] text-gray-400 font-mono">TF-1274 · Business Bay</div></div><div class="col-span-3"><span class="text-[9px] font-bold bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">In Production</span></div><div class="col-span-2 flex items-center gap-1"><span class="w-5 h-5 rounded-full bg-orange/20 text-orange text-[9px] font-bold flex items-center justify-center">A</span><span class="text-[10px] text-gray-500">Ahmed</span></div><div class="col-span-2"><div class="h-1.5 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-blue-400 rounded-full" style="width:60%"></div></div></div></div>
+                <div class="grid grid-cols-12 items-center px-3 py-2.5 border-b border-gray-50"><div class="col-span-5"><div class="text-[11px] font-bold text-gray-900">Reception Counter</div><div class="text-[9px] text-gray-400 font-mono">TF-1265 · DIFC</div></div><div class="col-span-3"><span class="text-[9px] font-bold bg-amber-50 text-amber-600 px-2 py-0.5 rounded-full">Awaiting Approval</span></div><div class="col-span-2 flex items-center gap-1"><span class="w-5 h-5 rounded-full bg-purple-200 text-purple-700 text-[9px] font-bold flex items-center justify-center">S</span><span class="text-[10px] text-gray-500">Sara</span></div><div class="col-span-2"><div class="h-1.5 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width:90%"></div></div></div></div>
+                <div class="grid grid-cols-12 items-center px-3 py-2.5 border-b border-gray-50"><div class="col-span-5"><div class="text-[11px] font-bold text-gray-900">TV Unit</div><div class="text-[9px] text-gray-400 font-mono">TF-1269 · Marina</div></div><div class="col-span-3"><span class="text-[9px] font-bold bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">In Production</span></div><div class="col-span-2 flex items-center gap-1"><span class="w-5 h-5 rounded-full bg-teal-200 text-teal-700 text-[9px] font-bold flex items-center justify-center">O</span><span class="text-[10px] text-gray-500">Omar</span></div><div class="col-span-2"><div class="h-1.5 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-blue-400 rounded-full" style="width:78%"></div></div></div></div>
+                <div class="grid grid-cols-12 items-center px-3 py-2.5 border-b border-gray-50"><div class="col-span-5"><div class="text-[11px] font-bold text-gray-900">Bedroom Set</div><div class="text-[9px] text-gray-400 font-mono">TF-1254 · Jumeirah</div></div><div class="col-span-3"><span class="text-[9px] font-bold bg-green-50 text-green-600 px-2 py-0.5 rounded-full">Delivery Ready</span></div><div class="col-span-2 flex items-center gap-1"><span class="w-5 h-5 rounded-full bg-rose-200 text-rose-700 text-[9px] font-bold flex items-center justify-center">K</span><span class="text-[10px] text-gray-500">Khalid</span></div><div class="col-span-2"><div class="h-1.5 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-green-400 rounded-full" style="width:100%"></div></div></div></div>
+                <div class="grid grid-cols-12 items-center px-3 py-2.5"><div class="col-span-5"><div class="text-[11px] font-bold text-gray-900">Villa Wardrobe</div><div class="text-[9px] text-gray-400 font-mono">TF-1281 · Jumeirah</div></div><div class="col-span-3"><span class="text-[9px] font-bold bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">Quote</span></div><div class="col-span-2 flex items-center gap-1"><span class="w-5 h-5 rounded-full bg-orange/20 text-orange text-[9px] font-bold flex items-center justify-center">A</span><span class="text-[10px] text-gray-500">Ahmed</span></div><div class="col-span-2"><div class="h-1.5 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-gray-300 rounded-full" style="width:15%"></div></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRODUCT TOUR — DESIGNS
+============================================================ -->
+<section class="bg-cream py-20 md:py-24 overflow-hidden" id="tour-designs">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col-reverse md:flex-row-reverse items-center gap-12 lg:gap-20">
+
+      <!-- Copy -->
+      <div class="w-full md:w-[46%] fade-up-hidden">
+        <div class="inline-flex items-center gap-2 text-orange text-xs font-black tracking-widest uppercase mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-orange"></span> Designs
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-navy leading-[1.08] tracking-tight">
+          Every design sign-off,<br class="hidden lg:inline"> on the record.
+        </h2>
+        <p class="text-gray-500 text-lg leading-relaxed mt-5 max-w-md">
+          Revisions, change orders, and approvals live against the job — timestamped and undeniable. The end of "but I never approved that."
+        </p>
+        <div class="flex flex-col gap-4 mt-8">
+          <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><div class="font-bold text-navy text-sm">A version-by-version approval trail</div><div class="text-gray-500 text-sm leading-snug">Every revision is stored with who approved it and when.</div></div></div>
+          <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><div class="font-bold text-navy text-sm">Clients approve or request changes in a tap</div><div class="text-gray-500 text-sm leading-snug">No email threads, no lost feedback.</div></div></div>
+          <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><div class="font-bold text-navy text-sm">No more disputed reworks</div><div class="text-gray-500 text-sm leading-snug">Protect your margin with a record you can point to.</div></div></div>
+        </div>
+      </div>
+
+      <!-- Browser frame -->
+      <div class="w-full md:w-[54%] flex justify-center fade-up-hidden" style="transition-delay:.12s">
+        <div class="relative w-full max-w-[540px]">
+          <div class="absolute -inset-6 bg-gradient-to-tr from-orange/15 via-transparent to-purple-500/10 blur-3xl rounded-full"></div>
+          <div class="relative rounded-2xl border border-gray-200 shadow-2xl overflow-hidden bg-white animate-float" style="animation-duration:8s;">
+            <div class="bg-[#1a1a2e] px-3 py-2.5 flex items-center gap-2.5 border-b border-white/10">
+              <div class="flex gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span><span class="w-2.5 h-2.5 rounded-full bg-yellow-400/80"></span><span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span></div>
+              <div class="flex-1 bg-white/8 border border-white/10 rounded-md px-2.5 py-1 text-[10px] text-white/40 font-mono">trackflow.trifekta.io/designs</div>
+            </div>
+            <div class="bg-gray-50 p-3">
+              <div class="flex items-center justify-between mb-3"><div class="font-bold text-gray-900 text-sm">Designs <span class="text-gray-400 text-xs font-normal">· 6 awaiting approval</span></div></div>
+              <div class="grid grid-cols-4 gap-2 mb-3">
+                <div class="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden"><div class="h-16 bg-gradient-to-br from-orange/40 to-navy/40"></div><div class="p-2"><div class="text-[11px] font-bold text-gray-800 truncate">Villa Wardrobe</div><div class="flex items-center justify-between mt-1"><span class="text-[9px] text-gray-400">Rev 3</span><span class="text-[9px] font-bold bg-green-50 text-green-600 px-1.5 py-0.5 rounded">Approved</span></div></div></div>
+                <div class="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden"><div class="h-16 bg-gradient-to-br from-blue-400/40 to-navy/40"></div><div class="p-2"><div class="text-[11px] font-bold text-gray-800 truncate">Kitchen Cabinet</div><div class="flex items-center justify-between mt-1"><span class="text-[9px] text-gray-400">Rev 2</span><span class="text-[9px] font-bold bg-amber-50 text-amber-600 px-1.5 py-0.5 rounded">Pending</span></div></div></div>
+                <div class="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden"><div class="h-16 bg-gradient-to-br from-gray-300 to-gray-400/60"></div><div class="p-2"><div class="text-[11px] font-bold text-gray-800 truncate">Reception Counter</div><div class="flex items-center justify-between mt-1"><span class="text-[9px] text-gray-400">Rev 1</span><span class="text-[9px] font-bold bg-red-50 text-red-600 px-1.5 py-0.5 rounded">Changes</span></div></div></div>
+                <div class="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden"><div class="h-16 bg-gradient-to-br from-teal-400/40 to-navy/40"></div><div class="p-2"><div class="text-[11px] font-bold text-gray-800 truncate">Dining Table</div><div class="flex items-center justify-between mt-1"><span class="text-[9px] text-gray-400">Rev 2</span><span class="text-[9px] font-bold bg-green-50 text-green-600 px-1.5 py-0.5 rounded">Approved</span></div></div></div>
+              </div>
+              <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-3">
+                <div class="text-[11px] font-bold text-gray-800 mb-2">Approval activity</div>
+                <div class="flex items-center gap-2 mb-2"><span class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[9px] shrink-0">✓</span><span class="text-[10px] text-gray-600 truncate flex-1">Rev 3 approved · Villa Wardrobe</span><span class="text-[9px] text-gray-300">11:42am</span></div>
+                <div class="flex items-center gap-2 mb-2"><span class="w-5 h-5 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-[9px] shrink-0">↻</span><span class="text-[10px] text-gray-600 truncate flex-1">Changes requested · Reception Counter</span><span class="text-[9px] text-gray-300">Yesterday</span></div>
+                <div class="flex items-center gap-2"><span class="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[9px] shrink-0">→</span><span class="text-[10px] text-gray-600 truncate flex-1">Rev 2 sent to client · Kitchen Cabinet</span><span class="text-[9px] text-gray-300">2 days</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRODUCT TOUR — QUOTES
+============================================================ -->
+<section class="bg-white py-20 md:py-24 overflow-hidden" id="tour-quotes">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col-reverse md:flex-row items-center gap-12 lg:gap-20">
+
+      <!-- Copy -->
+      <div class="w-full md:w-[46%] fade-up-hidden">
+        <div class="inline-flex items-center gap-2 text-orange text-xs font-black tracking-widest uppercase mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-orange"></span> Quotes
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-navy leading-[1.08] tracking-tight">
+          Quotes that turn into<br class="hidden lg:inline"> accepted jobs.
+        </h2>
+        <p class="text-gray-500 text-lg leading-relaxed mt-5 max-w-md">
+          Build a clear, itemised quote, send it to the client, and watch it move from draft to accepted — with the exact scope captured, not argued.
+        </p>
+        <div class="flex flex-col gap-4 mt-8">
+          <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><div class="font-bold text-navy text-sm">Itemised, branded quotes in minutes</div><div class="text-gray-500 text-sm leading-snug">Line items, totals, and your studio's name — ready to send.</div></div></div>
+          <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><div class="font-bold text-navy text-sm">Clients accept the exact scope</div><div class="text-gray-500 text-sm leading-snug">What they approve is what gets built — in writing.</div></div></div>
+          <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><div class="font-bold text-navy text-sm">Accepted quotes become jobs instantly</div><div class="text-gray-500 text-sm leading-snug">No re-keying — an accepted quote opens a tracked job.</div></div></div>
+        </div>
+      </div>
+
+      <!-- Browser frame -->
+      <div class="w-full md:w-[54%] flex justify-center fade-up-hidden" style="transition-delay:.12s">
+        <div class="relative w-full max-w-[540px]">
+          <div class="absolute -inset-6 bg-gradient-to-tr from-green-500/10 via-transparent to-orange/15 blur-3xl rounded-full"></div>
+          <div class="relative rounded-2xl border border-gray-200 shadow-2xl overflow-hidden bg-white animate-float" style="animation-duration:7s;">
+            <div class="bg-[#1a1a2e] px-3 py-2.5 flex items-center gap-2.5 border-b border-white/10">
+              <div class="flex gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span><span class="w-2.5 h-2.5 rounded-full bg-yellow-400/80"></span><span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span></div>
+              <div class="flex-1 bg-white/8 border border-white/10 rounded-md px-2.5 py-1 text-[10px] text-white/40 font-mono">trackflow.trifekta.io/quotes</div>
+            </div>
+            <div class="bg-gray-50 p-3">
+              <div class="flex gap-2">
+                <div class="w-1/2 bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
+                  <div class="px-3 py-2 border-b border-gray-100 font-bold text-gray-900 text-xs">Quotes</div>
+                  <div class="px-3 py-2.5 border-l-2 border-orange bg-orange/5"><div class="flex items-center justify-between"><span class="text-[9px] font-mono text-gray-400">QO-1048</span><span class="text-[9px] font-bold bg-green-50 text-green-600 px-1.5 py-0.5 rounded">Accepted</span></div><div class="text-[11px] font-bold text-gray-800 mt-1">L-Shape Sofa</div><div class="text-[9px] text-gray-400">AED 10,150</div></div>
+                  <div class="px-3 py-2.5 border-l-2 border-transparent"><div class="flex items-center justify-between"><span class="text-[9px] font-mono text-gray-400">QO-1042</span><span class="text-[9px] font-bold bg-amber-50 text-amber-600 px-1.5 py-0.5 rounded">Sent</span></div><div class="text-[11px] font-bold text-gray-800 mt-1">Reception Counter</div><div class="text-[9px] text-gray-400">AED 14,800</div></div>
+                  <div class="px-3 py-2.5 border-l-2 border-transparent"><div class="flex items-center justify-between"><span class="text-[9px] font-mono text-gray-400">QO-1039</span><span class="text-[9px] font-bold bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded">Draft</span></div><div class="text-[11px] font-bold text-gray-800 mt-1">Dining Table</div><div class="text-[9px] text-gray-400">AED 6,400</div></div>
+                </div>
+                <div class="w-1/2 bg-white rounded-xl border border-gray-100 shadow-sm p-3 flex flex-col gap-1.5">
+                  <div class="text-[9px] font-mono text-gray-400">QO-1048</div>
+                  <div class="text-[13px] font-black text-gray-900 leading-none">L-Shape Sofa</div>
+                  <div class="text-[9px] text-gray-400">Dubai Marina · 3-seater sectional</div>
+                  <div class="flex flex-col gap-1 mt-1">
+                    <div class="flex justify-between text-[10px]"><span class="text-gray-500">Frame &amp; structure</span><span class="font-semibold text-gray-700">4,200</span></div>
+                    <div class="flex justify-between text-[10px]"><span class="text-gray-500">Upholstery &amp; foam</span><span class="font-semibold text-gray-700">3,950</span></div>
+                    <div class="flex justify-between text-[10px]"><span class="text-gray-500">Delivery &amp; install</span><span class="font-semibold text-gray-700">2,000</span></div>
+                  </div>
+                  <div class="flex justify-between items-center pt-1.5 mt-0.5 border-t border-gray-200"><span class="text-[10px] text-gray-500">Total</span><span class="text-base font-black text-gray-900">AED 10,150</span></div>
+                  <div class="flex items-center gap-1.5 bg-green-50 border border-green-200 rounded-lg p-2 mt-1"><div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center text-white text-[10px] shrink-0">✓</div><div><div class="text-[10px] font-bold text-green-700 leading-none">Accepted</div><div class="text-[8px] text-green-600 mt-0.5">Client confirmed · Jun 2</div></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     PRODUCT TOUR — STAFF
+============================================================ -->
+<section class="bg-cream py-20 md:py-24 overflow-hidden" id="tour-staff">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col-reverse md:flex-row-reverse items-center gap-12 lg:gap-20">
+
+      <!-- Copy -->
+      <div class="w-full md:w-1/2 fade-up-hidden">
+        <div class="inline-flex items-center gap-2 text-orange text-xs font-black tracking-widest uppercase mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-orange"></span> Staff
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-navy leading-[1.08] tracking-tight">
+          Your site team, two taps<br class="hidden lg:inline"> from the dashboard.
+        </h2>
+        <p class="text-gray-500 text-lg leading-relaxed mt-5 max-w-md">
+          No app, no login, no training. Site and workshop staff open a link, tap Start, Problem, or Done, and attach a photo. The supervisor sees it instantly.
+        </p>
+        <div class="flex flex-col gap-4 mt-8">
+          <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><div class="font-bold text-navy text-sm">Works on any phone browser</div><div class="text-gray-500 text-sm leading-snug">Nothing to install — open the link and go.</div></div></div>
+          <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><div class="font-bold text-navy text-sm">Start · Problem · Done — that's the interface</div><div class="text-gray-500 text-sm leading-snug">Simple enough for day one, for anyone on the crew.</div></div></div>
+          <div class="flex items-start gap-3"><div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5"><svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></div><div><div class="font-bold text-navy text-sm">Photos land on the job, not a chat</div><div class="text-gray-500 text-sm leading-snug">Every update is attached to the right task automatically.</div></div></div>
+        </div>
+      </div>
+
+      <!-- Phone frame -->
+      <div class="w-full md:w-1/2 flex justify-center fade-up-hidden" style="transition-delay:.12s">
+        <div class="relative">
+          <div class="absolute -inset-8 bg-gradient-to-tr from-blue-500/15 via-transparent to-orange/15 blur-3xl rounded-full"></div>
+          <!-- floating supervisor chip -->
+          <div class="hidden sm:block absolute -right-6 top-10 z-20 bg-white rounded-xl shadow-2xl border border-gray-100 px-3 py-2 animate-float-slow">
+            <div class="text-[10px] text-gray-400">Supervisor sees it</div>
+            <div class="flex items-center gap-1.5 text-xs font-semibold text-gray-800"><span>📸</span> Ahmed · 3 photos <span class="text-gray-300 font-normal">12m</span></div>
+          </div>
+          <div class="relative bg-[#0d1220] rounded-[2.6rem] border-[7px] border-gray-900 shadow-2xl overflow-hidden animate-float" style="width:288px; animation-duration:6.5s;">
+            <div class="flex justify-center pt-2.5 pb-1.5"><div class="w-16 h-1.5 bg-gray-700 rounded-full"></div></div>
+            <div class="bg-gray-50 mx-1.5 mb-1.5 rounded-[2rem] overflow-hidden">
+              <div class="bg-navy px-4 py-3"><div class="text-white font-bold text-sm leading-none">Villa Wardrobe</div><div class="text-white/50 text-[11px] mt-1">Your tasks today · Jumeirah</div></div>
+              <div class="p-3 flex flex-col gap-2">
+                <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-3 flex items-center justify-between"><div><div class="text-xs font-bold text-gray-900">Install wardrobe side panels</div><div class="text-[10px] text-gray-400">Carpentry · Floor 4</div></div><span class="text-[10px] font-bold bg-blue-50 text-blue-600 px-2 py-1 rounded-full">In progress</span></div>
+                <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-3 flex items-center justify-between"><div><div class="text-xs font-bold text-gray-900">Fix ceiling section A</div><div class="text-[10px] text-gray-400">Gypsum · Started 2h ago</div></div><span class="text-[10px] font-bold bg-amber-50 text-amber-600 px-2 py-1 rounded-full">Started</span></div>
+                <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-3 flex items-center justify-between opacity-70"><div><div class="text-xs font-bold text-gray-900 line-through">Door frame install</div><div class="text-[10px] text-gray-400">Carpentry · Completed</div></div><span class="text-[10px] font-bold bg-green-50 text-green-600 px-2 py-1 rounded-full">Done</span></div>
+                <div class="h-14 rounded-xl bg-gradient-to-br from-gray-200 to-gray-300 mt-0.5"></div>
+                <div class="grid grid-cols-3 gap-2 mt-0.5">
+                  <button class="bg-blue-50 text-blue-600 text-[11px] font-bold py-2.5 rounded-lg">▶ Start</button>
+                  <button class="bg-red-50 text-red-600 text-[11px] font-bold py-2.5 rounded-lg">⚠ Problem</button>
+                  <button class="bg-green-500 text-white text-[11px] font-bold py-2.5 rounded-lg">✓ Done</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 
 <!-- ============================================================
      BEFORE / AFTER SECTION
