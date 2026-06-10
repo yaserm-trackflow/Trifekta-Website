@@ -73,6 +73,36 @@
     .fade-up-hidden      { opacity: 0; transform: translateY(28px); }
     .fade-up-visible     { animation: fadeUp .6s ease-out forwards; }
 
+    /* ===== Hero product showcase ===== */
+    .hero-stage   { position: relative; }
+    .hero-screen  {
+      position: absolute; inset: 0;
+      opacity: 0; transform: translateY(12px);
+      transition: opacity .6s cubic-bezier(.22,1,.36,1), transform .6s cubic-bezier(.22,1,.36,1);
+      pointer-events: none; will-change: opacity, transform;
+    }
+    .hero-screen.is-active { opacity: 1; transform: none; pointer-events: auto; }
+
+    .hero-nav-item            { color: rgba(255,255,255,.55); cursor: pointer; transition: color .2s ease, background-color .2s ease; }
+    .hero-nav-item:hover      { color: rgba(255,255,255,.85); }
+    .hero-nav-item.is-active  { background: #e85a1f; color: #fff; font-weight: 600; }
+
+    .hero-dot           { width: 7px; height: 7px; border-radius: 999px; background: rgba(255,255,255,.25); cursor: pointer; transition: width .25s ease, background-color .25s ease; }
+    .hero-dot:hover     { background: rgba(255,255,255,.45); }
+    .hero-dot.is-active { width: 22px; background: #e85a1f; }
+
+    /* ===== Reduced motion: static / instant fallback ===== */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: .001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: .001ms !important;
+        scroll-behavior: auto !important;
+      }
+      .fade-up-hidden { opacity: 1 !important; transform: none !important; }
+      .hero-screen    { transition: none !important; }
+    }
+
     /* Donut chart */
     .donut-bg    { stroke: #e5e7eb; }
     .donut-fill  { stroke: #e85a1f; stroke-dasharray: 223.2 314.2; stroke-linecap: round; transform: rotate(-90deg); transform-origin: 50% 50%; }
@@ -212,7 +242,7 @@
         </div>
 
         <!-- Browser chrome wrapper -->
-        <div class="rounded-2xl border border-neutral-700/50 shadow-2xl overflow-hidden animate-float" style="animation-duration: 6s;">
+        <div id="hero-showcase" class="rounded-2xl border border-neutral-700/50 shadow-2xl overflow-hidden animate-float" style="animation-duration: 6s;">
 
           <!-- Browser chrome bar -->
           <div class="bg-[#1a1a2e] px-4 py-3 flex items-center gap-3 border-b border-white/10">
@@ -223,7 +253,7 @@
             </div>
             <div class="flex-1 bg-white/8 border border-white/10 rounded-md px-3 py-1.5 flex items-center gap-2">
               <svg class="w-3 h-3 text-white/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 11c0-1.1.9-2 2-2a2 2 0 012 2v2a2 2 0 01-2 2 2 2 0 01-2-2v-2z"/><path stroke-linecap="round" stroke-linejoin="round" d="M5 11c0-3.87 3.13-7 7-7s7 3.13 7 7v2c0 3.87-3.13 7-7 7S5 16.87 5 13v-2z"/></svg>
-              <span class="text-xs text-white/40 font-mono">trackflow.trifekta.io/dashboard</span>
+              <span id="hero-url" class="text-xs text-white/40 font-mono">trackflow.trifekta.io/portal</span>
             </div>
           </div>
 
@@ -238,35 +268,222 @@
               </div>
               <!-- Nav items -->
               <nav class="flex flex-col gap-0.5 px-2 flex-1">
-                <div class="flex items-center gap-2 px-2 py-1.5 rounded-md bg-orange text-white font-semibold">
+                <div class="hero-nav-item flex items-center gap-2 px-2 py-1.5 rounded-md" data-nav="dashboard">
                   <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/></svg>
                   Dashboard
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1.5 rounded-md text-white/55 hover:text-white/80 cursor-pointer">
+                <div class="hero-nav-item flex items-center gap-2 px-2 py-1.5 rounded-md" data-nav="jobs">
                   <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
                   Jobs
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1.5 rounded-md text-white/55 hover:text-white/80 cursor-pointer">
+                <div class="hero-nav-item flex items-center gap-2 px-2 py-1.5 rounded-md" data-nav="quotes">
                   <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                   Quotes
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1.5 rounded-md text-white/55 hover:text-white/80 cursor-pointer">
+                <div class="hero-nav-item flex items-center gap-2 px-2 py-1.5 rounded-md" data-nav="designs">
                   <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                   Designs
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1.5 rounded-md text-white/55 hover:text-white/80 cursor-pointer">
+                <div class="hero-nav-item is-active flex items-center gap-2 px-2 py-1.5 rounded-md" data-nav="portal">
                   <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
                   Client Portal
                 </div>
-                <div class="flex items-center gap-2 px-2 py-1.5 rounded-md text-white/55 hover:text-white/80 cursor-pointer">
+                <div class="hero-nav-item flex items-center gap-2 px-2 py-1.5 rounded-md" data-nav="staff">
                   <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                   Staff
                 </div>
               </nav>
             </div>
 
-            <!-- Main dashboard area -->
-            <div class="flex-1 overflow-hidden flex flex-col bg-gray-50">
+            <!-- Main area = auto-cycling product showcase stage -->
+            <div id="hero-stage" class="hero-stage flex-1 overflow-hidden bg-gray-50">
+
+              <!-- ░░ SCREEN: CLIENT PORTAL (lead positioning) ░░ -->
+              <div class="hero-screen is-active" data-screen="portal">
+                <div class="h-full flex">
+                  <div class="hidden sm:flex flex-col justify-center gap-2 p-4 w-[44%] bg-white">
+                    <div class="text-[9px] font-black tracking-widest uppercase text-orange">Client Portal</div>
+                    <div class="text-gray-900 font-black text-sm leading-tight">What your client sees</div>
+                    <div class="text-gray-500 text-[10px] leading-snug">One branded link. Progress, approvals &amp; payments — no app, no login.</div>
+                    <div class="flex flex-col gap-1 mt-1.5">
+                      <div class="flex items-center gap-1.5 text-[9px] text-gray-600"><span class="text-green-500 text-[7px]">●</span> Live progress tracking</div>
+                      <div class="flex items-center gap-1.5 text-[9px] text-gray-600"><span class="text-green-500 text-[7px]">●</span> One-tap design approval</div>
+                      <div class="flex items-center gap-1.5 text-[9px] text-gray-600"><span class="text-green-500 text-[7px]">●</span> Payment status</div>
+                    </div>
+                  </div>
+                  <div class="flex-1 flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200/70 p-3">
+                    <div class="bg-[#0d1220] rounded-[1.4rem] border-4 border-gray-900 shadow-xl overflow-hidden" style="width:152px;">
+                      <div class="flex justify-center pt-1.5 pb-1"><div class="w-8 h-1 bg-gray-700 rounded-full"></div></div>
+                      <div class="bg-white mx-1 mb-1 rounded-[1rem] p-2.5 flex flex-col gap-2">
+                        <div class="flex items-center gap-1.5">
+                          <div class="w-5 h-5 rounded-md bg-navy text-white text-[8px] font-black flex items-center justify-center">ST</div>
+                          <span class="text-[9px] font-bold text-gray-800">Studio Interiors</span>
+                        </div>
+                        <div>
+                          <div class="text-[10px] font-black text-gray-900 leading-tight">Villa Wardrobe</div>
+                          <div class="text-[8px] text-gray-400">Jumeirah · Your project</div>
+                        </div>
+                        <div class="bg-gray-50 rounded-lg p-2">
+                          <div class="flex justify-between text-[8px] text-gray-500 mb-1"><span>Progress</span><span class="font-bold text-gray-700">72%</span></div>
+                          <div class="h-1 bg-gray-200 rounded-full overflow-hidden"><div class="h-full bg-orange rounded-full" style="width:72%"></div></div>
+                          <div class="flex justify-between text-[7px] text-gray-400 mt-1"><span class="text-green-600 font-bold">Quote ✓</span><span>Production</span><span>Delivery</span></div>
+                        </div>
+                        <div class="bg-amber-50 border border-amber-200 rounded-lg p-2">
+                          <div class="text-[8px] font-bold text-amber-800 leading-tight mb-1">Design Rev 3 — your approval</div>
+                          <div class="grid grid-cols-2 gap-1">
+                            <button class="bg-green-500 text-white text-[8px] font-bold py-1 rounded">✓ Approve</button>
+                            <button class="bg-white border border-gray-200 text-gray-600 text-[8px] font-semibold py-1 rounded">Change</button>
+                          </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                          <span class="text-[8px] text-gray-500">Balance payment</span>
+                          <span class="text-[8px] font-bold text-orange bg-orange/10 px-1.5 py-0.5 rounded-full">Due Jun 15</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ░░ SCREEN: JOBS ░░ -->
+              <div class="hero-screen" data-screen="jobs">
+                <div class="h-full flex flex-col">
+                  <div class="flex items-center justify-between px-4 py-3 bg-white border-b border-gray-100">
+                    <div><div class="font-bold text-gray-900 text-xs">Jobs</div><div class="text-gray-400 text-[10px]">24 active · 8 moving today</div></div>
+                    <div class="flex gap-1">
+                      <span class="text-[8px] font-semibold bg-orange/10 text-orange px-2 py-1 rounded-full">All</span>
+                      <span class="text-[8px] font-semibold bg-gray-100 text-gray-500 px-2 py-1 rounded-full">Production</span>
+                      <span class="text-[8px] font-semibold bg-gray-100 text-gray-500 px-2 py-1 rounded-full">Approval</span>
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-2 p-3 overflow-hidden">
+                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-2.5 flex items-center gap-2.5">
+                      <div class="flex flex-col min-w-0 flex-1">
+                        <div class="flex items-center gap-1.5"><span class="text-[8px] font-mono text-gray-400">TF-1274</span><span class="text-[10px] font-bold text-gray-900 truncate">Kitchen Cabinet</span></div>
+                        <div class="text-[8px] text-gray-400">Business Bay · Ahmed · Due Thu</div>
+                        <div class="mt-1 h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-blue-400 rounded-full" style="width:60%"></div></div>
+                      </div>
+                      <span class="text-[8px] font-bold bg-blue-50 text-blue-600 px-2 py-1 rounded-full shrink-0">In Production</span>
+                    </div>
+                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-2.5 flex items-center gap-2.5">
+                      <div class="flex flex-col min-w-0 flex-1">
+                        <div class="flex items-center gap-1.5"><span class="text-[8px] font-mono text-gray-400">TF-1265</span><span class="text-[10px] font-bold text-gray-900 truncate">Reception Counter</span></div>
+                        <div class="text-[8px] text-gray-400">DIFC · Sara · 2 days waiting</div>
+                        <div class="mt-1 h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width:90%"></div></div>
+                      </div>
+                      <span class="text-[8px] font-bold bg-amber-50 text-amber-600 px-2 py-1 rounded-full shrink-0">Awaiting Approval</span>
+                    </div>
+                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-2.5 flex items-center gap-2.5">
+                      <div class="flex flex-col min-w-0 flex-1">
+                        <div class="flex items-center gap-1.5"><span class="text-[8px] font-mono text-gray-400">TF-1254</span><span class="text-[10px] font-bold text-gray-900 truncate">Bedroom Set</span></div>
+                        <div class="text-[8px] text-gray-400">Jumeirah · Khalid · Ready to ship</div>
+                        <div class="mt-1 h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-green-400 rounded-full" style="width:100%"></div></div>
+                      </div>
+                      <span class="text-[8px] font-bold bg-green-50 text-green-600 px-2 py-1 rounded-full shrink-0">Delivery Ready</span>
+                    </div>
+                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-2.5 flex items-center gap-2.5">
+                      <div class="flex flex-col min-w-0 flex-1">
+                        <div class="flex items-center gap-1.5"><span class="text-[8px] font-mono text-gray-400">TF-1281</span><span class="text-[10px] font-bold text-gray-900 truncate">Villa Wardrobe</span></div>
+                        <div class="text-[8px] text-gray-400">Jumeirah · Ahmed · Due Mon</div>
+                        <div class="mt-1 h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-gray-300 rounded-full" style="width:15%"></div></div>
+                      </div>
+                      <span class="text-[8px] font-bold bg-gray-100 text-gray-500 px-2 py-1 rounded-full shrink-0">Quote</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ░░ SCREEN: DESIGNS ░░ -->
+              <div class="hero-screen" data-screen="designs">
+                <div class="h-full flex flex-col">
+                  <div class="px-4 py-3 bg-white border-b border-gray-100"><div class="font-bold text-gray-900 text-xs">Designs</div><div class="text-gray-400 text-[10px]">6 awaiting approval</div></div>
+                  <div class="grid grid-cols-3 gap-2 p-3">
+                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
+                      <div class="h-12 bg-gradient-to-br from-orange/40 to-navy/40"></div>
+                      <div class="p-1.5"><div class="text-[9px] font-bold text-gray-800 truncate">Villa Wardrobe</div><div class="flex items-center justify-between mt-0.5"><span class="text-[7px] text-gray-400">Rev 3</span><span class="text-[7px] font-bold bg-green-50 text-green-600 px-1 py-0.5 rounded">Approved</span></div></div>
+                    </div>
+                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
+                      <div class="h-12 bg-gradient-to-br from-blue-400/40 to-navy/40"></div>
+                      <div class="p-1.5"><div class="text-[9px] font-bold text-gray-800 truncate">Kitchen Cabinet</div><div class="flex items-center justify-between mt-0.5"><span class="text-[7px] text-gray-400">Rev 2</span><span class="text-[7px] font-bold bg-amber-50 text-amber-600 px-1 py-0.5 rounded">Pending</span></div></div>
+                    </div>
+                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
+                      <div class="h-12 bg-gradient-to-br from-gray-300 to-gray-400/60"></div>
+                      <div class="p-1.5"><div class="text-[9px] font-bold text-gray-800 truncate">Reception Counter</div><div class="flex items-center justify-between mt-0.5"><span class="text-[7px] text-gray-400">Rev 1</span><span class="text-[7px] font-bold bg-red-50 text-red-600 px-1 py-0.5 rounded">Changes</span></div></div>
+                    </div>
+                  </div>
+                  <div class="px-3 pb-3">
+                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-2.5">
+                      <div class="text-[9px] font-bold text-gray-800 mb-1.5">Approval activity</div>
+                      <div class="flex items-center gap-2 mb-1.5"><span class="w-4 h-4 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[7px] shrink-0">✓</span><span class="text-[8px] text-gray-600 truncate">Rev 3 approved · Villa Wardrobe</span><span class="text-[7px] text-gray-300 ml-auto">11:42am</span></div>
+                      <div class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-[7px] shrink-0">↻</span><span class="text-[8px] text-gray-600 truncate">Changes requested · Reception Counter</span><span class="text-[7px] text-gray-300 ml-auto">Yesterday</span></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ░░ SCREEN: QUOTES ░░ -->
+              <div class="hero-screen" data-screen="quotes">
+                <div class="h-full flex">
+                  <div class="w-1/2 border-r border-gray-100 bg-white flex flex-col">
+                    <div class="px-3 py-2.5 border-b border-gray-100"><div class="font-bold text-gray-900 text-[11px]">Quotes</div></div>
+                    <div class="flex flex-col">
+                      <div class="px-3 py-2 border-l-2 border-orange bg-orange/5"><div class="flex items-center justify-between"><span class="text-[8px] font-mono text-gray-400">QO-1048</span><span class="text-[7px] font-bold bg-green-50 text-green-600 px-1 py-0.5 rounded">Accepted</span></div><div class="text-[9px] font-bold text-gray-800 mt-0.5">L-Shape Sofa</div><div class="text-[8px] text-gray-400">AED 10,150</div></div>
+                      <div class="px-3 py-2 border-l-2 border-transparent"><div class="flex items-center justify-between"><span class="text-[8px] font-mono text-gray-400">QO-1042</span><span class="text-[7px] font-bold bg-amber-50 text-amber-600 px-1 py-0.5 rounded">Sent</span></div><div class="text-[9px] font-bold text-gray-800 mt-0.5">Reception Counter</div><div class="text-[8px] text-gray-400">AED 14,800</div></div>
+                      <div class="px-3 py-2 border-l-2 border-transparent"><div class="flex items-center justify-between"><span class="text-[8px] font-mono text-gray-400">QO-1039</span><span class="text-[7px] font-bold bg-gray-100 text-gray-500 px-1 py-0.5 rounded">Draft</span></div><div class="text-[9px] font-bold text-gray-800 mt-0.5">Dining Table</div><div class="text-[8px] text-gray-400">AED 6,400</div></div>
+                    </div>
+                  </div>
+                  <div class="w-1/2 p-3 flex flex-col gap-1.5 bg-gray-50">
+                    <div class="text-[8px] font-mono text-gray-400">QO-1048</div>
+                    <div class="text-[11px] font-black text-gray-900 leading-none">L-Shape Sofa</div>
+                    <div class="text-[8px] text-gray-400">Dubai Marina · 3-seater sectional</div>
+                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-2 mt-1 flex flex-col gap-1">
+                      <div class="flex justify-between text-[8px]"><span class="text-gray-500">Frame &amp; structure</span><span class="font-semibold text-gray-700">4,200</span></div>
+                      <div class="flex justify-between text-[8px]"><span class="text-gray-500">Upholstery &amp; foam</span><span class="font-semibold text-gray-700">3,950</span></div>
+                      <div class="flex justify-between text-[8px]"><span class="text-gray-500">Delivery &amp; install</span><span class="font-semibold text-gray-700">2,000</span></div>
+                    </div>
+                    <div class="flex justify-between items-center pt-1.5 border-t border-gray-200"><span class="text-[9px] text-gray-500">Total</span><span class="text-sm font-black text-gray-900">AED 10,150</span></div>
+                    <div class="flex items-center gap-1.5 bg-green-50 border border-green-200 rounded-lg p-2 mt-0.5">
+                      <div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center text-white text-[9px] shrink-0">✓</div>
+                      <div><div class="text-[9px] font-bold text-green-700 leading-none">Accepted</div><div class="text-[7px] text-green-600 mt-0.5">Client confirmed · Jun 2</div></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ░░ SCREEN: STAFF ░░ -->
+              <div class="hero-screen" data-screen="staff">
+                <div class="h-full flex">
+                  <div class="hidden sm:flex flex-col justify-center gap-2 p-4 w-[44%] bg-white">
+                    <div class="text-[9px] font-black tracking-widest uppercase text-orange">Staff</div>
+                    <div class="text-gray-900 font-black text-sm leading-tight">Two taps from site to dashboard</div>
+                    <div class="text-gray-500 text-[10px] leading-snug">No app, no login. Open the link, tap a button, attach a photo.</div>
+                    <div class="bg-gray-50 rounded-lg border border-gray-100 p-2 mt-1">
+                      <div class="text-[8px] text-gray-400 mb-1">Supervisor sees it instantly</div>
+                      <div class="flex items-center gap-1.5 text-[9px]"><span>📸</span><span class="text-gray-700 font-semibold truncate">Ahmed · 3 photos</span><span class="text-gray-300 ml-auto">12m</span></div>
+                    </div>
+                  </div>
+                  <div class="flex-1 flex items-center justify-center bg-gradient-to-br from-gray-100 to-gray-200/70 p-3">
+                    <div class="bg-[#0d1220] rounded-[1.4rem] border-4 border-gray-900 shadow-xl overflow-hidden" style="width:152px;">
+                      <div class="flex justify-center pt-1.5 pb-1"><div class="w-8 h-1 bg-gray-700 rounded-full"></div></div>
+                      <div class="bg-white mx-1 mb-1 rounded-[1rem] p-2.5 flex flex-col gap-2">
+                        <div class="text-[8px] font-mono text-gray-400">TF-1430</div>
+                        <div class="text-[10px] font-black text-gray-900 leading-tight">Install wardrobe side panels</div>
+                        <div class="inline-flex items-center gap-1 bg-blue-50 text-blue-600 text-[8px] font-semibold px-2 py-0.5 rounded-full self-start"><span class="w-1 h-1 rounded-full bg-blue-500"></span> In progress</div>
+                        <div class="text-[8px] text-gray-400">Al Barsha · Floor 4</div>
+                        <div class="h-9 rounded-lg bg-gradient-to-br from-gray-200 to-gray-300"></div>
+                        <div class="grid grid-cols-3 gap-1">
+                          <button class="bg-blue-50 text-blue-600 text-[8px] font-bold py-1.5 rounded">▶ Start</button>
+                          <button class="bg-red-50 text-red-600 text-[8px] font-bold py-1.5 rounded">⚠ Problem</button>
+                          <button class="bg-green-500 text-white text-[8px] font-bold py-1.5 rounded">✓ Done</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ░░ SCREEN: DASHBOARD ░░ -->
+              <div class="hero-screen flex flex-col" data-screen="dashboard">
 
               <!-- Dashboard header -->
               <div class="flex items-center justify-between px-4 py-3 bg-white border-b border-gray-100">
@@ -404,9 +621,20 @@
                 </div>
 
               </div><!-- end two-col -->
-            </div><!-- end main area -->
+              </div><!-- end dashboard screen -->
+            </div><!-- end stage -->
           </div><!-- end dashboard body -->
         </div><!-- end browser chrome -->
+
+        <!-- Showcase progress dots -->
+        <div class="hidden md:flex items-center justify-center gap-2 mt-5">
+          <span class="hero-dot is-active" data-nav="portal" title="Client Portal"></span>
+          <span class="hero-dot" data-nav="dashboard" title="Dashboard"></span>
+          <span class="hero-dot" data-nav="jobs" title="Jobs"></span>
+          <span class="hero-dot" data-nav="designs" title="Designs"></span>
+          <span class="hero-dot" data-nav="quotes" title="Quotes"></span>
+          <span class="hero-dot" data-nav="staff" title="Staff"></span>
+        </div>
       </div><!-- end right col -->
     </div><!-- end flex row -->
   </div>
@@ -560,6 +788,100 @@
       </div>
 
     </div><!-- end grid -->
+  </div>
+</section>
+
+<!-- ============================================================
+     PRODUCT TOUR — CLIENT PORTAL  (reference motion section)
+============================================================ -->
+<section class="bg-white py-20 md:py-28 overflow-hidden" id="tour-portal">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex flex-col-reverse md:flex-row items-center gap-12 lg:gap-20">
+
+      <!-- Copy -->
+      <div class="w-full md:w-1/2 fade-up-hidden">
+        <div class="inline-flex items-center gap-2 text-orange text-xs font-black tracking-widest uppercase mb-4">
+          <span class="w-1.5 h-1.5 rounded-full bg-orange"></span> Client Portal
+        </div>
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-navy leading-[1.08] tracking-tight">
+          Give clients a live window<br class="hidden lg:inline"> into their project.
+        </h2>
+        <p class="text-gray-500 text-lg leading-relaxed mt-5 max-w-md">
+          Send one branded link. Your client tracks progress, approves designs, and sees payment status — on any phone, no app, no login. Every "what's the update?" call, handled before it happens.
+        </p>
+        <div class="flex flex-col gap-4 mt-8">
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div><div class="font-bold text-navy text-sm">Your studio's name — not ours</div><div class="text-gray-500 text-sm leading-snug">The portal is branded to your studio. Clients think it's your system, because it is.</div></div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div><div class="font-bold text-navy text-sm">Approvals captured on record, instantly</div><div class="text-gray-500 text-sm leading-snug">One tap to approve a design or change. Timestamped and stored — no more "I never agreed to that".</div></div>
+          </div>
+          <div class="flex items-start gap-3">
+            <div class="w-6 h-6 rounded-full bg-green-50 flex items-center justify-center shrink-0 mt-0.5">
+              <svg class="w-3.5 h-3.5 text-green-600" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div><div class="font-bold text-navy text-sm">Progress, photos &amp; payments — always current</div><div class="text-gray-500 text-sm leading-snug">Site photos and payment milestones update live, so the client always sees the real status.</div></div>
+          </div>
+        </div>
+        <a href="trackflow.html#client-portal" class="inline-flex items-center gap-2 text-navy font-bold mt-8 group">
+          See the client portal
+          <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"/></svg>
+        </a>
+      </div>
+
+      <!-- Device -->
+      <div class="w-full md:w-1/2 flex justify-center fade-up-hidden" style="transition-delay:.12s">
+        <div class="relative">
+          <div class="absolute -inset-8 bg-gradient-to-tr from-orange/20 via-transparent to-blue-500/10 blur-3xl rounded-full"></div>
+          <div class="relative bg-[#0d1220] rounded-[2.6rem] border-[7px] border-gray-900 shadow-2xl overflow-hidden animate-float" style="width:288px; animation-duration:6s;">
+            <div class="flex justify-center pt-2.5 pb-1.5"><div class="w-16 h-1.5 bg-gray-700 rounded-full"></div></div>
+            <div class="bg-gray-50 mx-1.5 mb-1.5 rounded-[2rem] overflow-hidden">
+              <!-- branded header -->
+              <div class="bg-navy px-4 py-3 flex items-center gap-2.5">
+                <div class="w-8 h-8 rounded-lg bg-orange text-white text-sm font-black flex items-center justify-center">ST</div>
+                <div><div class="text-white font-bold text-sm leading-none">Studio Interiors</div><div class="text-white/50 text-[11px] mt-1">Villa Wardrobe · Jumeirah</div></div>
+              </div>
+              <div class="p-3 flex flex-col gap-3">
+                <!-- progress -->
+                <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-3">
+                  <div class="flex justify-between text-xs mb-2"><span class="text-gray-500 font-semibold">Project progress</span><span class="font-black text-gray-900">72%</span></div>
+                  <div class="h-1.5 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-orange rounded-full" style="width:72%"></div></div>
+                  <div class="flex justify-between text-[10px] mt-2"><span class="text-green-600 font-bold">● Quote</span><span class="text-orange font-bold">● Production</span><span class="text-gray-300 font-bold">● Delivery</span></div>
+                </div>
+                <!-- approval -->
+                <div class="bg-amber-50 rounded-xl border border-amber-200 p-3">
+                  <div class="text-xs font-bold text-amber-900 mb-2.5">Design Rev 3 — pending your approval</div>
+                  <div class="grid grid-cols-2 gap-2">
+                    <button class="bg-green-500 text-white text-xs font-bold py-2 rounded-lg">✓ Approve</button>
+                    <button class="bg-white border border-gray-200 text-gray-600 text-xs font-semibold py-2 rounded-lg">Request change</button>
+                  </div>
+                </div>
+                <!-- photos -->
+                <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-3">
+                  <div class="text-[11px] font-bold text-gray-700 mb-2">Latest site photos (6)</div>
+                  <div class="grid grid-cols-3 gap-1.5">
+                    <div class="aspect-square rounded-lg bg-gradient-to-br from-orange/30 to-navy/30"></div>
+                    <div class="aspect-square rounded-lg bg-gradient-to-br from-blue-300 to-gray-400"></div>
+                    <div class="aspect-square rounded-lg bg-gradient-to-br from-gray-200 to-gray-400"></div>
+                  </div>
+                </div>
+                <!-- payment -->
+                <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-3 flex items-center justify-between">
+                  <div><div class="text-xs font-bold text-gray-900">Balance payment</div><div class="text-[10px] text-gray-400">30% on delivery</div></div>
+                  <span class="text-[11px] font-bold text-orange bg-orange/10 px-2.5 py-1 rounded-full">Due Jun 15</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1140,6 +1462,59 @@
 
   const baSection = document.querySelector('.ba-left')?.closest('section');
   if (baSection) baObserver.observe(baSection);
+
+  // ============================================================
+  //  Hero product showcase — auto-cycling screen carousel
+  // ============================================================
+  (function () {
+    const frame = document.getElementById('hero-showcase');
+    const stage = document.getElementById('hero-stage');
+    if (!frame || !stage) return;
+
+    const screens  = Array.from(stage.querySelectorAll('.hero-screen'));
+    const navItems = Array.from(frame.querySelectorAll('[data-nav]'));
+    const dots     = Array.from(document.querySelectorAll('.hero-dot'));
+    const urlEl    = document.getElementById('hero-url');
+
+    // Cycle order — lead with the client portal (core positioning)
+    const order = ['portal', 'dashboard', 'jobs', 'designs', 'quotes', 'staff'];
+    const urls  = {
+      portal:    'trackflow.trifekta.io/portal',
+      dashboard: 'trackflow.trifekta.io/dashboard',
+      jobs:      'trackflow.trifekta.io/jobs',
+      designs:   'trackflow.trifekta.io/designs',
+      quotes:    'trackflow.trifekta.io/quotes',
+      staff:     'trackflow.trifekta.io/staff'
+    };
+    const INTERVAL = 3800;
+    const reduce   = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let i = 0, timer = null;
+
+    function render(key) {
+      screens.forEach(s  => s.classList.toggle('is-active', s.dataset.screen === key));
+      navItems.forEach(n => n.classList.toggle('is-active', n.dataset.nav    === key));
+      dots.forEach(d     => d.classList.toggle('is-active', d.dataset.nav    === key));
+      if (urlEl) urlEl.textContent = urls[key];
+    }
+    function go(idx)  { i = (idx + order.length) % order.length; render(order[i]); }
+    function next()   { go(i + 1); }
+    function stop()   { if (timer) { clearInterval(timer); timer = null; } }
+    function start()  { if (reduce.matches) return; stop(); timer = setInterval(next, INTERVAL); }
+
+    go(0);
+    start();
+
+    // Manual control via dots + sidebar nav items
+    dots.concat(navItems).forEach(el => {
+      el.addEventListener('click', () => { go(order.indexOf(el.dataset.nav)); start(); });
+    });
+
+    // Pause while hovering, or when the tab is hidden
+    frame.addEventListener('mouseenter', stop);
+    frame.addEventListener('mouseleave', start);
+    document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
+    reduce.addEventListener && reduce.addEventListener('change', () => { reduce.matches ? stop() : (go(i), start()); });
+  })();
 </script>
 
 </body>
