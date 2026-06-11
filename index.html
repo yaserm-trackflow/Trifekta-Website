@@ -91,6 +91,31 @@
     .hero-dot:hover     { background: rgba(255,255,255,.45); }
     .hero-dot.is-active { width: 22px; background: #e85a1f; }
 
+    /* ===== Hero frame pointer parallax ===== */
+    #hero-parallax { transition: transform .35s cubic-bezier(.22,1,.36,1); transform-style: preserve-3d; will-change: transform; }
+
+    /* ===== Live dashboard data motion ===== */
+    .kpi-num { font-variant-numeric: tabular-nums; }
+    @keyframes drawDonut { from { stroke-dashoffset: 97.6; } to { stroke-dashoffset: 0; } }
+    .is-playing .donut-draw { animation: drawDonut 1.2s cubic-bezier(.22,1,.36,1) both; }
+
+    /* ===== Product reel (self-running demo) ===== */
+    .reel-fill { transform-origin: left center; transform: scaleX(.82); }
+    .reel-cursor { position: absolute; width: 22px; height: 22px; pointer-events: none; z-index: 30; opacity: 0; filter: drop-shadow(0 3px 4px rgba(0,0,0,.55)); }
+    .reel-toast, .reel-state-after, .reel-ripple { opacity: 0; }
+    .reel.is-playing .reel-toast        { animation: reelToast   9s ease-in-out infinite; }
+    .reel.is-playing .reel-ripple       { animation: reelRipple  9s ease-out     infinite; }
+    .reel.is-playing .reel-cursor       { animation: reelCursor  9s ease-in-out infinite; }
+    .reel.is-playing .reel-state-before { animation: reelFadeOut 9s ease-in-out infinite; }
+    .reel.is-playing .reel-state-after  { animation: reelFadeIn  9s ease-in-out infinite; }
+    .reel.is-playing .reel-fill         { animation: reelFill    9s ease-in-out infinite; }
+    @keyframes reelToast   { 0%,6%{opacity:0;transform:translateY(-10px)} 12%,34%{opacity:1;transform:none} 42%,100%{opacity:0;transform:translateY(-10px)} }
+    @keyframes reelRipple  { 0%,46%{opacity:0;transform:scale(.4)} 52%{opacity:.5;transform:scale(1)} 64%{opacity:0;transform:scale(2.1)} 100%{opacity:0} }
+    @keyframes reelCursor  { 0%,30%{opacity:0;transform:translate(110px,46px)} 41%{opacity:1;transform:translate(0,0) scale(1)} 50%{transform:translate(0,0) scale(.8)} 57%{transform:translate(0,0) scale(1)} 72%{opacity:1;transform:translate(0,0)} 82%,100%{opacity:0;transform:translate(60px,34px)} }
+    @keyframes reelFadeOut { 0%,50%{opacity:1} 57%,100%{opacity:0} }
+    @keyframes reelFadeIn  { 0%,50%{opacity:0} 57%,93%{opacity:1} 100%{opacity:0} }
+    @keyframes reelFill    { 0%,52%{transform:scaleX(.62)} 67%,100%{transform:scaleX(.82)} }
+
     /* ===== Reduced motion: static / instant fallback ===== */
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after {
@@ -101,6 +126,10 @@
       }
       .fade-up-hidden { opacity: 1 !important; transform: none !important; }
       .hero-screen    { transition: none !important; }
+      #hero-parallax  { transform: none !important; }
+      .reel-state-after { opacity: 1 !important; }
+      .reel-state-before, .reel-cursor, .reel-ripple, .reel-toast { opacity: 0 !important; }
+      .reel-fill { transform: scaleX(.82) !important; }
     }
 
     /* Donut chart */
@@ -217,7 +246,7 @@
       </div>
 
       <!-- Right column — Browser mockup -->
-      <div class="w-full md:w-[55%] relative">
+      <div id="hero-parallax" class="w-full md:w-[55%] relative">
 
         <!-- Floating notification — top right (desktop only) -->
         <div class="hidden md:block absolute -top-5 -right-4 z-20 animate-bounce-in" style="animation-delay:.4s">
@@ -253,7 +282,7 @@
             </div>
             <div class="flex-1 bg-white/8 border border-white/10 rounded-md px-3 py-1.5 flex items-center gap-2">
               <svg class="w-3 h-3 text-white/40" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 11c0-1.1.9-2 2-2a2 2 0 012 2v2a2 2 0 01-2 2 2 2 0 01-2-2v-2z"/><path stroke-linecap="round" stroke-linejoin="round" d="M5 11c0-3.87 3.13-7 7-7s7 3.13 7 7v2c0 3.87-3.13 7-7 7S5 16.87 5 13v-2z"/></svg>
-              <span id="hero-url" class="text-xs text-white/40 font-mono">trackflow.trifekta.io/portal</span>
+              <span id="hero-url" class="text-xs text-white/40 font-mono">trackflow.trifekta.io/clients</span>
             </div>
           </div>
 
@@ -280,17 +309,25 @@
                   <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
                   Quotes
                 </div>
-                <div class="hero-nav-item flex items-center gap-2 px-2 py-1.5 rounded-md" data-nav="designs">
-                  <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                  Designs
+                <div class="hero-nav-item flex items-center gap-2 px-2 py-1.5 rounded-md" data-nav="approvals">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  Approvals
                 </div>
                 <div class="hero-nav-item is-active flex items-center gap-2 px-2 py-1.5 rounded-md" data-nav="portal">
                   <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
-                  Client Portal
+                  Clients
+                </div>
+                <div class="hero-nav-item flex items-center gap-2 px-2 py-1.5 rounded-md" data-nav="finance">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+                  Finance
                 </div>
                 <div class="hero-nav-item flex items-center gap-2 px-2 py-1.5 rounded-md" data-nav="staff">
                   <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                   Staff
+                </div>
+                <div class="hero-nav-item flex items-center gap-2 px-2 py-1.5 rounded-md" data-nav="settings">
+                  <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                  Settings
                 </div>
               </nav>
             </div>
@@ -316,12 +353,12 @@
                       <div class="flex justify-center pt-1.5 pb-1"><div class="w-8 h-1 bg-gray-700 rounded-full"></div></div>
                       <div class="bg-white mx-1 mb-1 rounded-[1rem] p-2.5 flex flex-col gap-2">
                         <div class="flex items-center gap-1.5">
-                          <div class="w-5 h-5 rounded-md bg-navy text-white text-[8px] font-black flex items-center justify-center">ST</div>
-                          <span class="text-[9px] font-bold text-gray-800">Studio Interiors</span>
+                          <div class="w-5 h-5 rounded-md bg-navy text-white text-[8px] font-black flex items-center justify-center">WI</div>
+                          <span class="text-[9px] font-bold text-gray-800">Woodfront Interiors</span>
                         </div>
                         <div>
-                          <div class="text-[10px] font-black text-gray-900 leading-tight">Villa Wardrobe</div>
-                          <div class="text-[8px] text-gray-400">Jumeirah · Your project</div>
+                          <div class="text-[10px] font-black text-gray-900 leading-tight">Marina Apartment Fit-out</div>
+                          <div class="text-[8px] text-gray-400">Dubai Marina · Your project</div>
                         </div>
                         <div class="bg-gray-50 rounded-lg p-2">
                           <div class="flex justify-between text-[8px] text-gray-500 mb-1"><span>Progress</span><span class="font-bold text-gray-700">72%</span></div>
@@ -345,77 +382,77 @@
                 </div>
               </div>
 
-              <!-- ░░ SCREEN: JOBS ░░ -->
+              <!-- ░░ SCREEN: JOBS (dark) ░░ -->
               <div class="hero-screen" data-screen="jobs">
-                <div class="h-full flex flex-col">
-                  <div class="flex items-center justify-between px-4 py-3 bg-white border-b border-gray-100">
-                    <div><div class="font-bold text-gray-900 text-xs">Jobs</div><div class="text-gray-400 text-[10px]">24 active · 8 moving today</div></div>
+                <div class="h-full flex flex-col" style="background:linear-gradient(160deg,#0c1c3d,#091428)">
+                  <div class="flex items-center justify-between px-4 py-3 border-b border-white/10">
+                    <div><div class="font-bold text-white text-xs">Jobs</div><div class="text-white/45 text-[10px]">18 active · 8 moving today</div></div>
                     <div class="flex gap-1">
-                      <span class="text-[8px] font-semibold bg-orange/10 text-orange px-2 py-1 rounded-full">All</span>
-                      <span class="text-[8px] font-semibold bg-gray-100 text-gray-500 px-2 py-1 rounded-full">Production</span>
-                      <span class="text-[8px] font-semibold bg-gray-100 text-gray-500 px-2 py-1 rounded-full">Approval</span>
+                      <span class="text-[8px] font-semibold bg-orange/20 text-orange px-2 py-1 rounded-full">All</span>
+                      <span class="text-[8px] font-semibold bg-white/5 text-white/50 px-2 py-1 rounded-full">In Progress</span>
+                      <span class="text-[8px] font-semibold bg-white/5 text-white/50 px-2 py-1 rounded-full">On Hold</span>
                     </div>
                   </div>
                   <div class="flex flex-col gap-2 p-3 overflow-hidden">
-                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-2.5 flex items-center gap-2.5">
+                    <div class="bg-white/5 rounded-lg border border-white/10 p-2.5 flex items-center gap-2.5">
                       <div class="flex flex-col min-w-0 flex-1">
-                        <div class="flex items-center gap-1.5"><span class="text-[8px] font-mono text-gray-400">TF-1274</span><span class="text-[10px] font-bold text-gray-900 truncate">Kitchen Cabinet</span></div>
-                        <div class="text-[8px] text-gray-400">Business Bay · Ahmed · Due Thu</div>
-                        <div class="mt-1 h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-blue-400 rounded-full" style="width:60%"></div></div>
+                        <div class="flex items-center gap-1.5"><span class="text-[8px] font-mono text-white/35">J-2024-045</span><span class="text-[10px] font-bold text-white truncate">Marina Apartment Fit-out</span></div>
+                        <div class="text-[8px] text-white/40">Dubai Marina · Ahmed · Handover 28 May</div>
+                        <div class="mt-1 h-1 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-blue-400 rounded-full" style="width:65%"></div></div>
                       </div>
-                      <span class="text-[8px] font-bold bg-blue-50 text-blue-600 px-2 py-1 rounded-full shrink-0">In Production</span>
+                      <span class="text-[8px] font-bold bg-blue-500/15 text-blue-300 px-2 py-1 rounded-full shrink-0">In Progress</span>
                     </div>
-                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-2.5 flex items-center gap-2.5">
+                    <div class="bg-white/5 rounded-lg border border-white/10 p-2.5 flex items-center gap-2.5">
                       <div class="flex flex-col min-w-0 flex-1">
-                        <div class="flex items-center gap-1.5"><span class="text-[8px] font-mono text-gray-400">TF-1265</span><span class="text-[10px] font-bold text-gray-900 truncate">Reception Counter</span></div>
-                        <div class="text-[8px] text-gray-400">DIFC · Sara · 2 days waiting</div>
-                        <div class="mt-1 h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width:90%"></div></div>
+                        <div class="flex items-center gap-1.5"><span class="text-[8px] font-mono text-white/35">J-2024-038</span><span class="text-[10px] font-bold text-white truncate">High-End Villa Fit-out</span></div>
+                        <div class="text-[8px] text-white/40">Palm Jumeirah · Sara · Awaiting design approval</div>
+                        <div class="mt-1 h-1 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width:40%"></div></div>
                       </div>
-                      <span class="text-[8px] font-bold bg-amber-50 text-amber-600 px-2 py-1 rounded-full shrink-0">Awaiting Approval</span>
+                      <span class="text-[8px] font-bold bg-amber-500/15 text-amber-300 px-2 py-1 rounded-full shrink-0">On Hold</span>
                     </div>
-                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-2.5 flex items-center gap-2.5">
+                    <div class="bg-white/5 rounded-lg border border-white/10 p-2.5 flex items-center gap-2.5">
                       <div class="flex flex-col min-w-0 flex-1">
-                        <div class="flex items-center gap-1.5"><span class="text-[8px] font-mono text-gray-400">TF-1254</span><span class="text-[10px] font-bold text-gray-900 truncate">Bedroom Set</span></div>
-                        <div class="text-[8px] text-gray-400">Jumeirah · Khalid · Ready to ship</div>
-                        <div class="mt-1 h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-green-400 rounded-full" style="width:100%"></div></div>
+                        <div class="flex items-center gap-1.5"><span class="text-[8px] font-mono text-white/35">J-2024-052</span><span class="text-[10px] font-bold text-white truncate">Luxury Retail Store</span></div>
+                        <div class="text-[8px] text-white/40">DIFC · Khalid · Ready for handover</div>
+                        <div class="mt-1 h-1 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-green-400 rounded-full" style="width:100%"></div></div>
                       </div>
-                      <span class="text-[8px] font-bold bg-green-50 text-green-600 px-2 py-1 rounded-full shrink-0">Delivery Ready</span>
+                      <span class="text-[8px] font-bold bg-green-500/15 text-green-300 px-2 py-1 rounded-full shrink-0">Completed</span>
                     </div>
-                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-2.5 flex items-center gap-2.5">
+                    <div class="bg-white/5 rounded-lg border border-white/10 p-2.5 flex items-center gap-2.5">
                       <div class="flex flex-col min-w-0 flex-1">
-                        <div class="flex items-center gap-1.5"><span class="text-[8px] font-mono text-gray-400">TF-1281</span><span class="text-[10px] font-bold text-gray-900 truncate">Villa Wardrobe</span></div>
-                        <div class="text-[8px] text-gray-400">Jumeirah · Ahmed · Due Mon</div>
-                        <div class="mt-1 h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-gray-300 rounded-full" style="width:15%"></div></div>
+                        <div class="flex items-center gap-1.5"><span class="text-[8px] font-mono text-white/35">J-2024-056</span><span class="text-[10px] font-bold text-white truncate">Corporate Office Fit-out</span></div>
+                        <div class="text-[8px] text-white/40">JLT · Ahmed · Quote sent</div>
+                        <div class="mt-1 h-1 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-white/30 rounded-full" style="width:15%"></div></div>
                       </div>
-                      <span class="text-[8px] font-bold bg-gray-100 text-gray-500 px-2 py-1 rounded-full shrink-0">Quote</span>
+                      <span class="text-[8px] font-bold bg-white/10 text-white/55 px-2 py-1 rounded-full shrink-0">Quote</span>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <!-- ░░ SCREEN: DESIGNS ░░ -->
-              <div class="hero-screen" data-screen="designs">
-                <div class="h-full flex flex-col">
-                  <div class="px-4 py-3 bg-white border-b border-gray-100"><div class="font-bold text-gray-900 text-xs">Designs</div><div class="text-gray-400 text-[10px]">6 awaiting approval</div></div>
+              <!-- ░░ SCREEN: DESIGN APPROVALS (dark) ░░ -->
+              <div class="hero-screen" data-screen="approvals">
+                <div class="h-full flex flex-col" style="background:linear-gradient(160deg,#0c1c3d,#091428)">
+                  <div class="px-4 py-3 border-b border-white/10"><div class="font-bold text-white text-xs">Design Approvals</div><div class="text-white/45 text-[10px]">5 awaiting approval</div></div>
                   <div class="grid grid-cols-3 gap-2 p-3">
-                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
-                      <div class="h-12 bg-gradient-to-br from-orange/40 to-navy/40"></div>
-                      <div class="p-1.5"><div class="text-[9px] font-bold text-gray-800 truncate">Villa Wardrobe</div><div class="flex items-center justify-between mt-0.5"><span class="text-[7px] text-gray-400">Rev 3</span><span class="text-[7px] font-bold bg-green-50 text-green-600 px-1 py-0.5 rounded">Approved</span></div></div>
+                    <div class="bg-white/5 rounded-lg border border-white/10 overflow-hidden">
+                      <div class="h-12 bg-gradient-to-br from-orange/50 to-navy/30"></div>
+                      <div class="p-1.5"><div class="text-[9px] font-bold text-white/90 truncate">Marina Apartment</div><div class="flex items-center justify-between mt-0.5"><span class="text-[7px] text-white/40">V1 → V2</span><span class="text-[7px] font-bold bg-green-500/15 text-green-300 px-1 py-0.5 rounded">Approved</span></div></div>
                     </div>
-                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
-                      <div class="h-12 bg-gradient-to-br from-blue-400/40 to-navy/40"></div>
-                      <div class="p-1.5"><div class="text-[9px] font-bold text-gray-800 truncate">Kitchen Cabinet</div><div class="flex items-center justify-between mt-0.5"><span class="text-[7px] text-gray-400">Rev 2</span><span class="text-[7px] font-bold bg-amber-50 text-amber-600 px-1 py-0.5 rounded">Pending</span></div></div>
+                    <div class="bg-white/5 rounded-lg border border-white/10 overflow-hidden">
+                      <div class="h-12 bg-gradient-to-br from-blue-400/50 to-navy/30"></div>
+                      <div class="p-1.5"><div class="text-[9px] font-bold text-white/90 truncate">High-End Villa</div><div class="flex items-center justify-between mt-0.5"><span class="text-[7px] text-white/40">V1</span><span class="text-[7px] font-bold bg-amber-500/15 text-amber-300 px-1 py-0.5 rounded">Pending</span></div></div>
                     </div>
-                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden">
-                      <div class="h-12 bg-gradient-to-br from-gray-300 to-gray-400/60"></div>
-                      <div class="p-1.5"><div class="text-[9px] font-bold text-gray-800 truncate">Reception Counter</div><div class="flex items-center justify-between mt-0.5"><span class="text-[7px] text-gray-400">Rev 1</span><span class="text-[7px] font-bold bg-red-50 text-red-600 px-1 py-0.5 rounded">Changes</span></div></div>
+                    <div class="bg-white/5 rounded-lg border border-white/10 overflow-hidden">
+                      <div class="h-12 bg-gradient-to-br from-purple-400/50 to-navy/30"></div>
+                      <div class="p-1.5"><div class="text-[9px] font-bold text-white/90 truncate">Luxury Retail</div><div class="flex items-center justify-between mt-0.5"><span class="text-[7px] text-white/40">V3</span><span class="text-[7px] font-bold bg-red-500/15 text-red-300 px-1 py-0.5 rounded">Changes</span></div></div>
                     </div>
                   </div>
                   <div class="px-3 pb-3">
-                    <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-2.5">
-                      <div class="text-[9px] font-bold text-gray-800 mb-1.5">Approval activity</div>
-                      <div class="flex items-center gap-2 mb-1.5"><span class="w-4 h-4 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[7px] shrink-0">✓</span><span class="text-[8px] text-gray-600 truncate">Rev 3 approved · Villa Wardrobe</span><span class="text-[7px] text-gray-300 ml-auto">11:42am</span></div>
-                      <div class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-[7px] shrink-0">↻</span><span class="text-[8px] text-gray-600 truncate">Changes requested · Reception Counter</span><span class="text-[7px] text-gray-300 ml-auto">Yesterday</span></div>
+                    <div class="bg-white/5 rounded-lg border border-white/10 p-2.5">
+                      <div class="text-[9px] font-bold text-white/90 mb-1.5">Approval activity</div>
+                      <div class="flex items-center gap-2 mb-1.5"><span class="w-4 h-4 rounded-full bg-green-500/20 text-green-300 flex items-center justify-center text-[7px] shrink-0">✓</span><span class="text-[8px] text-white/55 truncate">V2 approved · Marina Apartment</span><span class="text-[7px] text-white/30 ml-auto">11:42am</span></div>
+                      <div class="flex items-center gap-2"><span class="w-4 h-4 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center text-[7px] shrink-0">↻</span><span class="text-[8px] text-white/55 truncate">Changes requested · Luxury Retail</span><span class="text-[7px] text-white/30 ml-auto">Yesterday</span></div>
                     </div>
                   </div>
                 </div>
@@ -427,24 +464,24 @@
                   <div class="w-1/2 border-r border-gray-100 bg-white flex flex-col">
                     <div class="px-3 py-2.5 border-b border-gray-100"><div class="font-bold text-gray-900 text-[11px]">Quotes</div></div>
                     <div class="flex flex-col">
-                      <div class="px-3 py-2 border-l-2 border-orange bg-orange/5"><div class="flex items-center justify-between"><span class="text-[8px] font-mono text-gray-400">QO-1048</span><span class="text-[7px] font-bold bg-green-50 text-green-600 px-1 py-0.5 rounded">Accepted</span></div><div class="text-[9px] font-bold text-gray-800 mt-0.5">L-Shape Sofa</div><div class="text-[8px] text-gray-400">AED 10,150</div></div>
-                      <div class="px-3 py-2 border-l-2 border-transparent"><div class="flex items-center justify-between"><span class="text-[8px] font-mono text-gray-400">QO-1042</span><span class="text-[7px] font-bold bg-amber-50 text-amber-600 px-1 py-0.5 rounded">Sent</span></div><div class="text-[9px] font-bold text-gray-800 mt-0.5">Reception Counter</div><div class="text-[8px] text-gray-400">AED 14,800</div></div>
-                      <div class="px-3 py-2 border-l-2 border-transparent"><div class="flex items-center justify-between"><span class="text-[8px] font-mono text-gray-400">QO-1039</span><span class="text-[7px] font-bold bg-gray-100 text-gray-500 px-1 py-0.5 rounded">Draft</span></div><div class="text-[9px] font-bold text-gray-800 mt-0.5">Dining Table</div><div class="text-[8px] text-gray-400">AED 6,400</div></div>
+                      <div class="px-3 py-2 border-l-2 border-orange bg-orange/5"><div class="flex items-center justify-between"><span class="text-[8px] font-mono text-gray-400">Q-2024-078</span><span class="text-[7px] font-bold bg-amber-50 text-amber-600 px-1 py-0.5 rounded">Sent</span></div><div class="text-[9px] font-bold text-gray-800 mt-0.5">High-End Villa Fit-out</div><div class="text-[8px] text-gray-400">AED 86,750</div></div>
+                      <div class="px-3 py-2 border-l-2 border-transparent"><div class="flex items-center justify-between"><span class="text-[8px] font-mono text-gray-400">QTN-2024-056</span><span class="text-[7px] font-bold bg-green-50 text-green-600 px-1 py-0.5 rounded">Accepted</span></div><div class="text-[9px] font-bold text-gray-800 mt-0.5">Marina Apartment</div><div class="text-[8px] text-gray-400">AED 96,450</div></div>
+                      <div class="px-3 py-2 border-l-2 border-transparent"><div class="flex items-center justify-between"><span class="text-[8px] font-mono text-gray-400">Q-2024-071</span><span class="text-[7px] font-bold bg-gray-100 text-gray-500 px-1 py-0.5 rounded">Draft</span></div><div class="text-[9px] font-bold text-gray-800 mt-0.5">Luxury Retail Store</div><div class="text-[8px] text-gray-400">AED 142,000</div></div>
                     </div>
                   </div>
                   <div class="w-1/2 p-3 flex flex-col gap-1.5 bg-gray-50">
-                    <div class="text-[8px] font-mono text-gray-400">QO-1048</div>
-                    <div class="text-[11px] font-black text-gray-900 leading-none">L-Shape Sofa</div>
-                    <div class="text-[8px] text-gray-400">Dubai Marina · 3-seater sectional</div>
+                    <div class="text-[8px] font-mono text-gray-400">Q-2024-078</div>
+                    <div class="text-[11px] font-black text-gray-900 leading-none">High-End Villa Fit-out</div>
+                    <div class="text-[8px] text-gray-400">Palm Jumeirah · Mr. Rashid Al Mansoori</div>
                     <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-2 mt-1 flex flex-col gap-1">
-                      <div class="flex justify-between text-[8px]"><span class="text-gray-500">Frame &amp; structure</span><span class="font-semibold text-gray-700">4,200</span></div>
-                      <div class="flex justify-between text-[8px]"><span class="text-gray-500">Upholstery &amp; foam</span><span class="font-semibold text-gray-700">3,950</span></div>
-                      <div class="flex justify-between text-[8px]"><span class="text-gray-500">Delivery &amp; install</span><span class="font-semibold text-gray-700">2,000</span></div>
+                      <div class="flex justify-between text-[8px]"><span class="text-gray-500">Joinery &amp; carpentry</span><span class="font-semibold text-gray-700">48,500</span></div>
+                      <div class="flex justify-between text-[8px]"><span class="text-gray-500">Finishes &amp; materials</span><span class="font-semibold text-gray-700">26,250</span></div>
+                      <div class="flex justify-between text-[8px]"><span class="text-gray-500">Delivery &amp; install</span><span class="font-semibold text-gray-700">12,000</span></div>
                     </div>
-                    <div class="flex justify-between items-center pt-1.5 border-t border-gray-200"><span class="text-[9px] text-gray-500">Total</span><span class="text-sm font-black text-gray-900">AED 10,150</span></div>
-                    <div class="flex items-center gap-1.5 bg-green-50 border border-green-200 rounded-lg p-2 mt-0.5">
-                      <div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center text-white text-[9px] shrink-0">✓</div>
-                      <div><div class="text-[9px] font-bold text-green-700 leading-none">Accepted</div><div class="text-[7px] text-green-600 mt-0.5">Client confirmed · Jun 2</div></div>
+                    <div class="flex justify-between items-center pt-1.5 border-t border-gray-200"><span class="text-[9px] text-gray-500">Total</span><span class="text-sm font-black text-gray-900">AED 86,750</span></div>
+                    <div class="flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-lg p-2 mt-0.5">
+                      <div class="w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center text-white text-[9px] shrink-0">↗</div>
+                      <div><div class="text-[9px] font-bold text-amber-700 leading-none">Sent to client</div><div class="text-[7px] text-amber-600 mt-0.5">Awaiting response · May 25</div></div>
                     </div>
                   </div>
                 </div>
@@ -466,10 +503,10 @@
                     <div class="bg-[#0d1220] rounded-[1.4rem] border-4 border-gray-900 shadow-xl overflow-hidden" style="width:152px;">
                       <div class="flex justify-center pt-1.5 pb-1"><div class="w-8 h-1 bg-gray-700 rounded-full"></div></div>
                       <div class="bg-white mx-1 mb-1 rounded-[1rem] p-2.5 flex flex-col gap-2">
-                        <div class="text-[8px] font-mono text-gray-400">TF-1430</div>
-                        <div class="text-[10px] font-black text-gray-900 leading-tight">Install wardrobe side panels</div>
+                        <div class="text-[8px] font-mono text-gray-400">J-2024-045</div>
+                        <div class="text-[10px] font-black text-gray-900 leading-tight">Install joinery — Living Room</div>
                         <div class="inline-flex items-center gap-1 bg-blue-50 text-blue-600 text-[8px] font-semibold px-2 py-0.5 rounded-full self-start"><span class="w-1 h-1 rounded-full bg-blue-500"></span> In progress</div>
-                        <div class="text-[8px] text-gray-400">Al Barsha · Floor 4</div>
+                        <div class="text-[8px] text-gray-400">Marina Apartment · Dubai Marina</div>
                         <div class="h-9 rounded-lg bg-gradient-to-br from-gray-200 to-gray-300"></div>
                         <div class="grid grid-cols-3 gap-1">
                           <button class="bg-blue-50 text-blue-600 text-[8px] font-bold py-1.5 rounded">▶ Start</button>
@@ -482,50 +519,50 @@
                 </div>
               </div>
 
-              <!-- ░░ SCREEN: DASHBOARD ░░ -->
-              <div class="hero-screen flex flex-col" data-screen="dashboard">
+              <!-- ░░ SCREEN: DASHBOARD (dark) ░░ -->
+              <div class="hero-screen flex flex-col" data-screen="dashboard" style="background:linear-gradient(160deg,#0c1c3d,#091428)">
 
               <!-- Dashboard header -->
-              <div class="flex items-center justify-between px-4 py-3 bg-white border-b border-gray-100">
+              <div class="flex items-center justify-between px-4 py-3 border-b border-white/10">
                 <div>
-                  <div class="font-bold text-gray-900 text-xs">Good morning, Alex</div>
-                  <div class="text-gray-400 text-[10px]">Tuesday, June 3 · Dubai</div>
+                  <div class="font-bold text-white text-xs">Good morning, Alex Smith 👋</div>
+                  <div class="text-white/40 text-[10px]">Tuesday, June 3 · Dubai</div>
                 </div>
-                <div class="w-7 h-7 rounded-full bg-orange flex items-center justify-center text-white font-bold text-xs">A</div>
+                <div class="w-7 h-7 rounded-full bg-orange flex items-center justify-center text-white font-bold text-[10px]">AS</div>
               </div>
 
               <!-- Stats row -->
               <div class="grid grid-cols-4 gap-2 p-3">
                 <!-- Active Jobs -->
-                <div class="bg-white rounded-lg p-2 border border-gray-100 shadow-sm">
-                  <div class="font-black text-gray-900 text-base leading-none">24</div>
-                  <div class="text-gray-500 text-[9px] mt-0.5 leading-tight">Active Jobs</div>
-                  <div class="mt-1.5 inline-flex items-center gap-1 bg-green-50 text-green-700 rounded px-1 py-0.5 text-[8px] font-semibold leading-none">
-                    <span class="w-1 h-1 rounded-full bg-green-500"></span>8 moving today
+                <div class="bg-white/5 rounded-lg p-2 border border-white/10">
+                  <div class="font-black text-white text-base leading-none kpi-num" data-to="18">18</div>
+                  <div class="text-white/45 text-[9px] mt-0.5 leading-tight">Active Jobs</div>
+                  <div class="mt-1.5 inline-flex items-center gap-1 bg-green-500/15 text-green-300 rounded px-1 py-0.5 text-[8px] font-semibold leading-none">
+                    <span class="w-1 h-1 rounded-full bg-green-400"></span>+3 this week
                   </div>
                 </div>
-                <!-- Approval Blockers -->
-                <div class="bg-white rounded-lg p-2 border border-gray-100 shadow-sm">
-                  <div class="font-black text-gray-900 text-base leading-none">6</div>
-                  <div class="text-gray-500 text-[9px] mt-0.5 leading-tight">Approval Blockers</div>
-                  <div class="mt-1.5 inline-flex items-center gap-1 bg-amber-50 text-amber-700 rounded px-1 py-0.5 text-[8px] font-semibold leading-none">
-                    <span class="w-1 h-1 rounded-full bg-amber-500"></span>client action
+                <!-- Completed Jobs -->
+                <div class="bg-white/5 rounded-lg p-2 border border-white/10">
+                  <div class="font-black text-white text-base leading-none kpi-num" data-to="12">12</div>
+                  <div class="text-white/45 text-[9px] mt-0.5 leading-tight">Completed Jobs</div>
+                  <div class="mt-1.5 inline-flex items-center gap-1 bg-blue-500/15 text-blue-300 rounded px-1 py-0.5 text-[8px] font-semibold leading-none">
+                    <span class="w-1 h-1 rounded-full bg-blue-400"></span>+2 this week
                   </div>
                 </div>
-                <!-- Delayed -->
-                <div class="bg-white rounded-lg p-2 border border-gray-100 shadow-sm">
-                  <div class="font-black text-gray-900 text-base leading-none">4</div>
-                  <div class="text-gray-500 text-[9px] mt-0.5 leading-tight">Delayed Jobs</div>
-                  <div class="mt-1.5 inline-flex items-center gap-1 bg-red-50 text-red-700 rounded px-1 py-0.5 text-[8px] font-semibold leading-none">
-                    <span class="w-1 h-1 rounded-full bg-red-500"></span>escalate
+                <!-- Design Approvals -->
+                <div class="bg-white/5 rounded-lg p-2 border border-white/10">
+                  <div class="font-black text-white text-base leading-none kpi-num" data-to="5">5</div>
+                  <div class="text-white/45 text-[9px] mt-0.5 leading-tight">Design Approvals</div>
+                  <div class="mt-1.5 inline-flex items-center gap-1 bg-amber-500/15 text-amber-300 rounded px-1 py-0.5 text-[8px] font-semibold leading-none">
+                    <span class="w-1 h-1 rounded-full bg-amber-400"></span>pending
                   </div>
                 </div>
-                <!-- Staff Updates -->
-                <div class="bg-white rounded-lg p-2 border border-gray-100 shadow-sm">
-                  <div class="font-black text-gray-900 text-base leading-none">17</div>
-                  <div class="text-gray-500 text-[9px] mt-0.5 leading-tight">Staff Updates</div>
-                  <div class="mt-1.5 inline-flex items-center gap-1 bg-blue-50 text-blue-700 rounded px-1 py-0.5 text-[8px] font-semibold leading-none">
-                    <span class="w-1 h-1 rounded-full bg-blue-500"></span>photos+notes
+                <!-- Payments Due -->
+                <div class="bg-white/5 rounded-lg p-2 border border-white/10">
+                  <div class="font-black text-white text-sm leading-none"><span class="text-[9px] font-bold text-white/45">AED</span> <span class="kpi-num" data-to="128450" data-fmt="comma">128,450</span></div>
+                  <div class="text-white/45 text-[9px] mt-0.5 leading-tight">Payments Due</div>
+                  <div class="mt-1.5 inline-flex items-center gap-1 bg-orange/20 text-orange rounded px-1 py-0.5 text-[8px] font-semibold leading-none">
+                    <span class="w-1 h-1 rounded-full bg-orange"></span>3 payments
                   </div>
                 </div>
               </div>
@@ -533,90 +570,37 @@
               <!-- Two-col lower area -->
               <div class="grid grid-cols-2 gap-2 px-3 pb-3 flex-1 min-h-0">
 
-                <!-- Job completion snapshot -->
-                <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-3 flex flex-col gap-2 overflow-hidden">
-                  <div class="font-bold text-gray-800 text-[10px]">Job completion snapshot</div>
+                <!-- Job progress donut -->
+                <div class="bg-white/5 rounded-lg border border-white/10 p-3 flex flex-col gap-2 overflow-hidden">
+                  <div class="font-bold text-white/90 text-[10px]">Job progress</div>
                   <div class="flex items-center gap-3">
-                    <!-- Donut SVG -->
                     <div class="relative shrink-0">
-                      <svg width="54" height="54" viewBox="0 0 54 54">
-                        <circle class="donut-bg" cx="27" cy="27" r="21" fill="none" stroke-width="6"/>
-                        <circle class="donut-fill" cx="27" cy="27" r="21" fill="none" stroke-width="6" stroke="#e85a1f" stroke-dasharray="93.1 131.9" stroke-linecap="round" transform="rotate(-90 27 27)"/>
+                      <svg width="58" height="58" viewBox="0 0 54 54">
+                        <circle cx="27" cy="27" r="21" fill="none" stroke-width="6" stroke="#1e2d47"/>
+                        <circle class="donut-draw" cx="27" cy="27" r="21" fill="none" stroke-width="6" stroke="#e85a1f" stroke-dasharray="97.6 131.95" stroke-linecap="round" transform="rotate(-90 27 27)"/>
                       </svg>
-                      <div class="absolute inset-0 flex items-center justify-center">
-                        <span class="text-[10px] font-black text-gray-800">71%</span>
-                      </div>
+                      <div class="absolute inset-0 flex items-center justify-center"><span class="text-[11px] font-black text-white">74%</span></div>
                     </div>
-                    <!-- Progress bars -->
-                    <div class="flex flex-col gap-1.5 flex-1 min-w-0">
-                      <div>
-                        <div class="flex justify-between mb-0.5">
-                          <span class="text-[8px] text-gray-500 truncate">Quotes accepted</span>
-                          <span class="text-[8px] font-semibold text-gray-700">88%</span>
-                        </div>
-                        <div class="h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-orange rounded-full" style="width:88%"></div></div>
-                      </div>
-                      <div>
-                        <div class="flex justify-between mb-0.5">
-                          <span class="text-[8px] text-gray-500 truncate">Production on track</span>
-                          <span class="text-[8px] font-semibold text-gray-700">71%</span>
-                        </div>
-                        <div class="h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-orange rounded-full" style="width:71%"></div></div>
-                      </div>
-                      <div>
-                        <div class="flex justify-between mb-0.5">
-                          <span class="text-[8px] text-gray-500 truncate">Design approvals</span>
-                          <span class="text-[8px] font-semibold text-gray-700">64%</span>
-                        </div>
-                        <div class="h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-blue-400 rounded-full" style="width:64%"></div></div>
-                      </div>
-                      <div>
-                        <div class="flex justify-between mb-0.5">
-                          <span class="text-[8px] text-gray-500 truncate">Ready for delivery</span>
-                          <span class="text-[8px] font-semibold text-gray-700">55%</span>
-                        </div>
-                        <div class="h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-green-400 rounded-full" style="width:55%"></div></div>
-                      </div>
+                    <div class="flex flex-col gap-1 flex-1 min-w-0 text-[8px]">
+                      <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-orange"></span><span class="text-white/60">In Progress</span><span class="text-white/40 ml-auto font-semibold">9</span></div>
+                      <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span><span class="text-white/60">On Hold</span><span class="text-white/40 ml-auto font-semibold">2</span></div>
+                      <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-white/30"></span><span class="text-white/60">Not Started</span><span class="text-white/40 ml-auto font-semibold">3</span></div>
+                      <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span><span class="text-white/60">Completed</span><span class="text-white/40 ml-auto font-semibold">12</span></div>
                     </div>
                   </div>
                 </div>
 
-                <!-- Today's critical feed -->
-                <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-3 flex flex-col gap-2 overflow-hidden">
-                  <div class="font-bold text-gray-800 text-[10px]">Today's critical feed</div>
-                  <div class="flex flex-col gap-1.5">
-                    <!-- Row 1 -->
-                    <div class="flex items-start gap-2">
-                      <div class="w-5 h-5 rounded-full bg-red-100 flex items-center justify-center shrink-0 text-[8px]">❗</div>
-                      <div class="min-w-0">
-                        <div class="font-semibold text-gray-800 text-[9px] leading-tight truncate">Client approval overdue</div>
-                        <div class="text-gray-400 text-[8px] leading-tight">Villa Wardrobe · 2 days</div>
-                      </div>
-                    </div>
-                    <!-- Row 2 -->
-                    <div class="flex items-start gap-2">
-                      <div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center shrink-0 text-[8px]">📸</div>
-                      <div class="min-w-0">
-                        <div class="font-semibold text-gray-800 text-[9px] leading-tight truncate">Ahmed uploaded install photos</div>
-                        <div class="text-gray-400 text-[8px] leading-tight">L-Shape Sofa · 12 min</div>
-                      </div>
-                    </div>
-                    <!-- Row 3 -->
-                    <div class="flex items-start gap-2">
-                      <div class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center shrink-0 text-[8px]">✅</div>
-                      <div class="min-w-0">
-                        <div class="font-semibold text-gray-800 text-[9px] leading-tight truncate">Quote accepted by client</div>
-                        <div class="text-gray-400 text-[8px] leading-tight">Reception Counter · 34 min</div>
-                      </div>
-                    </div>
-                    <!-- Row 4 -->
-                    <div class="flex items-start gap-2">
-                      <div class="w-5 h-5 rounded-full bg-amber-100 flex items-center justify-center shrink-0 text-[8px]">⚠️</div>
-                      <div class="min-w-0">
-                        <div class="font-semibold text-gray-800 text-[9px] leading-tight truncate">Supervisor reported problem</div>
-                        <div class="text-gray-400 text-[8px] leading-tight">Kitchen Cabinet · material mismatch</div>
-                      </div>
-                    </div>
+                <!-- Finance overview -->
+                <div class="bg-white/5 rounded-lg border border-white/10 p-3 flex flex-col gap-2 overflow-hidden">
+                  <div class="font-bold text-white/90 text-[10px]">Finance overview</div>
+                  <div class="grid grid-cols-3 gap-1.5">
+                    <div class="bg-white/5 rounded-md p-1.5 text-center"><div class="text-green-300 font-black text-[11px] leading-none">275,600</div><div class="text-white/40 text-[7px] mt-1">Paid</div></div>
+                    <div class="bg-white/5 rounded-md p-1.5 text-center"><div class="text-amber-300 font-black text-[11px] leading-none">128,450</div><div class="text-white/40 text-[7px] mt-1">Pending</div></div>
+                    <div class="bg-white/5 rounded-md p-1.5 text-center"><div class="text-red-300 font-black text-[11px] leading-none">45,300</div><div class="text-white/40 text-[7px] mt-1">Overdue</div></div>
+                  </div>
+                  <div class="flex items-center justify-between bg-white/5 rounded-md px-2 py-1.5 mt-auto">
+                    <span class="text-white/50 text-[8px]">Total Outstanding</span>
+                    <span class="text-white font-black text-[11px]">AED 173,750</span>
                   </div>
                 </div>
 
@@ -631,12 +615,70 @@
           <span class="hero-dot is-active" data-nav="portal" title="Client Portal"></span>
           <span class="hero-dot" data-nav="dashboard" title="Dashboard"></span>
           <span class="hero-dot" data-nav="jobs" title="Jobs"></span>
-          <span class="hero-dot" data-nav="designs" title="Designs"></span>
+          <span class="hero-dot" data-nav="approvals" title="Design Approvals"></span>
           <span class="hero-dot" data-nav="quotes" title="Quotes"></span>
           <span class="hero-dot" data-nav="staff" title="Staff"></span>
         </div>
       </div><!-- end right col -->
     </div><!-- end flex row -->
+  </div>
+</section>
+
+<!-- ============================================================
+     SEE IT IN MOTION — self-running product reel
+============================================================ -->
+<section class="py-20 md:py-28 overflow-hidden" id="see-it" style="background:linear-gradient(180deg,#091428,#0c1c3d)">
+  <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+    <div class="inline-flex items-center gap-2 text-orange text-xs font-black tracking-widest uppercase mb-4 fade-up-hidden"><span class="w-1.5 h-1.5 rounded-full bg-orange animate-pulse"></span> See it in motion</div>
+    <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-white leading-tight tracking-tight fade-up-hidden" style="transition-delay:.05s">Watch a job move itself forward.</h2>
+    <p class="text-white/55 text-lg mt-5 max-w-2xl mx-auto fade-up-hidden" style="transition-delay:.1s">A quote gets accepted, a payment clears, the dashboard updates — live, the way it happens inside TrackFlow.</p>
+
+    <!-- Reel -->
+    <div class="reel mt-12 fade-up-hidden" style="transition-delay:.15s">
+      <div class="relative max-w-3xl mx-auto rounded-2xl border border-white/10 shadow-2xl overflow-hidden animate-float" style="animation-duration:7s;">
+        <!-- chrome -->
+        <div class="bg-[#0a1326] px-4 py-2.5 flex items-center gap-2.5 border-b border-white/10">
+          <div class="flex gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span><span class="w-2.5 h-2.5 rounded-full bg-yellow-400/80"></span><span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span></div>
+          <div class="flex-1 bg-white/8 border border-white/10 rounded-md px-2.5 py-1 text-[10px] text-white/40 font-mono text-left">trackflow.trifekta.io/finance</div>
+        </div>
+        <!-- body -->
+        <div class="relative p-4 md:p-6 text-left" style="background:linear-gradient(160deg,#0c1c3d,#091428)">
+          <!-- toast -->
+          <div class="reel-toast absolute top-3 right-3 z-20 flex items-center gap-2 bg-[#0f2147] border border-white/10 rounded-xl px-3 py-2 shadow-xl">
+            <span class="w-6 h-6 rounded-full bg-green-500/20 text-green-300 flex items-center justify-center text-xs">✓</span>
+            <div><div class="text-white text-xs font-bold leading-none">Quote accepted</div><div class="text-white/45 text-[10px] mt-0.5">Marina Apartment · AED 96,450</div></div>
+          </div>
+
+          <div class="text-white/90 font-bold text-sm mb-3">Payments</div>
+          <div class="flex flex-col gap-2 max-w-md">
+            <!-- flipping row -->
+            <div class="relative bg-white/5 border border-white/10 rounded-xl p-3 flex items-center justify-between">
+              <div>
+                <div class="text-white text-xs font-bold">Marina Apartment · Milestone 2</div>
+                <div class="text-white/45 text-[10px] mt-0.5">J-2024-045 · AED 96,450</div>
+              </div>
+              <div class="relative flex items-center justify-end" style="min-width:84px;">
+                <span class="reel-state-before inline-flex items-center gap-1 bg-amber-500/15 text-amber-300 text-[11px] font-bold px-2.5 py-1 rounded-full">● Pending</span>
+                <span class="reel-state-after absolute right-0 inline-flex items-center gap-1 bg-green-500/15 text-green-300 text-[11px] font-bold px-2.5 py-1 rounded-full whitespace-nowrap">✓ Paid</span>
+              </div>
+              <span class="reel-ripple absolute right-7 top-1/2 -mt-3 w-6 h-6 rounded-full bg-orange/60"></span>
+              <svg class="reel-cursor" style="right:10px; top:58%" viewBox="0 0 24 24" fill="#fff"><path d="M5 3l15 9-6 1.6L11 21 5 3z"/></svg>
+            </div>
+            <!-- static row -->
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3 flex items-center justify-between">
+              <div><div class="text-white text-xs font-bold">High-End Villa · Deposit</div><div class="text-white/45 text-[10px] mt-0.5">J-2024-038 · AED 43,375</div></div>
+              <span class="inline-flex items-center gap-1 bg-green-500/15 text-green-300 text-[11px] font-bold px-2.5 py-1 rounded-full">✓ Paid</span>
+            </div>
+            <!-- collection progress -->
+            <div class="bg-white/5 border border-white/10 rounded-xl p-3">
+              <div class="flex justify-between text-[11px] mb-2"><span class="text-white/55 font-semibold">Payments collected</span><span class="text-white font-bold">82%</span></div>
+              <div class="h-2 bg-white/10 rounded-full overflow-hidden"><div class="reel-fill h-full bg-gradient-to-r from-orange to-[#f48c5a] rounded-full" style="width:100%"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="text-white/35 text-xs mt-5">Illustrative demo · loops automatically</p>
+    </div>
   </div>
 </section>
 
@@ -855,8 +897,8 @@
             <div class="bg-gray-50 mx-1.5 mb-1.5 rounded-[2rem] overflow-hidden">
               <!-- branded header -->
               <div class="bg-navy px-4 py-3 flex items-center gap-2.5">
-                <div class="w-8 h-8 rounded-lg bg-orange text-white text-sm font-black flex items-center justify-center">ST</div>
-                <div><div class="text-white font-bold text-sm leading-none">Studio Interiors</div><div class="text-white/50 text-[11px] mt-1">Villa Wardrobe · Jumeirah</div></div>
+                <div class="w-8 h-8 rounded-lg bg-orange text-white text-sm font-black flex items-center justify-center">WI</div>
+                <div><div class="text-white font-bold text-sm leading-none">Woodfront Interiors</div><div class="text-white/50 text-[11px] mt-1">Marina Apartment · Dubai Marina</div></div>
               </div>
               <div class="p-3 flex flex-col gap-3">
                 <!-- progress -->
@@ -930,39 +972,48 @@
               <div class="flex gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span><span class="w-2.5 h-2.5 rounded-full bg-yellow-400/80"></span><span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span></div>
               <div class="flex-1 bg-white/8 border border-white/10 rounded-md px-2.5 py-1 text-[10px] text-white/40 font-mono">trackflow.trifekta.io/dashboard</div>
             </div>
-            <div class="bg-gray-50 p-3">
+            <div class="p-3" style="background:linear-gradient(160deg,#0c1c3d,#091428)">
               <div class="flex items-center justify-between mb-3">
-                <div><div class="font-bold text-gray-900 text-sm">Good morning, Alex</div><div class="text-gray-400 text-[11px]">Tuesday, June 3 · Dubai</div></div>
-                <div class="w-8 h-8 rounded-full bg-orange text-white font-bold text-sm flex items-center justify-center">A</div>
+                <div><div class="font-bold text-white text-sm">Good morning, Alex Smith 👋</div><div class="text-white/40 text-[11px]">Tuesday, June 3 · Dubai</div></div>
+                <div class="w-8 h-8 rounded-full bg-orange text-white font-bold text-[11px] flex items-center justify-center">AS</div>
               </div>
               <div class="grid grid-cols-4 gap-2 mb-3">
-                <div class="bg-white rounded-lg p-2.5 border border-gray-100 shadow-sm"><div class="font-black text-gray-900 text-xl leading-none">24</div><div class="text-gray-500 text-[10px] mt-1">Active Jobs</div><div class="mt-2 inline-flex items-center gap-1 bg-green-50 text-green-700 rounded px-1.5 py-0.5 text-[9px] font-semibold"><span class="w-1 h-1 rounded-full bg-green-500"></span>8 moving</div></div>
-                <div class="bg-white rounded-lg p-2.5 border border-gray-100 shadow-sm"><div class="font-black text-gray-900 text-xl leading-none">6</div><div class="text-gray-500 text-[10px] mt-1">Approval Blockers</div><div class="mt-2 inline-flex items-center gap-1 bg-amber-50 text-amber-700 rounded px-1.5 py-0.5 text-[9px] font-semibold"><span class="w-1 h-1 rounded-full bg-amber-500"></span>client action</div></div>
-                <div class="bg-white rounded-lg p-2.5 border border-gray-100 shadow-sm"><div class="font-black text-gray-900 text-xl leading-none">4</div><div class="text-gray-500 text-[10px] mt-1">Delayed Jobs</div><div class="mt-2 inline-flex items-center gap-1 bg-red-50 text-red-700 rounded px-1.5 py-0.5 text-[9px] font-semibold"><span class="w-1 h-1 rounded-full bg-red-500"></span>escalate</div></div>
-                <div class="bg-white rounded-lg p-2.5 border border-gray-100 shadow-sm"><div class="font-black text-gray-900 text-xl leading-none">17</div><div class="text-gray-500 text-[10px] mt-1">Staff Updates</div><div class="mt-2 inline-flex items-center gap-1 bg-blue-50 text-blue-700 rounded px-1.5 py-0.5 text-[9px] font-semibold"><span class="w-1 h-1 rounded-full bg-blue-500"></span>photos+notes</div></div>
+                <div class="bg-white/5 rounded-lg p-2.5 border border-white/10"><div class="font-black text-white text-xl leading-none kpi-num" data-to="18">18</div><div class="text-white/45 text-[10px] mt-1">Active Jobs</div><div class="mt-2 inline-flex items-center gap-1 bg-green-500/15 text-green-300 rounded px-1.5 py-0.5 text-[9px] font-semibold"><span class="w-1 h-1 rounded-full bg-green-400"></span>+3 week</div></div>
+                <div class="bg-white/5 rounded-lg p-2.5 border border-white/10"><div class="font-black text-white text-xl leading-none kpi-num" data-to="12">12</div><div class="text-white/45 text-[10px] mt-1">Completed</div><div class="mt-2 inline-flex items-center gap-1 bg-blue-500/15 text-blue-300 rounded px-1.5 py-0.5 text-[9px] font-semibold"><span class="w-1 h-1 rounded-full bg-blue-400"></span>+2 week</div></div>
+                <div class="bg-white/5 rounded-lg p-2.5 border border-white/10"><div class="font-black text-white text-xl leading-none kpi-num" data-to="5">5</div><div class="text-white/45 text-[10px] mt-1">Approvals</div><div class="mt-2 inline-flex items-center gap-1 bg-amber-500/15 text-amber-300 rounded px-1.5 py-0.5 text-[9px] font-semibold"><span class="w-1 h-1 rounded-full bg-amber-400"></span>pending</div></div>
+                <div class="bg-white/5 rounded-lg p-2.5 border border-white/10"><div class="font-black text-white text-base leading-none"><span class="text-[10px] text-white/45 font-bold">AED</span> <span class="kpi-num" data-to="128450" data-fmt="comma">128,450</span></div><div class="text-white/45 text-[10px] mt-1">Payments Due</div><div class="mt-2 inline-flex items-center gap-1 bg-orange/20 text-orange rounded px-1.5 py-0.5 text-[9px] font-semibold"><span class="w-1 h-1 rounded-full bg-orange"></span>3 due</div></div>
               </div>
-              <div class="grid grid-cols-2 gap-2">
-                <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-3">
-                  <div class="font-bold text-gray-800 text-[11px] mb-2">Job completion snapshot</div>
+              <div class="grid grid-cols-2 gap-2 mb-2">
+                <div class="bg-white/5 rounded-lg border border-white/10 p-3">
+                  <div class="font-bold text-white/90 text-[11px] mb-2">Job progress</div>
                   <div class="flex items-center gap-3">
-                    <div class="relative shrink-0"><svg width="64" height="64" viewBox="0 0 54 54"><circle cx="27" cy="27" r="21" fill="none" stroke-width="6" stroke="#e5e7eb"/><circle cx="27" cy="27" r="21" fill="none" stroke-width="6" stroke="#e85a1f" stroke-dasharray="93.1 131.9" stroke-linecap="round" transform="rotate(-90 27 27)"/></svg><div class="absolute inset-0 flex items-center justify-center"><span class="text-xs font-black text-gray-800">71%</span></div></div>
-                    <div class="flex flex-col gap-1.5 flex-1 min-w-0">
-                      <div><div class="flex justify-between mb-0.5"><span class="text-[9px] text-gray-500">Quotes accepted</span><span class="text-[9px] font-semibold text-gray-700">88%</span></div><div class="h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-orange rounded-full" style="width:88%"></div></div></div>
-                      <div><div class="flex justify-between mb-0.5"><span class="text-[9px] text-gray-500">Production on track</span><span class="text-[9px] font-semibold text-gray-700">71%</span></div><div class="h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-orange rounded-full" style="width:71%"></div></div></div>
-                      <div><div class="flex justify-between mb-0.5"><span class="text-[9px] text-gray-500">Design approvals</span><span class="text-[9px] font-semibold text-gray-700">64%</span></div><div class="h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-blue-400 rounded-full" style="width:64%"></div></div></div>
-                      <div><div class="flex justify-between mb-0.5"><span class="text-[9px] text-gray-500">Ready for delivery</span><span class="text-[9px] font-semibold text-gray-700">55%</span></div><div class="h-1 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-green-400 rounded-full" style="width:55%"></div></div></div>
+                    <div class="relative shrink-0"><svg width="64" height="64" viewBox="0 0 54 54"><circle cx="27" cy="27" r="21" fill="none" stroke-width="6" stroke="#1e2d47"/><circle class="donut-draw" cx="27" cy="27" r="21" fill="none" stroke-width="6" stroke="#e85a1f" stroke-dasharray="97.6 131.95" stroke-linecap="round" transform="rotate(-90 27 27)"/></svg><div class="absolute inset-0 flex items-center justify-center"><span class="text-xs font-black text-white">74%</span></div></div>
+                    <div class="flex flex-col gap-1 flex-1 min-w-0 text-[9px]">
+                      <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-orange"></span><span class="text-white/60">In Progress</span><span class="text-white/40 ml-auto font-semibold">9</span></div>
+                      <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span><span class="text-white/60">On Hold</span><span class="text-white/40 ml-auto font-semibold">2</span></div>
+                      <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-white/30"></span><span class="text-white/60">Not Started</span><span class="text-white/40 ml-auto font-semibold">3</span></div>
+                      <div class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-green-400"></span><span class="text-white/60">Completed</span><span class="text-white/40 ml-auto font-semibold">12</span></div>
                     </div>
                   </div>
                 </div>
-                <div class="bg-white rounded-lg border border-gray-100 shadow-sm p-3">
-                  <div class="font-bold text-gray-800 text-[11px] mb-2">Today's critical feed</div>
+                <div class="bg-white/5 rounded-lg border border-white/10 p-3">
+                  <div class="font-bold text-white/90 text-[11px] mb-2">Recent activity</div>
                   <div class="flex flex-col gap-2">
-                    <div class="flex items-start gap-2"><div class="w-5 h-5 rounded-full bg-red-100 flex items-center justify-center shrink-0 text-[9px]">❗</div><div class="min-w-0"><div class="font-semibold text-gray-800 text-[10px] leading-tight truncate">Client approval overdue</div><div class="text-gray-400 text-[9px]">Villa Wardrobe · 2 days</div></div></div>
-                    <div class="flex items-start gap-2"><div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center shrink-0 text-[9px]">📸</div><div class="min-w-0"><div class="font-semibold text-gray-800 text-[10px] leading-tight truncate">Ahmed uploaded install photos</div><div class="text-gray-400 text-[9px]">L-Shape Sofa · 12 min</div></div></div>
-                    <div class="flex items-start gap-2"><div class="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center shrink-0 text-[9px]">✅</div><div class="min-w-0"><div class="font-semibold text-gray-800 text-[10px] leading-tight truncate">Quote accepted by client</div><div class="text-gray-400 text-[9px]">Reception Counter · 34 min</div></div></div>
-                    <div class="flex items-start gap-2"><div class="w-5 h-5 rounded-full bg-amber-100 flex items-center justify-center shrink-0 text-[9px]">⚠️</div><div class="min-w-0"><div class="font-semibold text-gray-800 text-[10px] leading-tight truncate">Supervisor reported a problem</div><div class="text-gray-400 text-[9px]">Kitchen Cabinet · material mismatch</div></div></div>
+                    <div class="flex items-start gap-2"><div class="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0 text-[9px]">✅</div><div class="min-w-0"><div class="font-semibold text-white/85 text-[10px] leading-tight truncate">Kitchen installation completed</div><div class="text-white/35 text-[9px]">Marina Apartment Fit-out</div></div></div>
+                    <div class="flex items-start gap-2"><div class="w-5 h-5 rounded-full bg-blue-500/20 flex items-center justify-center shrink-0 text-[9px]">📦</div><div class="min-w-0"><div class="font-semibold text-white/85 text-[10px] leading-tight truncate">Office workstations delivered</div><div class="text-white/35 text-[9px]">Techhub Office</div></div></div>
+                    <div class="flex items-start gap-2"><div class="w-5 h-5 rounded-full bg-orange/20 flex items-center justify-center shrink-0 text-[9px]">🎨</div><div class="min-w-0"><div class="font-semibold text-white/85 text-[10px] leading-tight truncate">Design approved</div><div class="text-white/35 text-[9px]">Luxury Retail Store</div></div></div>
+                    <div class="flex items-start gap-2"><div class="w-5 h-5 rounded-full bg-green-500/20 flex items-center justify-center shrink-0 text-[9px]">💳</div><div class="min-w-0"><div class="font-semibold text-white/85 text-[10px] leading-tight truncate">Payment received</div><div class="text-white/35 text-[9px]">Corporate Office Fit-out</div></div></div>
                   </div>
                 </div>
+              </div>
+              <div class="bg-white/5 rounded-lg border border-white/10 p-2.5 flex items-center gap-2">
+                <span class="text-white/55 text-[10px] font-semibold mr-1">Finance</span>
+                <div class="flex-1 grid grid-cols-3 gap-1.5">
+                  <div class="text-center"><div class="text-green-300 font-black text-[11px] leading-none">275,600</div><div class="text-white/35 text-[8px] mt-0.5">Paid</div></div>
+                  <div class="text-center"><div class="text-amber-300 font-black text-[11px] leading-none">128,450</div><div class="text-white/35 text-[8px] mt-0.5">Pending</div></div>
+                  <div class="text-center"><div class="text-red-300 font-black text-[11px] leading-none">45,300</div><div class="text-white/35 text-[8px] mt-0.5">Overdue</div></div>
+                </div>
+                <div class="text-right pl-2 border-l border-white/10"><div class="text-white font-black text-[11px] leading-none">AED 173,750</div><div class="text-white/35 text-[8px] mt-0.5">Outstanding</div></div>
               </div>
             </div>
           </div>
@@ -1006,18 +1057,18 @@
               <div class="flex gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span><span class="w-2.5 h-2.5 rounded-full bg-yellow-400/80"></span><span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span></div>
               <div class="flex-1 bg-white/8 border border-white/10 rounded-md px-2.5 py-1 text-[10px] text-white/40 font-mono">trackflow.trifekta.io/jobs</div>
             </div>
-            <div class="bg-gray-50 p-3">
+            <div class="p-3" style="background:linear-gradient(160deg,#0c1c3d,#091428)">
               <div class="flex items-center justify-between mb-3">
-                <div class="font-bold text-gray-900 text-sm">Jobs <span class="text-gray-400 font-normal text-xs">· 24 active</span></div>
-                <div class="flex gap-1.5"><span class="text-[10px] font-semibold bg-orange/10 text-orange px-2 py-1 rounded-full">All</span><span class="text-[10px] font-semibold bg-white text-gray-500 px-2 py-1 rounded-full border border-gray-100">Production</span><span class="text-[10px] font-semibold bg-white text-gray-500 px-2 py-1 rounded-full border border-gray-100">Approval</span></div>
+                <div class="font-bold text-white text-sm">Jobs <span class="text-white/40 font-normal text-xs">· 18 active</span></div>
+                <div class="flex gap-1.5"><span class="text-[10px] font-semibold bg-orange/20 text-orange px-2 py-1 rounded-full">All</span><span class="text-[10px] font-semibold bg-white/5 text-white/50 px-2 py-1 rounded-full">In Progress</span><span class="text-[10px] font-semibold bg-white/5 text-white/50 px-2 py-1 rounded-full">On Hold</span></div>
               </div>
-              <div class="bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
-                <div class="grid grid-cols-12 px-3 py-2 bg-gray-50 border-b border-gray-100 text-[9px] font-bold text-gray-400 uppercase tracking-wide"><div class="col-span-5">Job</div><div class="col-span-3">Stage</div><div class="col-span-2">Owner</div><div class="col-span-2">Progress</div></div>
-                <div class="grid grid-cols-12 items-center px-3 py-2.5 border-b border-gray-50"><div class="col-span-5"><div class="text-[11px] font-bold text-gray-900">Kitchen Cabinet</div><div class="text-[9px] text-gray-400 font-mono">TF-1274 · Business Bay</div></div><div class="col-span-3"><span class="text-[9px] font-bold bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">In Production</span></div><div class="col-span-2 flex items-center gap-1"><span class="w-5 h-5 rounded-full bg-orange/20 text-orange text-[9px] font-bold flex items-center justify-center">A</span><span class="text-[10px] text-gray-500">Ahmed</span></div><div class="col-span-2"><div class="h-1.5 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-blue-400 rounded-full" style="width:60%"></div></div></div></div>
-                <div class="grid grid-cols-12 items-center px-3 py-2.5 border-b border-gray-50"><div class="col-span-5"><div class="text-[11px] font-bold text-gray-900">Reception Counter</div><div class="text-[9px] text-gray-400 font-mono">TF-1265 · DIFC</div></div><div class="col-span-3"><span class="text-[9px] font-bold bg-amber-50 text-amber-600 px-2 py-0.5 rounded-full">Awaiting Approval</span></div><div class="col-span-2 flex items-center gap-1"><span class="w-5 h-5 rounded-full bg-purple-200 text-purple-700 text-[9px] font-bold flex items-center justify-center">S</span><span class="text-[10px] text-gray-500">Sara</span></div><div class="col-span-2"><div class="h-1.5 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width:90%"></div></div></div></div>
-                <div class="grid grid-cols-12 items-center px-3 py-2.5 border-b border-gray-50"><div class="col-span-5"><div class="text-[11px] font-bold text-gray-900">TV Unit</div><div class="text-[9px] text-gray-400 font-mono">TF-1269 · Marina</div></div><div class="col-span-3"><span class="text-[9px] font-bold bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">In Production</span></div><div class="col-span-2 flex items-center gap-1"><span class="w-5 h-5 rounded-full bg-teal-200 text-teal-700 text-[9px] font-bold flex items-center justify-center">O</span><span class="text-[10px] text-gray-500">Omar</span></div><div class="col-span-2"><div class="h-1.5 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-blue-400 rounded-full" style="width:78%"></div></div></div></div>
-                <div class="grid grid-cols-12 items-center px-3 py-2.5 border-b border-gray-50"><div class="col-span-5"><div class="text-[11px] font-bold text-gray-900">Bedroom Set</div><div class="text-[9px] text-gray-400 font-mono">TF-1254 · Jumeirah</div></div><div class="col-span-3"><span class="text-[9px] font-bold bg-green-50 text-green-600 px-2 py-0.5 rounded-full">Delivery Ready</span></div><div class="col-span-2 flex items-center gap-1"><span class="w-5 h-5 rounded-full bg-rose-200 text-rose-700 text-[9px] font-bold flex items-center justify-center">K</span><span class="text-[10px] text-gray-500">Khalid</span></div><div class="col-span-2"><div class="h-1.5 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-green-400 rounded-full" style="width:100%"></div></div></div></div>
-                <div class="grid grid-cols-12 items-center px-3 py-2.5"><div class="col-span-5"><div class="text-[11px] font-bold text-gray-900">Villa Wardrobe</div><div class="text-[9px] text-gray-400 font-mono">TF-1281 · Jumeirah</div></div><div class="col-span-3"><span class="text-[9px] font-bold bg-gray-100 text-gray-500 px-2 py-0.5 rounded-full">Quote</span></div><div class="col-span-2 flex items-center gap-1"><span class="w-5 h-5 rounded-full bg-orange/20 text-orange text-[9px] font-bold flex items-center justify-center">A</span><span class="text-[10px] text-gray-500">Ahmed</span></div><div class="col-span-2"><div class="h-1.5 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-gray-300 rounded-full" style="width:15%"></div></div></div></div>
+              <div class="bg-white/5 rounded-xl border border-white/10 overflow-hidden">
+                <div class="grid grid-cols-12 px-3 py-2 bg-white/5 border-b border-white/10 text-[9px] font-bold text-white/40 uppercase tracking-wide"><div class="col-span-5">Job</div><div class="col-span-3">Stage</div><div class="col-span-2">Owner</div><div class="col-span-2">Progress</div></div>
+                <div class="grid grid-cols-12 items-center px-3 py-2.5 border-b border-white/5"><div class="col-span-5"><div class="text-[11px] font-bold text-white">Marina Apartment Fit-out</div><div class="text-[9px] text-white/35 font-mono">J-2024-045 · Dubai Marina</div></div><div class="col-span-3"><span class="text-[9px] font-bold bg-blue-500/15 text-blue-300 px-2 py-0.5 rounded-full">In Progress</span></div><div class="col-span-2 flex items-center gap-1"><span class="w-5 h-5 rounded-full bg-orange/20 text-orange text-[9px] font-bold flex items-center justify-center">A</span><span class="text-[10px] text-white/50">Ahmed</span></div><div class="col-span-2"><div class="h-1.5 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-blue-400 rounded-full" style="width:65%"></div></div></div></div>
+                <div class="grid grid-cols-12 items-center px-3 py-2.5 border-b border-white/5"><div class="col-span-5"><div class="text-[11px] font-bold text-white">High-End Villa Fit-out</div><div class="text-[9px] text-white/35 font-mono">J-2024-038 · Palm Jumeirah</div></div><div class="col-span-3"><span class="text-[9px] font-bold bg-amber-500/15 text-amber-300 px-2 py-0.5 rounded-full">On Hold</span></div><div class="col-span-2 flex items-center gap-1"><span class="w-5 h-5 rounded-full bg-purple-300/30 text-purple-200 text-[9px] font-bold flex items-center justify-center">S</span><span class="text-[10px] text-white/50">Sara</span></div><div class="col-span-2"><div class="h-1.5 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-amber-400 rounded-full" style="width:40%"></div></div></div></div>
+                <div class="grid grid-cols-12 items-center px-3 py-2.5 border-b border-white/5"><div class="col-span-5"><div class="text-[11px] font-bold text-white">Living &amp; Dining Joinery</div><div class="text-[9px] text-white/35 font-mono">J-2024-041 · Business Bay</div></div><div class="col-span-3"><span class="text-[9px] font-bold bg-blue-500/15 text-blue-300 px-2 py-0.5 rounded-full">In Progress</span></div><div class="col-span-2 flex items-center gap-1"><span class="w-5 h-5 rounded-full bg-teal-300/30 text-teal-200 text-[9px] font-bold flex items-center justify-center">O</span><span class="text-[10px] text-white/50">Omar</span></div><div class="col-span-2"><div class="h-1.5 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-blue-400 rounded-full" style="width:78%"></div></div></div></div>
+                <div class="grid grid-cols-12 items-center px-3 py-2.5 border-b border-white/5"><div class="col-span-5"><div class="text-[11px] font-bold text-white">Luxury Retail Store</div><div class="text-[9px] text-white/35 font-mono">J-2024-052 · DIFC</div></div><div class="col-span-3"><span class="text-[9px] font-bold bg-green-500/15 text-green-300 px-2 py-0.5 rounded-full">Completed</span></div><div class="col-span-2 flex items-center gap-1"><span class="w-5 h-5 rounded-full bg-rose-300/30 text-rose-200 text-[9px] font-bold flex items-center justify-center">K</span><span class="text-[10px] text-white/50">Khalid</span></div><div class="col-span-2"><div class="h-1.5 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-green-400 rounded-full" style="width:100%"></div></div></div></div>
+                <div class="grid grid-cols-12 items-center px-3 py-2.5"><div class="col-span-5"><div class="text-[11px] font-bold text-white">Corporate Office Fit-out</div><div class="text-[9px] text-white/35 font-mono">J-2024-056 · JLT</div></div><div class="col-span-3"><span class="text-[9px] font-bold bg-white/10 text-white/55 px-2 py-0.5 rounded-full">Quote</span></div><div class="col-span-2 flex items-center gap-1"><span class="w-5 h-5 rounded-full bg-orange/20 text-orange text-[9px] font-bold flex items-center justify-center">A</span><span class="text-[10px] text-white/50">Ahmed</span></div><div class="col-span-2"><div class="h-1.5 bg-white/10 rounded-full overflow-hidden"><div class="h-full bg-white/30 rounded-full" style="width:15%"></div></div></div></div>
               </div>
             </div>
           </div>
@@ -1028,16 +1079,16 @@
 </section>
 
 <!-- ============================================================
-     PRODUCT TOUR — DESIGNS
+     PRODUCT TOUR — DESIGN APPROVALS
 ============================================================ -->
-<section class="bg-cream py-20 md:py-24 overflow-hidden" id="tour-designs">
+<section class="bg-cream py-20 md:py-24 overflow-hidden" id="tour-approvals">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex flex-col-reverse md:flex-row-reverse items-center gap-12 lg:gap-20">
 
       <!-- Copy -->
       <div class="w-full md:w-[46%] fade-up-hidden">
         <div class="inline-flex items-center gap-2 text-orange text-xs font-black tracking-widest uppercase mb-4">
-          <span class="w-1.5 h-1.5 rounded-full bg-orange"></span> Designs
+          <span class="w-1.5 h-1.5 rounded-full bg-orange"></span> Design Approvals
         </div>
         <h2 class="text-3xl md:text-4xl lg:text-5xl font-black text-navy leading-[1.08] tracking-tight">
           Every design sign-off,<br class="hidden lg:inline"> on the record.
@@ -1059,21 +1110,21 @@
           <div class="relative rounded-2xl border border-gray-200 shadow-2xl overflow-hidden bg-white animate-float" style="animation-duration:8s;">
             <div class="bg-[#1a1a2e] px-3 py-2.5 flex items-center gap-2.5 border-b border-white/10">
               <div class="flex gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-red-500/80"></span><span class="w-2.5 h-2.5 rounded-full bg-yellow-400/80"></span><span class="w-2.5 h-2.5 rounded-full bg-green-500/80"></span></div>
-              <div class="flex-1 bg-white/8 border border-white/10 rounded-md px-2.5 py-1 text-[10px] text-white/40 font-mono">trackflow.trifekta.io/designs</div>
+              <div class="flex-1 bg-white/8 border border-white/10 rounded-md px-2.5 py-1 text-[10px] text-white/40 font-mono">trackflow.trifekta.io/approvals</div>
             </div>
-            <div class="bg-gray-50 p-3">
-              <div class="flex items-center justify-between mb-3"><div class="font-bold text-gray-900 text-sm">Designs <span class="text-gray-400 text-xs font-normal">· 6 awaiting approval</span></div></div>
+            <div class="p-3" style="background:linear-gradient(160deg,#0c1c3d,#091428)">
+              <div class="flex items-center justify-between mb-3"><div class="font-bold text-white text-sm">Design Approvals <span class="text-white/40 text-xs font-normal">· 5 awaiting</span></div></div>
               <div class="grid grid-cols-4 gap-2 mb-3">
-                <div class="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden"><div class="h-16 bg-gradient-to-br from-orange/40 to-navy/40"></div><div class="p-2"><div class="text-[11px] font-bold text-gray-800 truncate">Villa Wardrobe</div><div class="flex items-center justify-between mt-1"><span class="text-[9px] text-gray-400">Rev 3</span><span class="text-[9px] font-bold bg-green-50 text-green-600 px-1.5 py-0.5 rounded">Approved</span></div></div></div>
-                <div class="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden"><div class="h-16 bg-gradient-to-br from-blue-400/40 to-navy/40"></div><div class="p-2"><div class="text-[11px] font-bold text-gray-800 truncate">Kitchen Cabinet</div><div class="flex items-center justify-between mt-1"><span class="text-[9px] text-gray-400">Rev 2</span><span class="text-[9px] font-bold bg-amber-50 text-amber-600 px-1.5 py-0.5 rounded">Pending</span></div></div></div>
-                <div class="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden"><div class="h-16 bg-gradient-to-br from-gray-300 to-gray-400/60"></div><div class="p-2"><div class="text-[11px] font-bold text-gray-800 truncate">Reception Counter</div><div class="flex items-center justify-between mt-1"><span class="text-[9px] text-gray-400">Rev 1</span><span class="text-[9px] font-bold bg-red-50 text-red-600 px-1.5 py-0.5 rounded">Changes</span></div></div></div>
-                <div class="bg-white rounded-lg border border-gray-100 shadow-sm overflow-hidden"><div class="h-16 bg-gradient-to-br from-teal-400/40 to-navy/40"></div><div class="p-2"><div class="text-[11px] font-bold text-gray-800 truncate">Dining Table</div><div class="flex items-center justify-between mt-1"><span class="text-[9px] text-gray-400">Rev 2</span><span class="text-[9px] font-bold bg-green-50 text-green-600 px-1.5 py-0.5 rounded">Approved</span></div></div></div>
+                <div class="bg-white/5 rounded-lg border border-white/10 overflow-hidden"><div class="h-16 bg-gradient-to-br from-orange/50 to-navy/30"></div><div class="p-2"><div class="text-[11px] font-bold text-white/90 truncate">Marina Apartment</div><div class="flex items-center justify-between mt-1"><span class="text-[9px] text-white/40">V1 → V2</span><span class="text-[9px] font-bold bg-green-500/15 text-green-300 px-1.5 py-0.5 rounded">Approved</span></div></div></div>
+                <div class="bg-white/5 rounded-lg border border-white/10 overflow-hidden"><div class="h-16 bg-gradient-to-br from-blue-400/50 to-navy/30"></div><div class="p-2"><div class="text-[11px] font-bold text-white/90 truncate">High-End Villa</div><div class="flex items-center justify-between mt-1"><span class="text-[9px] text-white/40">V1</span><span class="text-[9px] font-bold bg-amber-500/15 text-amber-300 px-1.5 py-0.5 rounded">Pending</span></div></div></div>
+                <div class="bg-white/5 rounded-lg border border-white/10 overflow-hidden"><div class="h-16 bg-gradient-to-br from-purple-400/50 to-navy/30"></div><div class="p-2"><div class="text-[11px] font-bold text-white/90 truncate">Luxury Retail</div><div class="flex items-center justify-between mt-1"><span class="text-[9px] text-white/40">V3</span><span class="text-[9px] font-bold bg-red-500/15 text-red-300 px-1.5 py-0.5 rounded">Changes</span></div></div></div>
+                <div class="bg-white/5 rounded-lg border border-white/10 overflow-hidden"><div class="h-16 bg-gradient-to-br from-teal-400/50 to-navy/30"></div><div class="p-2"><div class="text-[11px] font-bold text-white/90 truncate">Living &amp; Dining</div><div class="flex items-center justify-between mt-1"><span class="text-[9px] text-white/40">V2</span><span class="text-[9px] font-bold bg-green-500/15 text-green-300 px-1.5 py-0.5 rounded">Approved</span></div></div></div>
               </div>
-              <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-3">
-                <div class="text-[11px] font-bold text-gray-800 mb-2">Approval activity</div>
-                <div class="flex items-center gap-2 mb-2"><span class="w-5 h-5 rounded-full bg-green-100 text-green-600 flex items-center justify-center text-[9px] shrink-0">✓</span><span class="text-[10px] text-gray-600 truncate flex-1">Rev 3 approved · Villa Wardrobe</span><span class="text-[9px] text-gray-300">11:42am</span></div>
-                <div class="flex items-center gap-2 mb-2"><span class="w-5 h-5 rounded-full bg-amber-100 text-amber-600 flex items-center justify-center text-[9px] shrink-0">↻</span><span class="text-[10px] text-gray-600 truncate flex-1">Changes requested · Reception Counter</span><span class="text-[9px] text-gray-300">Yesterday</span></div>
-                <div class="flex items-center gap-2"><span class="w-5 h-5 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center text-[9px] shrink-0">→</span><span class="text-[10px] text-gray-600 truncate flex-1">Rev 2 sent to client · Kitchen Cabinet</span><span class="text-[9px] text-gray-300">2 days</span></div>
+              <div class="bg-white/5 rounded-xl border border-white/10 p-3">
+                <div class="text-[11px] font-bold text-white/90 mb-2">Approval activity</div>
+                <div class="flex items-center gap-2 mb-2"><span class="w-5 h-5 rounded-full bg-green-500/20 text-green-300 flex items-center justify-center text-[9px] shrink-0">✓</span><span class="text-[10px] text-white/55 truncate flex-1">V2 approved · Marina Apartment</span><span class="text-[9px] text-white/30">11:42am</span></div>
+                <div class="flex items-center gap-2 mb-2"><span class="w-5 h-5 rounded-full bg-amber-500/20 text-amber-300 flex items-center justify-center text-[9px] shrink-0">↻</span><span class="text-[10px] text-white/55 truncate flex-1">Changes requested · Luxury Retail</span><span class="text-[9px] text-white/30">Yesterday</span></div>
+                <div class="flex items-center gap-2"><span class="w-5 h-5 rounded-full bg-blue-500/20 text-blue-300 flex items-center justify-center text-[9px] shrink-0">→</span><span class="text-[10px] text-white/55 truncate flex-1">V1 sent to client · High-End Villa</span><span class="text-[9px] text-white/30">2 days</span></div>
               </div>
             </div>
           </div>
@@ -1121,21 +1172,21 @@
               <div class="flex gap-2">
                 <div class="w-1/2 bg-white rounded-xl border border-gray-100 shadow-sm overflow-hidden">
                   <div class="px-3 py-2 border-b border-gray-100 font-bold text-gray-900 text-xs">Quotes</div>
-                  <div class="px-3 py-2.5 border-l-2 border-orange bg-orange/5"><div class="flex items-center justify-between"><span class="text-[9px] font-mono text-gray-400">QO-1048</span><span class="text-[9px] font-bold bg-green-50 text-green-600 px-1.5 py-0.5 rounded">Accepted</span></div><div class="text-[11px] font-bold text-gray-800 mt-1">L-Shape Sofa</div><div class="text-[9px] text-gray-400">AED 10,150</div></div>
-                  <div class="px-3 py-2.5 border-l-2 border-transparent"><div class="flex items-center justify-between"><span class="text-[9px] font-mono text-gray-400">QO-1042</span><span class="text-[9px] font-bold bg-amber-50 text-amber-600 px-1.5 py-0.5 rounded">Sent</span></div><div class="text-[11px] font-bold text-gray-800 mt-1">Reception Counter</div><div class="text-[9px] text-gray-400">AED 14,800</div></div>
-                  <div class="px-3 py-2.5 border-l-2 border-transparent"><div class="flex items-center justify-between"><span class="text-[9px] font-mono text-gray-400">QO-1039</span><span class="text-[9px] font-bold bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded">Draft</span></div><div class="text-[11px] font-bold text-gray-800 mt-1">Dining Table</div><div class="text-[9px] text-gray-400">AED 6,400</div></div>
+                  <div class="px-3 py-2.5 border-l-2 border-orange bg-orange/5"><div class="flex items-center justify-between"><span class="text-[9px] font-mono text-gray-400">Q-2024-078</span><span class="text-[9px] font-bold bg-amber-50 text-amber-600 px-1.5 py-0.5 rounded">Sent</span></div><div class="text-[11px] font-bold text-gray-800 mt-1">High-End Villa Fit-out</div><div class="text-[9px] text-gray-400">AED 86,750</div></div>
+                  <div class="px-3 py-2.5 border-l-2 border-transparent"><div class="flex items-center justify-between"><span class="text-[9px] font-mono text-gray-400">QTN-2024-056</span><span class="text-[9px] font-bold bg-green-50 text-green-600 px-1.5 py-0.5 rounded">Accepted</span></div><div class="text-[11px] font-bold text-gray-800 mt-1">Marina Apartment</div><div class="text-[9px] text-gray-400">AED 96,450</div></div>
+                  <div class="px-3 py-2.5 border-l-2 border-transparent"><div class="flex items-center justify-between"><span class="text-[9px] font-mono text-gray-400">Q-2024-071</span><span class="text-[9px] font-bold bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded">Draft</span></div><div class="text-[11px] font-bold text-gray-800 mt-1">Luxury Retail Store</div><div class="text-[9px] text-gray-400">AED 142,000</div></div>
                 </div>
                 <div class="w-1/2 bg-white rounded-xl border border-gray-100 shadow-sm p-3 flex flex-col gap-1.5">
-                  <div class="text-[9px] font-mono text-gray-400">QO-1048</div>
-                  <div class="text-[13px] font-black text-gray-900 leading-none">L-Shape Sofa</div>
-                  <div class="text-[9px] text-gray-400">Dubai Marina · 3-seater sectional</div>
+                  <div class="text-[9px] font-mono text-gray-400">Q-2024-078</div>
+                  <div class="text-[13px] font-black text-gray-900 leading-none">High-End Villa Fit-out</div>
+                  <div class="text-[9px] text-gray-400">Palm Jumeirah · Mr. Rashid Al Mansoori</div>
                   <div class="flex flex-col gap-1 mt-1">
-                    <div class="flex justify-between text-[10px]"><span class="text-gray-500">Frame &amp; structure</span><span class="font-semibold text-gray-700">4,200</span></div>
-                    <div class="flex justify-between text-[10px]"><span class="text-gray-500">Upholstery &amp; foam</span><span class="font-semibold text-gray-700">3,950</span></div>
-                    <div class="flex justify-between text-[10px]"><span class="text-gray-500">Delivery &amp; install</span><span class="font-semibold text-gray-700">2,000</span></div>
+                    <div class="flex justify-between text-[10px]"><span class="text-gray-500">Joinery &amp; carpentry</span><span class="font-semibold text-gray-700">48,500</span></div>
+                    <div class="flex justify-between text-[10px]"><span class="text-gray-500">Finishes &amp; materials</span><span class="font-semibold text-gray-700">26,250</span></div>
+                    <div class="flex justify-between text-[10px]"><span class="text-gray-500">Delivery &amp; install</span><span class="font-semibold text-gray-700">12,000</span></div>
                   </div>
-                  <div class="flex justify-between items-center pt-1.5 mt-0.5 border-t border-gray-200"><span class="text-[10px] text-gray-500">Total</span><span class="text-base font-black text-gray-900">AED 10,150</span></div>
-                  <div class="flex items-center gap-1.5 bg-green-50 border border-green-200 rounded-lg p-2 mt-1"><div class="w-5 h-5 rounded-full bg-green-500 flex items-center justify-center text-white text-[10px] shrink-0">✓</div><div><div class="text-[10px] font-bold text-green-700 leading-none">Accepted</div><div class="text-[8px] text-green-600 mt-0.5">Client confirmed · Jun 2</div></div></div>
+                  <div class="flex justify-between items-center pt-1.5 mt-0.5 border-t border-gray-200"><span class="text-[10px] text-gray-500">Total</span><span class="text-base font-black text-gray-900">AED 86,750</span></div>
+                  <div class="flex items-center gap-1.5 bg-amber-50 border border-amber-200 rounded-lg p-2 mt-1"><div class="w-5 h-5 rounded-full bg-amber-500 flex items-center justify-center text-white text-[10px] shrink-0">↗</div><div><div class="text-[10px] font-bold text-amber-700 leading-none">Sent to client</div><div class="text-[8px] text-amber-600 mt-0.5">Awaiting response · May 25</div></div></div>
                 </div>
               </div>
             </div>
@@ -1183,9 +1234,9 @@
           <div class="relative bg-[#0d1220] rounded-[2.6rem] border-[7px] border-gray-900 shadow-2xl overflow-hidden animate-float" style="width:288px; animation-duration:6.5s;">
             <div class="flex justify-center pt-2.5 pb-1.5"><div class="w-16 h-1.5 bg-gray-700 rounded-full"></div></div>
             <div class="bg-gray-50 mx-1.5 mb-1.5 rounded-[2rem] overflow-hidden">
-              <div class="bg-navy px-4 py-3"><div class="text-white font-bold text-sm leading-none">Villa Wardrobe</div><div class="text-white/50 text-[11px] mt-1">Your tasks today · Jumeirah</div></div>
+              <div class="bg-navy px-4 py-3"><div class="text-white font-bold text-sm leading-none">Marina Apartment Fit-out</div><div class="text-white/50 text-[11px] mt-1">Your tasks today · Dubai Marina</div></div>
               <div class="p-3 flex flex-col gap-2">
-                <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-3 flex items-center justify-between"><div><div class="text-xs font-bold text-gray-900">Install wardrobe side panels</div><div class="text-[10px] text-gray-400">Carpentry · Floor 4</div></div><span class="text-[10px] font-bold bg-blue-50 text-blue-600 px-2 py-1 rounded-full">In progress</span></div>
+                <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-3 flex items-center justify-between"><div><div class="text-xs font-bold text-gray-900">Install joinery — Living Room</div><div class="text-[10px] text-gray-400">Carpentry · Floor 4</div></div><span class="text-[10px] font-bold bg-blue-50 text-blue-600 px-2 py-1 rounded-full">In progress</span></div>
                 <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-3 flex items-center justify-between"><div><div class="text-xs font-bold text-gray-900">Fix ceiling section A</div><div class="text-[10px] text-gray-400">Gypsum · Started 2h ago</div></div><span class="text-[10px] font-bold bg-amber-50 text-amber-600 px-2 py-1 rounded-full">Started</span></div>
                 <div class="bg-white rounded-xl border border-gray-100 shadow-sm p-3 flex items-center justify-between opacity-70"><div><div class="text-xs font-bold text-gray-900 line-through">Door frame install</div><div class="text-[10px] text-gray-400">Carpentry · Completed</div></div><span class="text-[10px] font-bold bg-green-50 text-green-600 px-2 py-1 rounded-full">Done</span></div>
                 <div class="h-14 rounded-xl bg-gradient-to-br from-gray-200 to-gray-300 mt-0.5"></div>
@@ -1539,12 +1590,12 @@
     const urlEl    = document.getElementById('hero-url');
 
     // Cycle order — lead with the client portal (core positioning)
-    const order = ['portal', 'dashboard', 'jobs', 'designs', 'quotes', 'staff'];
+    const order = ['portal', 'dashboard', 'jobs', 'approvals', 'quotes', 'staff'];
     const urls  = {
-      portal:    'trackflow.trifekta.io/portal',
+      portal:    'trackflow.trifekta.io/clients',
       dashboard: 'trackflow.trifekta.io/dashboard',
       jobs:      'trackflow.trifekta.io/jobs',
-      designs:   'trackflow.trifekta.io/designs',
+      approvals: 'trackflow.trifekta.io/approvals',
       quotes:    'trackflow.trifekta.io/quotes',
       staff:     'trackflow.trifekta.io/staff'
     };
@@ -1568,7 +1619,11 @@
 
     // Manual control via dots + sidebar nav items
     dots.concat(navItems).forEach(el => {
-      el.addEventListener('click', () => { go(order.indexOf(el.dataset.nav)); start(); });
+      el.addEventListener('click', () => {
+        const idx = order.indexOf(el.dataset.nav);
+        if (idx === -1) return;          // Finance / Settings aren't showcased screens
+        go(idx); start();
+      });
     });
 
     // Pause while hovering, or when the tab is hidden
@@ -1576,6 +1631,84 @@
     frame.addEventListener('mouseleave', start);
     document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
     reduce.addEventListener && reduce.addEventListener('change', () => { reduce.matches ? stop() : (go(i), start()); });
+  })();
+
+  // ============================================================
+  //  Live data motion — KPI count-up + donut draw (in view)
+  // ============================================================
+  (function () {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function countUp(el) {
+      const to = parseFloat(el.dataset.to);
+      if (isNaN(to)) return;
+      const comma = el.dataset.fmt === 'comma';
+      const fmt = v => comma ? v.toLocaleString('en-US') : String(v);
+      if (reduce) { el.textContent = fmt(to); return; }
+      const dur = 1100, t0 = performance.now();
+      (function tick(now) {
+        const p = Math.min(1, (now - t0) / dur);
+        const val = Math.round(to * (1 - Math.pow(1 - p, 3)));
+        el.textContent = fmt(val);
+        if (p < 1) requestAnimationFrame(tick);
+      })(t0);
+    }
+
+    // Play each dashboard's data once when it scrolls into view
+    const dashObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (!e.isIntersecting) return;
+        e.target.classList.add('is-playing');
+        e.target.querySelectorAll('.kpi-num').forEach(countUp);
+        dashObs.unobserve(e.target);
+      });
+    }, { threshold: 0.25 });
+    document.querySelectorAll('[data-screen="dashboard"], #tour-dashboard').forEach(el => dashObs.observe(el));
+
+    // Re-count the hero dashboard KPIs each time that screen becomes active
+    const heroDash = document.querySelector('.hero-screen[data-screen="dashboard"]');
+    if (heroDash && !reduce) {
+      let was = false;
+      new MutationObserver(() => {
+        const active = heroDash.classList.contains('is-active');
+        if (active && !was) heroDash.querySelectorAll('.kpi-num').forEach(countUp);
+        was = active;
+      }).observe(heroDash, { attributes: true, attributeFilter: ['class'] });
+    }
+  })();
+
+  // ============================================================
+  //  Product reel — play only while in view
+  // ============================================================
+  (function () {
+    const reel = document.querySelector('.reel');
+    if (!reel) return;
+    new IntersectionObserver((entries) => {
+      entries.forEach(e => reel.classList.toggle('is-playing', e.isIntersecting));
+    }, { threshold: 0.3 }).observe(reel);
+  })();
+
+  // ============================================================
+  //  Hero frame pointer parallax (desktop, fine pointer only)
+  // ============================================================
+  (function () {
+    const el = document.getElementById('hero-parallax');
+    if (!el) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!window.matchMedia('(pointer:fine)').matches) return;
+    const hero = el.closest('section');
+    let raf = null;
+    hero.addEventListener('mousemove', (ev) => {
+      const r = hero.getBoundingClientRect();
+      const px = (ev.clientX - r.left) / r.width - 0.5;
+      const py = (ev.clientY - r.top) / r.height - 0.5;
+      if (raf) return;
+      raf = requestAnimationFrame(() => {
+        el.style.transform = `perspective(1100px) rotateY(${px * 6}deg) rotateX(${-py * 5}deg)`;
+        raf = null;
+      });
+    });
+    hero.addEventListener('mouseleave', () => { el.style.transform = 'perspective(1100px) rotateY(0deg) rotateX(0deg)'; });
   })();
 </script>
 
